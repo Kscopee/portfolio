@@ -4,27 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ashton James</title>
-    <link rel="stylesheet" href="PortfolioStyle.css">
+    <link rel="stylesheet" href="PortfolioStyles.css">
+    <link rel="icon" type="image/ico" href="web_portfolio_images/Logos/web-portfolio-favicon.ico">
 </head>
 <body>
-    <!-- header -->
+    <!-- header --> 
     <header class="header">
         <div class="logo">
             <img src="web_portfolio_images/Logos/web_logo_black_160x160.svg"
                  alt="Ashton James Logo"
-                 height="20" width="20">
+                 height="24" width="24">
         </div>
         <div class="quote">Turn your idyllic fantasy into digital reality</div>
         <div class="socials">
-            <button class="social-btn">
-                <img src="web_portfolio_images/SVGs/socials_icon0.svg"
+                <img id="socials-logo" src="web_portfolio_images/SVGs/socials_icon0.svg"
                      alt="Socials logo"
                      height="100%" width="20">
-            </button>
         </div>
     </header>
 
-    <!-- navbar -->
+    <!-- left navbar -->
     <nav class="vertical-nav">
         <ul>
             <li><a href="#home" class="nav-link active"> Home </a></li>
@@ -56,10 +55,10 @@
                 <!-- comments -->
                 <div class="short-comments">
                     <p>"He doesn't talk much... but pick the right topic, 
-                        and oh lord he never stops talking."</p>
+                        and oh lord he never stops talking." - Friend 1</p>
                     <p>"Ashton? Yeah, he cool, very nerdy. If he were dropped in the middle 
                         of America, the first thing he'd look for is LA, just to see 
-                        what anime expo is like."</p>
+                        what anime expo is like." - Friend 2</p>
                 </div>
             </div>
         </section>
@@ -121,20 +120,21 @@
             <!-- Long description section -->
             <article class="about-rant">
                 <h3>WAIT A MINUTE WHO ARE YOU?</h3>
-                <p>I am Ashton James currently studying at St. Dominic College of Asia as 
-                    an Information Technology student. My passion mainly lies in artistic design 
-                    which translates well into UI and UX. I also like theory-crafting systems 
-                    and projects.</p>
-                <p>Though not my main passion, I do love coding enough to make it my future profession.
-                     The process of slowly learning how technology and computers tick utterly fascinates 
-                     me, even though I am a bit slow in actual application of what I've learned. 
-                     Despite this, I aim to further my knowledge and mastery of computers, especially 
-                     in the front-end department.</p>
-                <p>When I'm not staring at the screen writing code or creating designs, 
-                    I partake in creating forms of entertainment media like anime, movies, 
-                    documentaries. To rest my eyes I also read traditional books like 
-                    Homer's "The Iliad" and Alexandre Dumas' "The Count of Monte Cristo". 
-                    When I'm not doing that, I work out as well, to not let my body rot away. And that's about it!</p>
+                <p>My name is Ashton James, and I am now studying at St. Dominic College of 
+                   Asia as an information technology student. My enthusiasm primarily lays 
+                   in artistic design this translates well to UI and UX. 
+                   I also enjoy theory-crafting systems and projects.</p>
+                <p>Though coding is not my main passion, I enjoy it enough to pursue it as a 
+                   career. The process of gradually discovering how technology and computers 
+                   work is truly fascinating. Even though I'm a little sluggish to apply 
+                   what I've learnt. Despite this, I hope to improve my understanding and 
+                   expertise of computers, particularly in the front end department.</p>
+                <p>When I'm not looking at the screen, writing programming or designing, 
+                   I participate in generating types of entertainment media such as anime,
+                   movies documentaries. To relax my eyes, I read traditional literature 
+                   such as Homer's "The Iliad" and Alexandre Dumas' "The Count of Monte Cristo". 
+                   When I'm not doing that, I work out to keep my body from deteriorating. 
+                   And that's it!</p>
             </article>
         </section>
 
@@ -143,9 +143,9 @@
             <!-- title -->
             <h2 class="skills-title">SKILLS</h2>            
 
-            <!-- Left Column - Skill Lists -->
+            <!-- seft column - skill lists -->
             <div class="skill-columns">
-                <!-- Technical Skills -->
+                <!-- sechnical skills -->
                 <article class="skill-list technical" data-active="true">
                     <h3>Technical Skills</h3>
                     <ul>
@@ -156,14 +156,14 @@
                     </ul>
                 </article>
 
-                <!-- Soft Skills -->
+                <!-- soft skills -->
                 <article class="skill-list soft" data-active="false">
                     <h3>Soft Skills</h3>
                     <ul>
                         <li data-skill="communication">Communication</li>
                         <li data-skill="creativity">Creativity</li>
                         <li data-skill="organization">Organization</li>
-                        <li data-skill="teamwork">Teamwork</li>
+                        <li data-skill="dedication">Dedication</li>
                     </ul>
                 </article>
             </div>
@@ -178,36 +178,87 @@
             <div class="tv-screen">
                 <!-- skill slides container -->
                 <div class="skill-slides">
-                    <!-- Technical Skill Slides -->
+                    <!-- technical skills slides -->
+                    <!-- html -->
                     <div class="skill-slide technical" data-skill="html" data-active="true">
-                        <img src="web_portfolio_images/SVGs/html_logo.svg" 
-                             alt="HTML logo and description">
+                        <h4>HTML</h4>
+                        <img src="web_portfolio_images/SVGs/html_logo.svg" alt="HTML logo">
+                        <p>If you want to have readable and structured semantic markup 
+                            for modern web applications? I'm your guy.</p>
+                        <p>Source: Me</p>
                     </div>
+                    <!-- css -->
                     <div class="skill-slide technical" data-skill="css" data-active="false">
-                        <img src="web_portfolio_images/SVGs/css_logo.svg" 
-                             alt="CSS logo and description">
+                        <h4>CSS</h4>
+                        <img src="web_portfolio_images/SVGs/css_logo.svg" alt="CSS logo">
+                        <p>Need some flavor in your site? I hear your plight. 
+                           Thus, help me help you make your design just right.</p>
+                        <p>Source: Me</p>
                     </div>
+                    <!-- javascript -->
                     <div class="skill-slide technical" data-skill="javascript" data-active="false">
-                        <img src="web_portfolio_images/SVGs/javascript_logo.svg" 
-                             alt="Javascript logo and description">
+                        <h4>JavaScript</h4>
+                        <img src="web_portfolio_images/SVGs/javascript_logo.svg" alt="JavaScript logo">
+                        <p>Quality of Life? I got it, with my experience in creating
+                           interactive web components and dynamic user interfaces
+                           I'll make sure sites go as smooth as possible 
+                           (empahsis on 'as possible'). </p>
+                        <p>Source: Me</p>
                     </div>
+                    <!-- java -->
                     <div class="skill-slide technical" data-skill="java" data-active="false">
-                        <img src="web_portfolio_images/SVGs/java_logo.svg" 
-                             alt="Java logo and description">
+                        <h4>Java</h4>
+                        <img src="web_portfolio_images/SVGs/java_logo.svg" alt="Java logo">
+                        <p>I have studied and developed applications using 
+                           object-oriented programming principles. Especially for 
+                           making android applications.</p>
+                           <p>Source: Me</p>
                     </div>
 
                     <!-- soft skill slides -->
+                     <!-- communication -->
                     <div class="skill-slide soft" data-skill="communication" data-active="false">
-                        <img src="" alt="Communication and description">
+                        <h4>Communication</h4>
+                        <img src="web_portfolio_images/SVGs/communication_icon.svg" alt="Communication icon">
+                        <p>Communication is the key to understanding oneself and others.
+                           Thus, I regard communication as a key component in making
+                           and managing projects. To that end, I try to make myself
+                           as clear and successful as a communicator.
+                           Across multiple platforms and teams.</p>
+                        <p>Source: Me</p>
                     </div>
+                    <!-- communication -->
                     <div class="skill-slide soft" data-skill="creativity" data-active="false">
-                        <img src="" alt="Creativity and description">
+                        <h4>Creativity</h4>
+                        <img src="web_portfolio_images/SVGs/creativity_icon.svg" alt="Creativity icon">
+                        <p>Creativity is not a trait one inherently has, it is 
+                           a process of taking inspiration from a myriad of sources
+                           and refining it. Making it your own.</p>
+                           <p>Source: Me</p>
                     </div>
+                    <!-- organization -->
                     <div class="skill-slide soft" data-skill="organization" data-active="false">
-                        <img src="" alt="Organization and description">
+                        <h4>Organization</h4>
+                        <img src="web_portfolio_images/SVGs/organization_icon.svg" alt="Organization icon">
+                        <p> I like to keep things structured when it comes to 
+                            handling project projects as it keeps my and other peoples
+                            ambitions and creativity in check, making for a smoother
+                            and streamlined project experience. That's my take at least</p>
+                            <p>Source: Me</p>
                     </div>
+                    <!-- dedication -->
                     <div class="skill-slide soft" data-skill="dedication" data-active="false">
-                        <img src="" alt="Dedication and description">
+                        <h4>Dedication</h4>
+                        <img src="web_portfolio_images/SVGs/dedication_icon.svg" alt="Dedication icon">
+                        <p>My dedication to investing time and effort into projects is 
+                           rooted in a deep commitment to both success and growth. 
+                           I approach every initiative with a mindset of ownership, treating 
+                           challenges as opportunities to drive meaningful results. 
+                           This means taking initiative beyond assigned tasks—like identifying 
+                           process gaps or proposing improvements—and holding myself accountable 
+                           for outcomes, whether through post-project reviews or transparently 
+                           addressing setbacks.</p>
+                           <p>Source: Me</p>
                     </div>
                 </div>
 
@@ -215,10 +266,8 @@
                 <div class="tv-controls">
                     <div class="nav-arrows">
                         <button class="arrow prev">
-                            <img src="" alt="Previous">
                         </button>
                         <button class="arrow next">
-                            <img src="" alt="Next">
                         </button>
                     </div>
                     
