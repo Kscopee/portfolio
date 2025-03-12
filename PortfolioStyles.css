@@ -39,7 +39,7 @@ h4 {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #0d0d0d;
+  background-color: #000000;
   color: #fff;
   padding: 1rem, 2rem;
   height: 8vh;
@@ -55,10 +55,9 @@ h4 {
 }
 
 .logo img {
-  height: 24px;
-  width: 24px;
+  width: 50px;
   object-fit: contain;
-  padding-left: 20px;
+  margin-left: 10px;
 }
 
 .quote {
@@ -73,15 +72,15 @@ h4 {
 }
 
 .socials img {
-  height: 30px;
-  transition: transform 1.5s ease;
-  padding-right: 20px;
+  width: 30px;
+  object-fit: contain;
+  margin-right: 30px;
 }
 
 .socials-dropdown {
   position: absolute;
   top: 100%;
-  right: 0%;
+  right: 50%;
   background-color: #0d0d0d;
   border-radius: 5px;
   padding: 1rem;
@@ -89,6 +88,17 @@ h4 {
   flex-direction: column;
   gap: 1rem;
   width: 150px;
+  overflow: hidden;
+}
+
+.top-highlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background-color: #d7f205; 
+  z-index: 1;
 }
 
 .socials:hover .socials-dropdown {
@@ -103,12 +113,13 @@ h4 {
   color: white;
   text-decoration: none;
   transition: 0.5s ease;
+  position: relative; /* Added for z-index to work properly */
+  z-index: 2; /* Make sure links appear above the highlight */
 }
 
 .social-icon:hover {
   color: #d7f205;
 }
-
 /* ===== LEFT NAVBAR ===== */
 .vertical-nav {
   position: fixed;
@@ -141,16 +152,18 @@ h4 {
 .vertical-nav li {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
 .nav-link {
   display: flex;
+  position: relative;
   justify-content: center;
   align-items: center;
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  border-radius: 50px;
   transition: all 0.5s ease;
 }
 
@@ -158,17 +171,29 @@ h4 {
   width: 24px;
   height: 24px;
   transition: all 0.5s ease;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .nav-link:hover {
   background-color: #d7f205;
   border-radius: 10px;
+  transition: all 0.5s ease;
 }
 
 .nav-link:hover img {
   filter: brightness(0);
 }
 
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  margin-left: 80px;
+  padding: 2rem;
+}
+
+/* Media */
 @media (max-height: 600px) {
   .vertical-nav {
     gap: 1rem;
@@ -185,8 +210,3 @@ h4 {
   }
 }
 
-/* ===== MAIN CONTENT ===== */
-.main-content {
-  margin-left: 80px;
-  padding: 2rem;
-}
