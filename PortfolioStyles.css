@@ -97,7 +97,7 @@ h4 {
   left: 0;
   right: 0;
   height: 5px;
-  background-color: #d7f205; 
+  background-color: #d7f205;
   z-index: 1;
 }
 
@@ -163,14 +163,13 @@ h4 {
   align-items: center;
   width: 60px;
   height: 60px;
-  border-radius: 50px;
-  transition: all 0.5s ease;
+  border-radius: 10px;
 }
 
 .nav-link img {
   width: 24px;
   height: 24px;
-  transition: all 0.5s ease;
+  transition: all 500ms ease;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -180,7 +179,6 @@ h4 {
 .nav-link:hover {
   background-color: #d7f205;
   border-radius: 10px;
-  transition: all 0.5s ease;
 }
 
 .nav-link:hover img {
@@ -209,4 +207,3 @@ h4 {
     height: 50px;
   }
 }
-
