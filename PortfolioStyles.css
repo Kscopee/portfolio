@@ -113,8 +113,8 @@ h4 {
   color: white;
   text-decoration: none;
   transition: 0.5s ease;
-  position: relative; /* Added for z-index to work properly */
-  z-index: 2; /* Make sure links appear above the highlight */
+  position: relative;
+  z-index: 2;
 }
 
 .social-icon:hover {
