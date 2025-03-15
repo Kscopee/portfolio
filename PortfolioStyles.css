@@ -193,15 +193,15 @@ h4 {
 /* ===== HOME ===== */
 
 #home {
-  display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  min-height: 100vh;
-  align-items: center;
+    display: -ms-inline-grid;
+    grid-template-columns: 1fr 1.5fr;
 }
 
 .intro-left {
-  position: relative;
-  padding-left: 2rem;
+  grid-column: 1;
+}
+.abstract-shape-container-right {
+    grid-column: 2;
 }
 
 .intro-left::before {
@@ -215,10 +215,14 @@ h4 {
 
 .abstract-shape-container-right {
   position: relative;
-  clip-path: polygon(30% 32%, 100% 33%, 100% 100%, 0 100%);
+  clip-path: polygon(27% 41%, 100% 41%, 100% 99%, 0% 100%);
   background: linear-gradient(45deg, #0d0d0d 30%, #1a1a1a 70%);
   height: 80vh;
 }
+
+#abstract-shape-highlight {
+    color: #d7f205;
+} 
 
 .profile-photo {
   position: absolute;
