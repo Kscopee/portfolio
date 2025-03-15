@@ -215,7 +215,7 @@ h4 {
 
 .abstract-shape-container-right {
   position: relative;
-  clip-path: polygon(0 20%, 100% 0, 100% 80%, 0 100%);
+  clip-path: polygon(30% 32%, 100% 33%, 100% 100%, 0 100%);
   background: linear-gradient(45deg, #0d0d0d 30%, #1a1a1a 70%);
   height: 80vh;
 }
