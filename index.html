@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+  <head> 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ashton James</title>
+    <!-- CSS file -->
     <link rel="stylesheet" href="PortfolioStyles.css" />
+    <!-- favicon -->
     <link
       rel="icon"
       type="image/ico"
@@ -15,78 +17,47 @@
     <!-- header -->
     <header class="header">
       <div class="logo">
-        <img
-          src="web_portfolio_images/Logo/portfolio_logo_android_chrome_192x192.png"
-          alt="Ashton James Logo"
-          height="24"
-          width="24"
-        />
+        <img src="web_portfolio_images/Logo/portfolio_logo_android_chrome_192x192.png" alt="Ashton James Logo" height="24" width="24" />
       </div>
+      <!-- quote -->
       <div class="quote">Turn your idyllic fantasy into digital reality</div>
+      <!-- socials -->
       <div class="socials">
-        <img
-          id="socials-logo"
-          src="web_portfolio_images/SVGs/socials_icon.svg"
-          alt="Socials logo"
-        />
+        <img id="socials-logo" src="web_portfolio_images/SVGs/socials_icon.svg" alt="Socials logo" />
         <div class="socials-dropdown">
           <div class="top-highlight"></div>
-          <a href="https://linkedin.com" target="_blank" class="social-icon">
-            <img
-              src="web_portfolio_images/SVGs/likedin_icon_white.svg"
-              alt="LinkedIn"
-              id="LinkedIn"
-            />
-            Linkedin
+          <!-- drop down content -->
+          <h6>Follow Me</h6>
+          <a href="https://x.com" target="_blank" class="social-icon">
+            <img src="web_portfolio_images/SVGs/x_icon_white.svg" alt="X (Twitter)" />
+            X
           </a>
           <a href="https://github.com" target="_blank" class="social-icon">
-            <img
-              src="web_portfolio_images/SVGs/github_icon_white.svg"
-              alt="GitHub"
-              id="Github"
-            />
-            Github
+            <img src="web_portfolio_images/SVGs/github_icon_white.svg" alt="GitHub" />
+            GitHub
           </a>
-          <a href="https://x.com" target="_blank" class="social-icon" id="X">
-            <img
-              src="web_portfolio_images/SVGs/x_icon_white.svg"
-              alt="X (Twitter)"
-            />
-            X
+          <a href="https://linkedin.com" target="_blank" class="social-icon">
+            <img src="web_portfolio_images/SVGs/likedin_icon_white.svg" alt="LinkedIn" />
+            LinkedIn
           </a>
         </div>
       </div>
     </header>
 
     <!-- left navbar -->
-    <nav class="vertical-nav">
+    <nav class="vertical-nav" aria-label="Main Navigation">
       <ul>
-        <li>
-          <a href="#home" class="nav-link">
-            <img
-              src="web_portfolio_images/SVGs/home_icon_white.svg"
-              alt="Home Page"
-          /></a>
-        </li>
-        <li>
-          <a href="#about" class="nav-link">
-            <img
-              src="web_portfolio_images/SVGs/person_icon_white.svg"
-              alt="About Page"
-          /></a>
-        </li>
-        <li>
-          <a href="#tech-stack" class="nav-link">
-            <img
-              src="web_portfolio_images/SVGs/stack_icon_white.svg"
-              alt="Tech Stack"
-          /></a>
-        </li>
+        <!-- anchors including tooltips -->
+        <li><a href="#home-anchor" class="nav-link" data-tooltip="Home"><img src="web_portfolio_images/SVGs/home_icon_white.svg" alt="Home Page" /></a></li>
+        <li><a href="#about-anchor" class="nav-link" data-tooltip="About"><img src="web_portfolio_images/SVGs/person_icon_white.svg" alt="About Page" /></a></li>
+        <li><a href="#tech-stack-anchor" class="nav-link" data-tooltip="Tech Stack"><img src="web_portfolio_images/SVGs/stack_icon_white.svg" alt="Tech Stack" /></a></li>
       </ul>
     </nav>
 
     <!-- main content -->
     <main class="main-content">
+      <!-- home anchor -->
+      <div id="home-anchor" class="anchor"></div>
       <!-- ===== HOME ===== -->
       <section id="home" class="section">
         <div class="intro-left">
@@ -126,13 +97,17 @@
         </div>
       </section>
 
+      <!-- about anchor -->
+      <div id="about-anchor" class="anchor"></div>
+
       <!-- ===== ABOUT ===== -->
       <section id="about" class="section">
+        <!-- header bio -->
         <div class="about-bio">
           <h2>about.</h2>
           <h2>Ashton James</h2>
           <h5>"absolute cinema!" - Ashton James</h5>
-
+          <!-- list of info -->
           <dl class="bio-list">
             <dt>Born</dt>
             <dd>August 26 2005</dd>
@@ -213,6 +188,9 @@
           </p>
         </article>
       </section>
+
+      <!-- tech stack anchor -->
+      <div id="tech-stack-anchor" class="anchor"></div>
 
       <!-- ===== TECH STACK ===== -->
       <section id="tech-stack" class="section">
