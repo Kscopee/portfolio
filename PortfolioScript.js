@@ -1,3 +1,14 @@
+//  copy email to clipboard when "connect with me" button is clicked
+document.addEventListener("DOMContentLoaded", function () {
+  const connectButton = document.querySelector(".connect-button");
+  connectButton.addEventListener("click", function () {
+    const email = "projectkfiles@gmail.com";
+    navigator.clipboard.writeText(email).then(() => {
+      alert("Email copied to clipboard: " + email);
+    });
+  });
+});
+
 // scroll logic
 document.addEventListener("DOMContentLoaded", function () {
   const navLinks = document.querySelectorAll(".nav-link");
