@@ -275,7 +275,7 @@ h6 {
 /* home left */
 #home {
   display: grid;
-  grid-template-columns: minmax(500px, 1fr) 2fr;
+  grid-template-columns: minmax(450px, 1fr) 2fr;
   gap: 2rem;
   /* spacing before navbar */
   margin-left: 3.75rem;
@@ -319,7 +319,7 @@ h6 {
 }
 
 .intro-text h2 {
-  font-size: 2rem;
+  font-size: 1.75rem;
 }
 .intro-headers {
   margin-bottom: 1.5rem;
