@@ -194,7 +194,7 @@ h6 {
   left: 0;
   transform: translateY(-50%);
   height: auto;
-  width: 5rem;
+  width: 4rem;
   border-radius: 0 15px 15px 0;
   z-index: 1000;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
@@ -203,7 +203,7 @@ h6 {
 
 .vertical-nav:hover {
   opacity: 1;
-  width: 4rem;
+  width: 5rem;
 }
 
 .vertical-nav .nav-link {
@@ -302,7 +302,7 @@ h6 {
 
 /* ===== MAIN ===== */
 main {
-  margin-left: 5.5rem; /* width of the navbar */
+  margin-left: 5.5rem; /* adjusted to width of the navbar */
   overflow-x: hidden;
 }
 
@@ -312,9 +312,6 @@ main {
   display: grid;
   grid-template-columns: minmax(450px, 1fr) 2fr;
   gap: 2rem;
-  /* spacing before navbar */
-  margin-left: 3.75rem;
-  padding-left: 1rem;
   align-items: center;
 }
 
@@ -955,7 +952,7 @@ main {
     grid-template-columns: auto 1fr auto;
     align-items: center;
     padding: 0.5rem 1rem;
-    height: auto; /* ensure header height adjusts dynamically */
+    height: auto(v); /* ensure header height adjusts dynamically */
   }
 
   .header .logo {
