@@ -1,0 +1,365 @@
+/* ===== HOME ===== */
+/* home left */
+#home {
+  display: grid;
+  grid-template-columns: minmax(450px, 1fr) 2fr;
+  gap: 2rem;
+  align-items: center;
+}
+
+.intro-left {
+  display: flex;
+  align-items: flex-start;
+  padding: 2rem;
+  position: relative;
+  align-self: start;
+  height: auto;
+}
+
+.intro-line {
+  background-color: #000000;
+  width: 0.25rem;
+  height: auto;
+  margin-right: 1.75rem;
+  border-radius: 5px;
+  align-self: stretch;
+}
+
+.intro-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.intro-text h4,
+.intro-text h2 {
+  margin: 0.25rem, 0.5rem;
+  color: #000000;
+}
+
+.intro-text h4 {
+  font-size: 1.25rem;
+}
+
+.intro-text h2 {
+  font-size: 1.75rem;
+}
+.intro-headers {
+  margin-bottom: 1.5rem;
+}
+
+.contact-info {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-top: center;
+}
+
+.connect-button {
+  background-color: #000000;
+  color: rgb(255, 255, 255);
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  font-family: "Tahoma", sans-serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 300ms, color 300ms;
+  margin-top: 2.5rem;
+  width: fit-content;
+  margin-top: 0;
+}
+
+.connect-button:hover {
+  background-color: #d7f205;
+  color: black;
+}
+
+.email {
+  color: #888888;
+  margin-top: 1rem;
+  width: fit-content;
+}
+
+/* home right */
+.big-text {
+  font-size: 200px;
+  font-family: "Hongmengti", sans-serif;
+  font-style: italic;
+  color: #00000056;
+  position: absolute;
+  top: -15%;
+  left: 0;
+  z-index: 1;
+}
+
+.home-right {
+  position: relative;
+  height: 600px;
+  margin-top: 0;
+  width: 100%;
+}
+
+.abstract-shape-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 120px;
+  width: 100%;
+  max-width: 100%;
+  height: 380px;
+  overflow: visible;
+}
+
+.abstract-shape {
+  width: 100%;
+  height: 380px;
+  background-color: #262626;
+  clip-path: polygon(calc(40% - 12vw) 12px, 100% 12px, 100% 100%, 0 100%);
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+
+.profile-photo {
+  position: absolute;
+  left: 1%;
+  bottom: 0;
+  width: 45%;
+  height: auto;
+  z-index: 3;
+  transform: translateY(0);
+}
+
+.comments-box {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 45%;
+  height: 75%;
+  padding: 1rem;
+  z-index: 3;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.comments-box p {
+  margin-bottom: 1.5rem;
+  line-height: 1.5;
+}
+
+.comments-box p:last-child {
+  margin-bottom: 0;
+}
+
+.comments-box::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+.comments-box::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.comments-box::-webkit-scrollbar-thumb {
+  background-color: rgba(63, 63, 63, 0.5);
+  border-radius: 3px;
+}
+
+.shape-highlight {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2.5rem;
+  background-color: #d7f205;
+  clip-path: polygon(calc(25% - 12vw) 12px, 100% 12px, 100% 100%, 0 100%);
+  z-index: 4;
+}
+
+/* home section media queries */
+@media (max-width: 1024px) {
+  #home {
+    grid-template-columns: 1fr;
+    gap: 0;
+    padding: 1rem;
+  }
+
+  .home-right {
+    height: auto;
+    display: flex;
+    align-items: center;
+    min-height: 50vh;
+  }
+
+  .abstract-shape-container {
+    margin-top: 0; /* remove top margin */
+    height: 100%;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+  }
+
+  .big-text {
+    display: none;
+  }
+
+  .abstract-shape-container {
+    margin-top: 0;
+    height: 100%;
+    min-height: 300px;
+    display: flex;
+    align-items: center;
+  }
+
+  .abstract-shape {
+    background-color: #f5f5f5;
+    clip-path: none;
+  }
+
+  .profile-photo {
+    position: relative;
+    left: auto;
+    width: 35%;
+    margin-right: 2rem;
+    align-self: center;
+  }
+
+  .comments-box {
+    position: relative;
+    right: auto;
+    top: auto;
+    transform: none;
+    width: 55%;
+    max-height: 300px; /* limit height */
+    overflow-y: auto; /* enable scrolling */
+    color: #000000;
+    background-color: transparent;
+    align-self: center;
+    padding: 0.5rem 1rem;
+  }
+
+  .comments-box::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .comments-box::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  .shape-highlight {
+    display: none;
+  }
+
+  .abstract-shape-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #home {
+    padding: 0.5rem;
+  }
+
+  .intro-left {
+    padding: 1rem;
+    margin-bottom: 0;
+  }
+
+  .home-right {
+    margin-top: 0; /* ensure no top margin */
+    min-height: auto; /* let height be determined by content */
+  }
+
+  .abstract-shape-container {
+    padding: 0;
+    margin: 0;
+  }
+
+  .intro-left {
+    padding: 1rem;
+  }
+
+  .profile-photo {
+    width: 45%;
+  }
+
+  .comments-box {
+    width: 45%;
+    max-height: 250px; /* slightly smaller for medium screens */
+    padding: 0.5rem;
+    overflow-y: auto;
+  }
+
+  .intro-text h4 {
+    font-size: 1rem;
+  }
+
+  .intro-text h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #home {
+    padding: 0.5rem;
+    gap: 0;
+  }
+
+  .home-right {
+    margin-top: 0;
+    min-height: auto;
+  }
+
+  .abstract-shape-container {
+    margin: 0;
+    padding: 0.5rem;
+  }
+
+  #home {
+    padding: 0.5rem;
+  }
+
+  .home-right {
+    min-height: 50vh;
+  }
+
+  .abstract-shape-container {
+    flex-direction: column;
+    padding: 0.5rem;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .profile-photo {
+    width: 60%;
+    margin-right: 0;
+    margin-bottom: 0;
+  }
+
+  .comments-box {
+    width: 100%;
+    max-height: 200px; /* even smaller for mobile */
+    text-align: center;
+    overflow-y: auto;
+    margin-top: 1rem;
+  }
+
+  .intro-line {
+    margin-right: 1rem;
+  }
+
+  .connect-button {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+}
