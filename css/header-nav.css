@@ -50,7 +50,7 @@
 .header .socials .socials-dropdown {
   display: none;
   position: absolute;
-  top: calc(100% + 5px); /* reduce gap between icon and dropdown */
+  top: calc(100% + 5px);
   right: 0;
   background-color: black;
   padding: 0;
@@ -118,7 +118,7 @@
 .header .socials::after {
   content: "";
   position: absolute;
-  height: 20px; /* height of invisible bridge */
+  height: 20px;
   width: 100%;
   bottom: -20px;
   left: 0;
@@ -127,25 +127,25 @@
 /* ===== LEFT NAVBAR ===== */
 .vertical-nav {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: center;
   padding: 1rem;
   background-color: rgb(0, 0, 0);
   position: fixed;
-  top: 50%;
-  left: 0;
-  transform: translateY(-50%);
-  height: auto;
-  width: 4rem;
-  border-radius: 0 15px 15px 0;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  height: fit-content;
+  width: auto;
+  border-radius: 15px 15px 0 0;
   z-index: 1000;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
-  transition: width 0.3s, opacity 0.3s, transform 0.3s;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  transition: height 0.3s, opacity 0.3s;
 }
 
 .vertical-nav:hover {
-  opacity: 1;
-  width: 5rem;
+  width: auto;
 }
 
 .vertical-nav .nav-link {
@@ -155,9 +155,9 @@
 .vertical-nav .nav-link::after {
   content: attr(data-tooltip);
   position: absolute;
-  left: 100%;
-  top: 55%;
-  transform: translateY(-55%);
+  left: 50%;
+  bottom: 100%; /* changed from top: 55% */
+  transform: translateX(-50%); /* changed from translateY(-55%) */
   background-color: #000000;
   color: #f5f5f5;
   padding: 0.5rem 1rem;
@@ -166,11 +166,11 @@
   opacity: 0;
   visibility: hidden;
   transition: opacity 500ms, visibility 500ms;
-  margin-left: 10px;
+  margin-bottom: 10px;
   pointer-events: none;
   z-index: 1001;
   font-family: "Tahoma", sans-serif;
-  border-left: 3px solid #d7f205;
+  border-bottom: 3px solid #d7f205;
 }
 
 .vertical-nav .nav-link:hover::after {
@@ -179,10 +179,13 @@
 }
 
 .vertical-nav .nav-link.active::after {
-  border-left-color: #d7f205;
+  border-bottom-color: #d7f205;
 }
 
 .vertical-nav ul {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -190,7 +193,7 @@
 }
 
 .vertical-nav ul li {
-  margin-bottom: 1rem;
+  margin: 0;
   display: flex;
   justify-content: center;
 }
@@ -203,7 +206,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 0.5rem;
+  padding: 0.75rem; /* adjusted padding to be equal on all sides */
   border-radius: 25px;
   transition: background-color 500ms, color 500ms, border-radius 500ms;
 }
@@ -286,15 +289,11 @@
   }
 
   main {
-    margin-left: 4rem;
+    margin-left: 0; /* Remove margin that was pushing content */
   }
 }
 
 @media (max-width: 480px) {
-  main {
-    margin-left: 2rem;
-  }
-
   .header {
     padding: 0.5rem;
   }
@@ -366,34 +365,34 @@
 /* mobile navbar style */
 @media (max-width: 992px) {
   .vertical-nav {
-    width: 4rem;
+    width: auto;
     padding: 0.75rem;
   }
 
   .vertical-nav:hover {
-    width: 4.75rem;
+    width: auto;
   }
 }
 
 @media (max-width: 768px) {
   .vertical-nav {
-    width: 3.5rem;
+    width: auto;
     padding: 0.5rem;
   }
 
   .vertical-nav:hover {
-    width: 4rem;
+    width: auto;
   }
 }
 
 /* extreme mobile (landscape) */
 @media (max-width: 480px) and (orientation: portrait) {
   .vertical-nav {
-    width: 3rem;
-    border-radius: 0 10px 10px 0;
+    width: auto;
+    border-radius: 10px 10px 0 0;
   }
 
   .vertical-nav:hover {
-    width: 3.5rem;
+    width: auto;
   }
 }
