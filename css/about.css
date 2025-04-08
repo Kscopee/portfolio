@@ -130,7 +130,7 @@
   width: calc(100% + 8rem);
   height: 380px;
   background-color: #262626;
-  clip-path: polygon(0 12px, var(--shape-angle) 12px, 100% 100%, 0 100%);
+  clip-path: polygon(0 12px, calc(100% - 12vw) 12px, 100% 100%, 0 100%);
   position: absolute;
   left: 0;
   z-index: 2;
@@ -158,7 +158,6 @@
 
 .about-rant {
   padding: 2rem;
-  overflow-y: auto;
   background-color: #262626;
   z-index: 3;
   color: white;
@@ -166,32 +165,14 @@
   flex-direction: column;
   border-radius: 2rem;
   position: relative;
-  max-height: 380px;
+  height: auto;
   width: 90%;
   margin-left: 1rem;
 }
 
 .about-rant p {
-  margin-bottom: 1.5rem;
-  line-height: 1.6;
-  padding-right: 1rem;
-}
-
-.about-rant h3 {
   margin-bottom: 1rem;
-}
-
-.about-rant::-webkit-scrollbar {
-  width: 0.5rem;
-}
-
-.about-rant::-webkit-scrollbar-track {
-  background: transparent;
-}
-
-.about-rant::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
+  line-height: 1.25rem;
 }
 
 /* about section media queries */
@@ -217,6 +198,7 @@
 
   .about-bottom-left {
     grid-row: 3;
+    top: 40%;
   }
 
   .about-bottom-right {
@@ -224,17 +206,33 @@
   }
 
   .abstract-shape-container-left {
+    bottom: 20%;
     margin-left: 0;
     width: 100%;
   }
 
   .abstract-shape-about {
     clip-path: none;
-    border-radius: 71% 29% 21% 79% / 59% 30% 70% 41%;
+    border-radius: 21% 79% 41% 59% / 34% 41% 59% 66%;
+    width: 100%;
   }
 
   .shape-highlight-about {
     display: none;
+  }
+
+  .about-rant {
+    bottom: 10%;
+    padding: 1.5rem;
+    width: 100%;
+    margin-left: 0;
+    height: auto;
+  }
+
+  .about-rant p {
+    font-size: 1.25rem;
+    line-height: 2rem;
+    margin-bottom: 1rem;
   }
 }
 
@@ -252,11 +250,10 @@
   }
 
   .about-rant {
-    max-height: none;
-    overflow-y: visible;
     padding: 1.5rem;
     width: 100%;
     margin-left: 0;
+    height: auto;
   }
 
   .about-rant p {
@@ -280,18 +277,32 @@
   }
 
   .about-rant {
+    bottom: 25%;
     padding: 1.25rem;
+    width: 100%;
   }
 
   .about-rant p {
     font-size: 0.9rem;
-    line-height: 1.4;
+    line-height: 1rem;
     margin-bottom: 0.75rem;
   }
 
   .about-rant h3 {
     font-size: 1.1rem;
     margin-bottom: 0.75rem;
+  }
+
+  .abstract-shape-container-left {
+    bottom: 50%;
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .abstract-shape-about {
+    clip-path: none;
+    border-radius: 61% 39% 52% 48% / 57% 61% 39% 43%;
+    width: 100%;
   }
 
   .profile-photo-about {
