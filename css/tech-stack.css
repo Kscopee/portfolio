@@ -43,6 +43,7 @@
 .skill-list h3 {
   margin-bottom: 1rem;
   font-size: 1.5rem;
+  color: black;
 }
 
 .skill-list ul {
@@ -114,17 +115,17 @@
 
 .skill-slides {
   position: relative;
-  height: 305px;
-  overflow: hidden;
+  height: auto;
+  min-height: 305px;
+  overflow: visible;
 }
 
 .skill-slide {
   position: absolute;
-  padding-top: 3rem;
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -134,7 +135,7 @@
   opacity: 0;
   transition: opacity 0.5s;
   padding: 1rem;
-  overflow-y: auto;
+  overflow: visible;
 }
 
 .skill-slide[data-active="true"] {
@@ -165,19 +166,6 @@
 .skill-slide p {
   margin-bottom: 1rem;
   line-height: 1.5;
-}
-
-.skill-slide::-webkit-scrollbar {
-  width: 0.5rem;
-}
-
-.skill-slide::-webkit-scrollbar-track {
-  background: #262626;
-}
-
-.skill-slide::-webkit-scrollbar-thumb {
-  background-color: #3f3f3f;
-  border-radius: 3px;
 }
 
 /* TV Controls */
@@ -280,7 +268,8 @@
   }
 
   .skill-slides {
-    height: 320px;
+    height: auto;
+    min-height: 320px;
   }
 }
 
@@ -321,7 +310,8 @@
   }
 
   .skill-slides {
-    height: 350px;
+    height: auto;
+    min-height: 350px;
   }
 
   .nav-arrows {
@@ -360,7 +350,8 @@
   }
 
   .skill-slides {
-    height: 375px;
+    height: auto;
+    min-height: 320px;
   }
 
   .skill-slide {

@@ -312,7 +312,7 @@
 @media (max-width: 480px) {
   #home {
     padding: 0;
-    gap: 0; /* remove the gap between grids */
+    gap: 0;
     width: 100%;
   }
 
@@ -377,5 +377,17 @@
   .connect-button {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
+  }
+
+  .abstract-shape {
+    clip-path: none;
+    border-radius: 29% 71% 24% 76% / 74% 28% 72% 26%;
+    width: 90%;
+    height: 40%;
+    background-color: #262626;
+    position: absolute;
+    top: 20%;
+    left: 40%;
+    transform: translate(-40%, -20%);
   }
 }

@@ -1,7 +1,7 @@
 /* root */
 :root {
   /* shape parameters */
-  --shape-angle: calc(75% - 12vw); /* reduced from 84% */
+  --shape-angle: calc(75% - 12vw);
 }
 
 /* fonts */
@@ -21,17 +21,38 @@
   box-sizing: border-box;
 }
 
+/* Chrome, Safari, Edge */
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+html {
+  scrollbar-width: none;
+}
+
+/* remove other scrollbar styles */
+.section::-webkit-scrollbar-track,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover {
+  display: none;
+}
+
 .section {
   display: flex;
   flex-direction: column;
   padding: 2rem;
 }
 
+html,
 body {
   background-color: #f5f5f5;
   color: #333;
   font-family: "Tahoma", "Hongmengti", sans-serif;
   overflow-x: hidden;
+  /* Firefox scrollbar */
+  scrollbar-color: #888 #f5f5f5;
 }
 .h1,
 h2,
@@ -62,6 +83,13 @@ main {
 }
 
 /* main media query */
+
+@media screen and (min-width: 820px) {
+  ::-webkit-scrollbar-track {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   main {
     padding: 1rem;

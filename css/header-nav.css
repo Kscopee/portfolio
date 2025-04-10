@@ -40,7 +40,7 @@
   width: 2rem;
   height: 2rem;
   filter: brightness(0.5);
-  transition: filter 0.3s;
+  transition: filter 300ms;
 }
 
 .header .socials img:hover {
@@ -91,7 +91,7 @@
   margin-bottom: 0.75rem;
   margin-left: 0.75rem;
   width: 100%;
-  transition: color 0.5s;
+  transition: color 300ms;
 }
 
 .header .socials .socials-dropdown .social-icon img {
@@ -99,12 +99,12 @@
   height: 1.5rem;
   margin-right: 0.75rem;
   filter: brightness(0.5);
-  transition: filter 0.3s;
+  transition: filter 300ms;
 }
 
 .header .socials .socials-dropdown .social-icon span {
   color: white;
-  transition: color 0.3s;
+  transition: color 300ms;
 }
 
 .header .socials .socials-dropdown .social-icon:hover img {
