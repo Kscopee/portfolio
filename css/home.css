@@ -391,3 +391,45 @@
     transform: translate(-40%, -20%);
   }
 }
+
+/* modal styling */
+.modal {
+  backdrop-filter: blur(8px);
+  background-color: rgba(38, 38, 38, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 15px;
+}
+
+.modal-header {
+  border-bottom: 2px solid #d7f205;
+}
+
+.modal-footer {
+  border-top: none;
+}
+
+.modal .btn-primary {
+  background-color: #000000;
+  border: none;
+  border-radius: 50px;
+  padding: 0.75rem 1.5rem;
+  transition: background-color 300ms, color 300ms;
+}
+
+.modal .btn-primary:hover {
+  background-color: #d7f205;
+  color: black;
+}
+
+.modal .form-control {
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+.modal .form-control:focus {
+  border-color: #d7f205;
+  box-shadow: 0 0 0 0.2rem rgba(215, 242, 5, 0.25);
+}
