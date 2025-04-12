@@ -39,8 +39,8 @@
 .header .socials img {
   width: 2rem;
   height: 2rem;
-  filter: brightness(0.5);
-  transition: filter 300ms;
+  filter: brightness(0.8);
+  transition: filter 100ms;
 }
 
 .header .socials img:hover {

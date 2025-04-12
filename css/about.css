@@ -1,43 +1,45 @@
 /* ===== ABOUT ===== */
 
 #about {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
-  gap: 2rem;
-  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
+  position: relative;
 }
 
 .about-top-left {
-  grid-column: 1 / 2;
-  grid-row: 1 / 2;
+  width: 100%;
   padding: 1rem;
   color: #000000;
+  min-height: 0; 
+  height: fit-content;
+  margin-block: 5rem;
+  text-align: center;
 }
 
 .about-top-right {
-  grid-column: 2 / 3;
-  grid-row: 1 / 2;
+  width: 100%;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;
-  padding: 1rem;
 }
 
 .about-bottom-left {
-  grid-column: 1 / 2;
-  grid-row: 2 / 3;
+  width: 100%;
   position: relative;
   overflow: visible;
   padding-right: 2rem;
+  margin-top: -3; 
 }
 
 .about-bottom-right {
-  grid-column: 2 / 3;
-  grid-row: 2 / 3;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 1rem;
 }
 
@@ -47,6 +49,11 @@
 
 .bio-list {
   margin-top: 1rem;
+  display: inline-block;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
 }
 
 .bio-list dt {
@@ -95,6 +102,7 @@
   border-radius: 50%;
   position: relative;
   font-weight: bold;
+  right: 60%;
 }
 
 .pacman-chart::before {
@@ -179,12 +187,47 @@
 }
 
 /* about section media queries */
+@media (min-width: 1024px) {
+  #about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+      "top-left top-right"
+      "bottom-left bottom-right";
+    gap: 0;
+  }
+
+  .about-top-left {
+    grid-area: top-left;
+    align-self:flex-start;
+  }
+
+  .about-top-right {
+    grid-area: top-right;
+  }
+
+  .about-bottom-left {
+    grid-area: bottom-left;
+    align-self: flex-start;
+  }
+
+  .about-bottom-right {
+    grid-area: bottom-right;
+    align-self: center;
+  }
+}
+
 @media (max-width: 1024px) {
   #about {
     grid-template-columns: 1fr;
     grid-template-rows: repeat(4, auto);
     gap: 2rem;
     padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
   }
 
   .about-top-left,
@@ -193,6 +236,38 @@
   .about-bottom-right {
     grid-column: 1;
     padding: 1rem;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .ego-section {
+    align-items: center;
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .spark-list {
+    text-align: left;
+    width: 100%;
+    padding-left: 2rem;
+    display: inline-block;
+  }
+
+  .bio-list {
+    text-align: left;
+    width: fit-content;
+    padding-left: 0;
+    margin: 1rem auto;
+    display: inline-block;
+  }
+
+  .bio-list dt,
+  .bio-list dd {
+    text-align: left;
+    margin-left: 0;
   }
 
   .about-top-right {
@@ -202,6 +277,7 @@
   .about-bottom-left {
     grid-row: 3;
     top: 40%;
+    margin-top: 0;  
   }
 
   .about-bottom-right {
@@ -218,10 +294,22 @@
     clip-path: none;
     border-radius: 21% 79% 41% 59% / 34% 41% 59% 66%;
     width: 100%;
+    bottom: -20%;
+  }
+
+  .pacman-chart {
+    right: 0;
+    margin: 0 auto;
   }
 
   .shape-highlight-about {
     display: none;
+  }
+
+  .profile-photo-about
+  {
+    left: 15%;
+    bottom: -20%;
   }
 
   .about-rant {
