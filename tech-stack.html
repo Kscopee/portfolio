@@ -7,8 +7,6 @@
     <!-- CSS files -->
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/header-nav.css" />
-    <link rel="stylesheet" href="css/home.css" />
-    <link rel="stylesheet" href="css/about.css" />
     <link rel="stylesheet" href="css/tech-stack.css" />
     <!-- Bootstrap CSS -->
     <link
@@ -74,191 +72,45 @@
     <!-- left navbar -->
     <nav class="vertical-nav" aria-label="Main Navigation">
       <ul>
-        <!-- anchors including tooltips -->
         <li>
-          <a href="#home-anchor" class="nav-link" data-tooltip="Home"
-            ><img
+          <a href="home.html" class="nav-link" data-tooltip="Home">
+            <img
               src="web_portfolio_images/SVGs/home_icon_white.svg"
               alt="Home Page"
-          /></a>
+            />
+          </a>
         </li>
         <li>
-          <a href="#about-anchor" class="nav-link" data-tooltip="About"
-            ><img
+          <a href="about.html" class="nav-link" data-tooltip="About">
+            <img
               src="web_portfolio_images/SVGs/person_icon_white.svg"
               alt="About Page"
-          /></a>
+            />
+          </a>
         </li>
         <li>
           <a
-            href="#tech-stack-anchor"
-            class="nav-link"
+            href="tech-stack.html"
+            class="nav-link active"
             data-tooltip="Tech Stack"
-            ><img
+          >
+            <img
               src="web_portfolio_images/SVGs/stack_icon_white.svg"
               alt="Tech Stack"
-          /></a>
+            />
+          </a>
         </li>
       </ul>
     </nav>
 
     <!-- main content -->
     <main class="main-content">
-      <!-- home anchor -->
-      <div id="home-anchor" class="anchor"></div>
-      <!-- ===== HOME ===== -->
-      <section id="home" class="section">
-        <!-- home left side -->
-        <div class="intro-left">
-          <div class="intro-line"></div>
-          <div class="intro-text">
-            <div class="intro-headers">
-              <h4>I am,</h4>
-              <h2>Ashton James D. Caspe</h2>
-              <h4>A UI/UX Designer & Front End Developer</h4>
-            </div>
-            <div class="contact-info">
-              <button class="connect-button">Connect with me</button>
-              <p class="email">Email: projectkfiles@gmail.com</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- home right side -->
-        <div class="home-right">
-          <div class="big-text">ASHTON</div>
-          <div class="abstract-shape-container">
-            <div class="abstract-shape"></div>
-            <img
-              src="web_portfolio_images/PNGs/home_page_picture.png"
-              alt="Ashton"
-              class="profile-photo"
-            />
-            <div class="comments-box">
-              <p>
-                "Ashton? Yeah, he cool, very nerdy. If he were dropped in the
-                middle of America, the first thing he'd look for is LA, just to
-                see what anime expo is like."
-                <span>- Friend 1</span>
-              </p>
-              <p>
-                "Ashton is not just a great friend but also an amazing study
-                buddy. His patience and curiosity make discussions about
-                programming incredibly engaging. Thanks to him, I've been able
-                to use the Feynman Technique effectively—breaking down complex
-                concepts into simpler explanations that deepen my own
-                understanding. Whether it's debugging code or brainstorming new
-                ideas, Ashton's insights and enthusiasm always make learning
-                more enjoyable!"
-                <span>- Friend 2</span>
-              </p>
-            </div>
-            <div class="shape-highlight"></div>
-          </div>
-        </div>
-      </section>
-
-      <!-- about anchor -->
-      <div id="about-anchor" class="anchor"></div>
-
-      <!-- ===== ABOUT ===== -->
-      <section id="about" class="section">
-        <!-- top left -->
-        <div class="about-top-left">
-          <h2>about.</h2>
-          <h2>Ashton James D. Caspe</h2>
-          <h5>"absolute cinema!" - Ashton James</h5>
-          <!-- info list - simplified -->
-          <dl class="bio-list">
-            <dt>Course:</dt>
-            <dd>Information Technology (Soon to be Degree)</dd>
-          </dl>
-        </div>
-
-        <!-- top right -->
-        <div class="about-top-right">
-          <div class="ego-section">
-            <!-- design ego list -->
-            <h3>Design Ego</h3>
-            <ul class="spark-list">
-              <li>UI Design</li>
-              <li>UX Design</li>
-              <li>System Design</li>
-              <li>Coating your designs with a dreamlike glaze</li>
-            </ul>
-          </div>
-          <div class="ego-section">
-            <h3>Code Ego</h3>
-            <!-- code ego list -->
-            <ul class="spark-list">
-              <li>HTML/CSS</li>
-              <li>JavaScript</li>
-              <li>Java</li>
-              <li>Questioning my life decisions</li>
-            </ul>
-          </div>
-          <!-- pie chart -->
-          <div class="ego-pie">
-            <div class="pacman-chart" aria-label="Design 70%, Code 30%"></div>
-          </div>
-        </div>
-
-        <!-- vertical separator line -->
-        <div class="about-vertical-line"></div>
-
-        <!-- bottom left -->
-        <div class="about-bottom-left">
-          <div class="abstract-shape-container-left">
-            <div class="abstract-shape-about"></div>
-            <img
-              src="web_portfolio_images/PNGs/aboute_page_picture.png"
-              alt="Ashton"
-              class="profile-photo-about"
-            />
-            <div class="shape-highlight-about"></div>
-          </div>
-        </div>
-
-        <!-- bottom right -->
-        <div class="about-bottom-right">
-          <article class="about-rant">
-            <h3>WAIT A MINUTE WHO ARE YOU?</h3>
-            <p>
-              My name is Ashton James, and I am now studying at St. Dominic
-              College of Asia as an information technology student. My
-              enthusiasm primarily lays in artistic design this translates well
-              to UI and UX. I also enjoy theory-crafting systems and projects.
-            </p>
-            <p>
-              Though coding is not my main passion, I enjoy it enough to pursue
-              it as a career. The process of gradually discovering how
-              technology and computers work is truly fascinating. Even though
-              I'm a little sluggish to apply what I've learnt. Despite this, I
-              hope to improve my understanding and expertise of computers,
-              particularly in the front end department.
-            </p>
-            <p>
-              When I'm not looking at the screen, writing programming or
-              designing, I participate in generating types of entertainment
-              media such as anime, movies documentaries. To relax my eyes, I
-              read traditional literature such as Homer's "The Iliad" and
-              Alexandre Dumas' "The Count of Monte Cristo". When I'm not doing
-              that, I work out to keep my body from deteriorating. And that's
-              it!
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <!-- tech stack anchor -->
-      <div id="tech-stack-anchor" class="anchor"></div>
-
       <!-- ===== TECH STACK ===== -->
       <section id="tech-stack" class="section">
         <!-- title -->
         <h2 class="skills-title">SKILLS</h2>
 
-        <!-- skill toggle - moved to top -->
+        <!-- skill toggle -->
         <div class="skill-switcher">
           <button class="skill-toggle active" data-type="technical">
             Technical
@@ -388,7 +240,7 @@
               </p>
               <p>Source: Me</p>
             </div>
-            <!-- communication -->
+            <!-- creativity -->
             <div
               class="skill-slide soft"
               data-skill="creativity"
@@ -467,63 +319,10 @@
       </section>
     </main>
 
-    <!-- email modal for connect with me functionality -->
-    <div
-      class="modal fade"
-      id="emailModal"
-      tabindex="-1"
-      aria-labelledby="emailModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="emailModalLabel">Contact me (｡•̀ᴗ-)✧</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form id="emailForm">
-              <div class="mb-3">
-                <input
-                  type="email"
-                  class="form-control"
-                  id="senderEmail"
-                  placeholder="Your email"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <textarea
-                  class="form-control"
-                  id="messageContent"
-                  rows="4"
-                  placeholder="Your message"
-                  required
-                ></textarea>
-              </div>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-primary" id="sendMessageBtn">
-              Send Message
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- emailJS SDK -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
-    <!-- bootstrap JS and its dependencies -->
+    <!-- Bootstrap JS and its dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <!-- local java scripts -->
-    <script src="js/email-sender.js"></script>
     <script src="js/navbar.js"></script>
     <script src="js/tv-carousel.js"></script>
   </body>

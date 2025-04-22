@@ -75,7 +75,6 @@
   transition: background-color 300ms, color 300ms;
   margin-top: 2.5rem;
   width: fit-content;
-  margin-top: 0;
 }
 
 .connect-button:hover {
@@ -193,9 +192,7 @@
     display: flex;
     align-items: center;
     min-height: 50vh;
-    display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
   }
 
@@ -224,7 +221,6 @@
     width: 35%;
     margin: 0;
     align-self: center;
-    position: relative;
     z-index: 2;
     margin-bottom: 1rem;
   }
@@ -242,18 +238,9 @@
     background-color: #262626;
     border-radius: 12px;
     align-self: center;
-    position: relative;
     z-index: 1;
     top: 0;
-    left: 0;
-    transform: none;
     margin-top: -1rem;
-    width: 55%;
-    height: auto;
-    padding: 1.5rem;
-    color: #ffffff;
-    background-color: #262626;
-    border-radius: 12px;
     text-align: center;
   }
 
@@ -265,14 +252,6 @@
 
   .shape-highlight {
     display: none;
-  }
-
-  .abstract-shape-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem;
   }
 }
 
@@ -362,7 +341,7 @@
     right: 0;
     display: block;
     margin: 0 0 -2rem 0;
-    z-index: 1; 
+    z-index: 1;
   }
 
   .comments-box {
@@ -374,7 +353,7 @@
     left: 0;
     right: 0;
     transform: none;
-    z-index: 2; 
+    z-index: 2;
   }
 
   .comments-box p {
@@ -411,7 +390,7 @@
     top: 20%;
     left: 40%;
     transform: translate(-40%, -20%);
-    z-index: 0; 
+    z-index: 0;
   }
 }
 

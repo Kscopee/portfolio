@@ -136,17 +136,18 @@
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  height: 3.75rem;
-  opacity: 0.9;
+  height: 3.5rem;
+  opacity: 0.8;
   width: auto;
   border-radius: 15px 15px 0 0;
   z-index: 1000;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  transition: height 300ms ease-in-out, opacity 300ms ease-in-out;
+  transition: height 300ms, opacity 300ms, width 300ms;
 }
 
-.vertical-nav:hover {
-  height: 4.5rem;
+.vertical-nav:hover,
+.vertical-nav.hovered-state {
+  height: 4rem;
   opacity: 1;
   width: auto;
 }
@@ -371,28 +372,20 @@
     width: auto;
     padding: 0.75rem;
   }
-
-  .vertical-nav:hover {
-    width: auto;
-  }
 }
 
 @media (max-width: 768px) {
   .vertical-nav {
     width: auto;
     padding: 0.5rem;
-    height: 3.5rem;
-    transition: all 0.3s ease;
+    height: 3.25rem;
   }
 
+  /* Remove hover animation */
   .vertical-nav:hover {
     width: auto;
-    height: 4.25rem;
+    height: 3.25rem;
     opacity: 1;
-  }
-
-  .vertical-nav ul li a {
-    padding: 0.5rem;
   }
 }
 
@@ -400,13 +393,13 @@
   .vertical-nav {
     width: auto;
     height: 3rem;
-    opacity: 0.9;
+    opacity: 1;
     border-radius: 10px 10px 0 0;
-    transition: all 0.3s ease;
   }
 
+  /* Remove hover animation */
   .vertical-nav:hover {
-    height: 3.75rem;
+    height: 3rem;
     opacity: 1;
     width: auto;
   }
@@ -417,13 +410,13 @@
   .vertical-nav {
     width: auto;
     height: 3rem;
-    opacity: 0.9;
+    opacity: 1;
     border-radius: 10px 10px 0 0;
-    transition: height 300ms ease-in-out, opacity 300ms ease-in-out;
   }
 
+  /* Remove hover animation */
   .vertical-nav:hover {
-    height: 3.75rem;
+    height: 3rem;
     opacity: 1;
     width: auto;
   }

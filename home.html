@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ashton James</title>
+    <!-- CSS files -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/header-nav.css" />
+    <link rel="stylesheet" href="css/home.css" />
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/ico"
+      href="web_portfolio_images/Logo/portfolio_logo_favicon.ico"
+    />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="logo">
+        <img
+          src="web_portfolio_images/Logo/portfolio_logo_android_chrome_192x192.png"
+          alt="Ashton James Logo"
+          height="24"
+          width="24"
+        />
+      </div>
+      <!-- quote -->
+      <div class="quote">Turn your idyllic fantasy into digital reality</div>
+      <!-- socials -->
+      <div class="socials">
+        <img
+          id="socials-logo"
+          src="web_portfolio_images/SVGs/socials_icon.svg"
+          alt="Socials logo"
+        />
+        <div class="socials-dropdown">
+          <div class="top-highlight"></div>
+          <!-- drop down content -->
+          <h6>Follow Me</h6>
+          <a href="https://x.com" target="_blank" class="social-icon">
+            <img
+              src="web_portfolio_images/SVGs/x_icon_white.svg"
+              alt="X (Twitter)"
+            />
+            X
+          </a>
+          <a href="https://github.com" target="_blank" class="social-icon">
+            <img
+              src="web_portfolio_images/SVGs/github_icon_white.svg"
+              alt="GitHub"
+            />
+            GitHub
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="social-icon">
+            <img
+              src="web_portfolio_images/SVGs/likedin_icon_white.svg"
+              alt="LinkedIn"
+            />
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- left navbar -->
+    <nav class="vertical-nav" aria-label="Main Navigation">
+      <ul>
+        <li>
+          <a href="home.html" class="nav-link active" data-tooltip="Home">
+            <img
+              src="web_portfolio_images/SVGs/home_icon_white.svg"
+              alt="Home Page"
+            />
+          </a>
+        </li>
+        <li>
+          <a href="about.html" class="nav-link" data-tooltip="About">
+            <img
+              src="web_portfolio_images/SVGs/person_icon_white.svg"
+              alt="About Page"
+            />
+          </a>
+        </li>
+        <li>
+          <a href="tech-stack.html" class="nav-link" data-tooltip="Tech Stack">
+            <img
+              src="web_portfolio_images/SVGs/stack_icon_white.svg"
+              alt="Tech Stack"
+            />
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- main content -->
+    <main class="main-content">
+      <!-- ===== HOME ===== -->
+      <section id="home" class="section">
+        <!-- email modal for connect with me functionality -->
+        <div
+          class="modal fade"
+          id="emailModal"
+          tabindex="-1"
+          aria-labelledby="emailModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="emailModalLabel">
+                  Contact me (｡•̀ᴗ-)✧
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body">
+                <form id="emailForm">
+                  <div class="mb-3">
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="senderEmail"
+                      placeholder="Your email"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <textarea
+                      class="form-control"
+                      id="messageContent"
+                      rows="4"
+                      placeholder="Your message"
+                      required
+                    ></textarea>
+                  </div>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="sendMessageBtn"
+                >
+                  Send Message
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- home left side -->
+        <div class="intro-left">
+          <div class="intro-line"></div>
+          <div class="intro-text">
+            <div class="intro-headers">
+              <h4>I am,</h4>
+              <h2>Ashton James D. Caspe</h2>
+              <h4>A UI/UX Designer & Front End Developer</h4>
+            </div>
+            <div class="contact-info">
+              <button class="connect-button">Connect with me</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- home right side -->
+        <div class="home-right">
+          <div class="big-text">ASHTON</div>
+          <div class="abstract-shape-container">
+            <div class="abstract-shape"></div>
+            <img
+              src="web_portfolio_images/PNGs/home_page_picture.png"
+              alt="Ashton"
+              class="profile-photo"
+            />
+            <div class="comments-box">
+              <p>
+                "Ashton? Yeah, he cool, very nerdy. If he were dropped in the
+                middle of America, the first thing he'd look for is LA, just to
+                see what anime expo is like."
+                <span>- Friend 1</span>
+              </p>
+              <p>
+                "Ashton is not just a great friend but also an amazing study
+                buddy. His patience and curiosity make discussions about
+                programming incredibly engaging. Thanks to him, I've been able
+                to use the Feynman Technique effectively—breaking down complex
+                concepts into simpler explanations that deepen my own
+                understanding. Whether it's debugging code or brainstorming new
+                ideas, Ashton's insights and enthusiasm always make learning
+                more enjoyable!"
+                <span>- Friend 2</span>
+              </p>
+            </div>
+            <div class="shape-highlight"></div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- emailJS SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- bootstrap JS and its dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <!-- local java scripts -->
+    <script src="js/email-sender.js"></script>
+    <script src="js/navbar.js"></script>
+  </body>
+</html>

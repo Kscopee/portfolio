@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ashton James</title>
+    <!-- CSS files -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/header-nav.css" />
+    <link rel="stylesheet" href="css/about.css" />
+    <!-- favicon -->
+    <link
+      rel="icon"
+      type="image/ico"
+      href="web_portfolio_images/Logo/portfolio_logo_favicon.ico"
+    />
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+      <div class="logo">
+        <img
+          src="web_portfolio_images/Logo/portfolio_logo_android_chrome_192x192.png"
+          alt="Ashton James Logo"
+          height="24"
+          width="24"
+        />
+      </div>
+      <!-- quote -->
+      <div class="quote">Turn your idyllic fantasy into digital reality</div>
+      <!-- socials -->
+      <div class="socials">
+        <img
+          id="socials-logo"
+          src="web_portfolio_images/SVGs/socials_icon.svg"
+          alt="Socials logo"
+        />
+        <div class="socials-dropdown">
+          <div class="top-highlight"></div>
+          <!-- drop down content -->
+          <h6>Follow Me</h6>
+          <a href="https://x.com" target="_blank" class="social-icon">
+            <img
+              src="web_portfolio_images/SVGs/x_icon_white.svg"
+              alt="X (Twitter)"
+            />
+            X
+          </a>
+          <a href="https://github.com" target="_blank" class="social-icon">
+            <img
+              src="web_portfolio_images/SVGs/github_icon_white.svg"
+              alt="GitHub"
+            />
+            GitHub
+          </a>
+          <a href="https://linkedin.com" target="_blank" class="social-icon">
+            <img
+              src="web_portfolio_images/SVGs/likedin_icon_white.svg"
+              alt="LinkedIn"
+            />
+            LinkedIn
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- left navbar -->
+    <nav class="vertical-nav" aria-label="Main Navigation">
+      <ul>
+        <li>
+          <a href="home.html" class="nav-link" data-tooltip="Home">
+            <img
+              src="web_portfolio_images/SVGs/home_icon_white.svg"
+              alt="Home Page"
+            />
+          </a>
+        </li>
+        <li>
+          <a href="about.html" class="nav-link active" data-tooltip="About">
+            <img
+              src="web_portfolio_images/SVGs/person_icon_white.svg"
+              alt="About Page"
+            />
+          </a>
+        </li>
+        <li>
+          <a href="tech-stack.html" class="nav-link" data-tooltip="Tech Stack">
+            <img
+              src="web_portfolio_images/SVGs/stack_icon_white.svg"
+              alt="Tech Stack"
+            />
+          </a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- main content -->
+    <main class="main-content">
+      <!-- ===== ABOUT ===== -->
+      <section id="about" class="section">
+        <!-- top left -->
+        <div class="about-top-left">
+          <h2>about.</h2>
+          <h2>Ashton James D. Caspe</h2>
+          <h5>"absolute cinema!" - Ashton James</h5>
+          <!-- info list - simplified -->
+          <dl class="bio-list">
+            <dt>Course:</dt>
+            <dd>Information Technology (Soon to be Degree)</dd>
+          </dl>
+        </div>
+
+        <!-- top right -->
+        <div class="about-top-right">
+          <div class="ego-section">
+            <!-- design ego list -->
+            <h3>Design Ego</h3>
+            <ul class="spark-list">
+              <li>UI Design</li>
+              <li>UX Design</li>
+              <li>System Design</li>
+              <li>Coating your designs with a dreamlike glaze</li>
+            </ul>
+          </div>
+          <div class="ego-section">
+            <h3>Code Ego</h3>
+            <!-- code ego list -->
+            <ul class="spark-list">
+              <li>HTML/CSS</li>
+              <li>JavaScript</li>
+              <li>Java</li>
+              <li>Questioning my life decisions</li>
+            </ul>
+          </div>
+          <!-- pie chart -->
+          <div class="ego-pie">
+            <div class="pacman-chart" aria-label="Design 70%, Code 30%"></div>
+          </div>
+        </div>
+
+        <!-- vertical separator line -->
+        <div class="about-vertical-line"></div>
+
+        <!-- bottom left -->
+        <div class="about-bottom-left">
+          <div class="abstract-shape-container-left">
+            <div class="abstract-shape-about"></div>
+            <img
+              src="web_portfolio_images/PNGs/aboute_page_picture.png"
+              alt="Ashton"
+              class="profile-photo-about"
+            />
+            <div class="shape-highlight-about"></div>
+          </div>
+        </div>
+
+        <!-- bottom right -->
+        <div class="about-bottom-right">
+          <article class="about-rant">
+            <h3>WAIT A MINUTE WHO ARE YOU?</h3>
+            <p>
+              My name is Ashton James, and I am now studying at St. Dominic
+              College of Asia as an information technology student. My
+              enthusiasm primarily lays in artistic design this translates well
+              to UI and UX. I also enjoy theory-crafting systems and projects.
+            </p>
+            <p>
+              Though coding is not my main passion, I enjoy it enough to pursue
+              it as a career. The process of gradually discovering how
+              technology and computers work is truly fascinating. Even though
+              I'm a little sluggish to apply what I've learnt. Despite this, I
+              hope to improve my understanding and expertise of computers,
+              particularly in the front end department.
+            </p>
+            <p>
+              When I'm not looking at the screen, writing programming or
+              designing, I participate in generating types of entertainment
+              media such as anime, movies documentaries. To relax my eyes, I
+              read traditional literature such as Homer's "The Iliad" and
+              Alexandre Dumas' "The Count of Monte Cristo". When I'm not doing
+              that, I work out to keep my body from deteriorating. And that's
+              it!
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bootstrap JS and its dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
+    <!-- local java scripts -->
+    <script src="js/navbar.js"></script>
+  </body>
+</html>

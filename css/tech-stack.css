@@ -79,9 +79,7 @@
   display: flex;
   gap: 1rem;
   margin-bottom: 2rem;
-  display: flex;
   justify-content: center;
-  gap: 1rem;
 }
 
 .skill-toggle {
