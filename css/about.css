@@ -6,7 +6,7 @@
   grid-template-areas:
     "top-left top-left"
     "bottom-left bottom-right";
-  gap: 2rem;
+  gap: 1rem;
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
@@ -27,7 +27,7 @@
   background: rgba(38, 38, 38, 0.05);
   border-radius: 15px;
   padding: 20px;
-  margin: 1rem auto 2rem auto;
+  margin: 1rem auto 1rem auto;
   border: 2px solid #262626;
   position: relative;
   overflow: hidden;
@@ -121,13 +121,10 @@
 }
 
 .bio-list {
-  margin-top: 1rem;
+  margin: 1rem auto 1rem;
   display: inline-block;
   width: fit-content;
-  margin-left: auto;
-  margin-right: auto;
   text-align: left;
-  margin-bottom: 2rem;
 }
 
 .bio-list dt {
@@ -145,7 +142,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   width: 85%;
   height: 380px;
   overflow: visible;
@@ -164,9 +161,9 @@
 
 .profile-photo-about {
   position: absolute;
-  left: 20%;
+  left: 10%;
   bottom: 0;
-  width: 65%;
+  width: 80%;
   height: auto;
   z-index: 3;
 }
@@ -209,7 +206,7 @@
       "top-left"
       "bottom-left"
       "bottom-right";
-    gap: 2rem;
+    gap: 0.75rem;
     padding: 1rem;
   }
 
@@ -222,106 +219,177 @@
   .about-bottom-left,
   .about-bottom-right {
     grid-column: 1;
-    padding: 1rem;
+    width: calc(100% - 2rem);
     max-width: 800px;
-    width: 100%;
     margin: 0 auto;
+    padding: 1rem;
   }
 
-  .about-bottom-left {
-    margin: 2rem auto;
+  .about-top-left {
+    margin-bottom: 0;
   }
 
   .abstract-shape-container-left {
-    margin: 0;
+    width: 80%;
+    max-width: 450px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    min-height: 320px;
+    position: relative;
+  }
+
+  .about-bottom-right {
+    width: 90%;
+    margin: 0 auto;
+    padding: 1rem;
+  }
+
+  .about-rant {
     width: 100%;
+    margin: 0 auto;
+    margin-left: 0;
+  }
+
+  .abstract-shape-about {
+    width: 100%;
+    height: 90%;
+    background-color: #262626;
+    clip-path: none;
+    border-radius: 2rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+
+  .profile-photo-about {
+    position: relative;
+    left: 0;
+    bottom: 0;
+    width: 80%;
+    max-width: 420px;
+    margin: 0 auto;
+    z-index: 3;
+  }
+
+  .shape-highlight-about {
+    width: 100%;
+    height: 3.5rem;
+    clip-path: none;
+    border-radius: 0 0 2rem 2rem;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
   }
 }
 
 @media (max-width: 768px) {
   #about {
-    gap: 0;
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    position: relative;
+    gap: 0.5rem;
+    padding: 0.75rem;
   }
 
   .about-top-left {
     padding: 0.75rem;
-    margin-bottom: 1rem;
-    width: 100%;
-    position: relative;
-    z-index: 5;
+    margin-bottom: 0;
   }
 
-  .about-bottom-left {
-    width: 100%;
-    position: relative;
-    padding: 0;
-    margin: 0;
-    min-height: auto;
+  .about-top-left h2 {
+    font-size: 1.75rem;
   }
 
   .profile-photo-about {
-    width: 50%;
-    position: absolute;
-    top: -125px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 2;
+    width: 80%;
+    max-width: 400px;
   }
 
   .about-bottom-right {
     width: 90%;
-    position: relative;
-    margin-top: 100px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 3;
-    display: flex;
-    justify-content: center;
-  }
-
-  .abstract-shape-about,
-  .shape-highlight-about {
-    display: none;
+    margin: 0.25rem auto;
   }
 
   .about-rant {
-    margin: 0 auto;
     width: 100%;
-    max-width: 600px;
-    position: relative;
-    z-index: 1;
+    margin: 0 auto;
   }
 
-  .abstract-shape-container-left {
-    margin: 0;
-    height: 100%;
-    width: 100%;
-    position: relative;
+  .skills-chart-container {
+    margin-bottom: 0.5rem;
+  }
+
+  .shape-highlight-about {
+    height: 2.5rem;
   }
 }
 
 @media (max-width: 480px) {
   #about {
-    gap: 1rem;
-    padding: 0.75rem;
+    gap: 0.25rem;
+    padding: 0.5rem;
+  }
+
+  .about-top-left h2 {
+    font-size: 1.5rem;
   }
 
   .about-top-left,
-  .about-bottom-left,
   .about-bottom-right {
     padding: 0.5rem;
   }
 
   .about-bottom-left {
-    margin: 1rem auto;
+    padding: 0;
+    margin: 0.25rem auto;
   }
 
   .chart-wrapper {
     width: 160px;
     height: 160px;
+  }
+
+  .profile-photo-about {
+    width: 70%;
+    max-width: 350px;
+  }
+
+  .abstract-shape-about {
+    border-radius: 1.5rem;
+  }
+
+  .shape-highlight-about {
+    border-radius: 0 0 1.5rem 1.5rem;
+  }
+
+  .about-rant {
+    padding: 1.5rem;
+    border-radius: 1.5rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .about-top-left h2 {
+    font-size: 1.5rem;
+  }
+
+  .profile-photo-about {
+    width: 80%;
+    max-width: 380px;
+  }
+
+  .abstract-shape-container-left {
+    min-height: 280px;
+  }
+
+  .abstract-shape-about {
+    height: 95%;
+  }
+
+  .shape-highlight-about {
+    height: 1.5rem;
   }
 }
