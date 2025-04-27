@@ -13,18 +13,22 @@
 .intro-left {
   grid-area: intro-left;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   position: relative;
   width: 100%;
+  height: auto;
+  align-self: start;
 }
 
 .intro-line {
   background-color: #000000;
-  width: 0.25rem;
+  width: 0.3rem;
   border-radius: 5px;
   align-self: stretch;
   margin-right: 1.75rem;
+  min-height: 80px;
+  display: block;
 }
 
 .intro-text {

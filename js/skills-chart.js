@@ -17,6 +17,32 @@ document.addEventListener("DOMContentLoaded", () => {
     coding: { percent: 40, details: "Frontend Development" },
   };
 
+  // Function to get responsive font and padding sizes
+  function getResponsiveSizes() {
+    const windowWidth = window.innerWidth;
+    if (windowWidth <= 480) {
+      return {
+        titleSize: 12,
+        bodySize: 10,
+        padding: 8,
+      };
+    } else if (windowWidth <= 768) {
+      return {
+        titleSize: 14,
+        bodySize: 12,
+        padding: 10,
+      };
+    } else {
+      return {
+        titleSize: 16,
+        bodySize: 14,
+        padding: 12,
+      };
+    }
+  }
+
+  const responsiveSizes = getResponsiveSizes();
+
   // store chart instance for potential future interactions
   window.skillsChart = new Chart(ctx, {
     type: "pie",
@@ -67,14 +93,18 @@ document.addEventListener("DOMContentLoaded", () => {
           titleColor: "#d7f205",
           bodyColor: "#ffffff",
           titleFont: {
-            size: 16,
+            size: responsiveSizes.titleSize,
             weight: "bold",
           },
           bodyFont: {
-            size: 14,
+            size: responsiveSizes.bodySize,
           },
-          padding: 12,
+          padding: responsiveSizes.padding,
           displayColors: false,
+          position: "nearest",
+          xAlign: "center",
+          yAlign: "center",
+          caretSize: 0,
           callbacks: {
             label: function (context) {
               const value = context.parsed;
@@ -85,7 +115,23 @@ document.addEventListener("DOMContentLoaded", () => {
                   : initialData.coding.details;
               return [`${value}% - ${label}`, details];
             },
+            // Limit text length for small screens
+            afterBody: function (context) {
+              const windowWidth = window.innerWidth;
+              if (windowWidth <= 480) {
+                return ""; // Remove any additional text on smallest screens
+              }
+              return null; // Use default behavior for larger screens
+            },
           },
+          // Ensure tooltip stays within the chart boundaries
+          boxPadding: 3,
+          boxWidth:
+            window.innerWidth <= 480
+              ? 120
+              : window.innerWidth <= 768
+              ? 160
+              : 200,
         },
       },
       animation: {
@@ -99,6 +145,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // handle window resize
   window.addEventListener("resize", () => {
+    // Update chart sizes
     window.skillsChart.resize();
+
+    // Update tooltip responsive properties
+    const newSizes = getResponsiveSizes();
+    window.skillsChart.options.plugins.tooltip.titleFont.size =
+      newSizes.titleSize;
+    window.skillsChart.options.plugins.tooltip.bodyFont.size =
+      newSizes.bodySize;
+    window.skillsChart.options.plugins.tooltip.padding = newSizes.padding;
+    window.skillsChart.options.plugins.tooltip.boxWidth =
+      window.innerWidth <= 480 ? 120 : window.innerWidth <= 768 ? 160 : 200;
+
+    window.skillsChart.update();
   });
 });

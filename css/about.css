@@ -59,15 +59,24 @@
   background: rgba(255, 255, 255, 0.03);
   padding: 10px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: visible !important; /* Ensure tooltips can extend outside */
 }
 
-.skills-chart-container h4 {
-  display: none;
-}
-
+/* Tooltip styles */
 #skillsPieChart {
   max-width: 100%;
   height: auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Fix for chart.js tooltips */
+#skillsPieChart + div {
+  overflow: visible !important;
+  z-index: 10 !important;
+}
+.skills-chart-container h4 {
+  display: none;
 }
 
 .skill-detail-popup {
@@ -325,6 +334,18 @@
   .shape-highlight-about {
     height: 2.5rem;
   }
+
+  .chart-wrapper {
+    width: 200px;
+    height: 200px;
+  }
+
+  /* Force chart tooltips to render correctly */
+  canvas {
+    overflow: visible !important;
+    position: relative;
+    z-index: 1;
+  }
 }
 
 @media (max-width: 480px) {
@@ -346,12 +367,6 @@
     padding: 0;
     margin: 0.25rem auto;
   }
-
-  .chart-wrapper {
-    width: 160px;
-    height: 160px;
-  }
-
   .profile-photo-about {
     width: 70%;
     max-width: 350px;
@@ -368,6 +383,16 @@
   .about-rant {
     padding: 1.5rem;
     border-radius: 1.5rem;
+  }
+
+  .chart-wrapper {
+    width: 160px;
+    height: 160px;
+  }
+
+  /* Further tooltip constraints for smallest screens */
+  #skillsPieChart + div {
+    max-width: 120px !important;
   }
 }
 
