@@ -1,3 +1,6 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap");
+
 /* root */
 :root {
   /* shape parameters */
@@ -7,11 +10,15 @@
 /* fonts */
 @font-face {
   font-family: "Hongmengti";
-  src: url(../fonts/Print\ Hongmeng\ style.ttf) format("truetype");
+  src: url("/portfolio/fonts/Print-Hongmeng-style.ttf") format("truetype"),
+    url("/fonts/Print-Hongmeng-style.ttf") format("truetype");
+  font-display: swap;
 }
 @font-face {
   font-family: "Tahoma";
-  src: url(../fonts/tahoma.ttf) format("truetype");
+  src: url("/portfolio/fonts/tahoma.ttf") format("truetype"),
+    url("/fonts/tahoma.ttf") format("truetype");
+  font-display: swap;
 }
 
 /* global styles */
@@ -28,7 +35,7 @@ html {
 body {
   min-height: 100%;
   color: #333;
-  font-family: "Tahoma", "Hongmengti", sans-serif;
+  font-family: "Tahoma", system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   position: relative;
   background: transparent;
@@ -38,13 +45,13 @@ body {
 h2,
 h3,
 h4 {
-  font-family: "Hongmengti", sans-serif;
+  font-family: "Hongmengti", "Noto Sans TC", sans-serif;
   font-size: 2rem;
 }
 
 .h4,
 h6 {
-  font-family: "Tahoma", sans-serif;
+  font-family: "Tahoma", "Noto Sans TC", sans-serif;
   font-size: 1.5rem;
 }
 
