@@ -41,6 +41,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
+  // Function to calculate tooltip box width based on window size
+  function getTooltipBoxWidth() {
+    if (window.innerWidth <= 480) {
+      return 120;
+    } else if (window.innerWidth <= 768) {
+      return 160;
+    }
+    return 200;
+  }
+
   const responsiveSizes = getResponsiveSizes();
 
   // store chart instance for potential future interactions
@@ -115,23 +125,18 @@ document.addEventListener("DOMContentLoaded", () => {
                   : initialData.coding.details;
               return [`${value}% - ${label}`, details];
             },
-            // Limit text length for small screens
+            // limit text length for small screens
             afterBody: function (context) {
               const windowWidth = window.innerWidth;
               if (windowWidth <= 480) {
-                return ""; // Remove any additional text on smallest screens
+                return ""; // remove any additional text on smallest screens
               }
-              return null; // Use default behavior for larger screens
+              return null; // use default behavior for larger screens
             },
           },
-          // Ensure tooltip stays within the chart boundaries
+          // ensure tooltip stays within the chart boundaries
           boxPadding: 3,
-          boxWidth:
-            window.innerWidth <= 480
-              ? 120
-              : window.innerWidth <= 768
-              ? 160
-              : 200,
+          boxWidth: getTooltipBoxWidth(),
         },
       },
       animation: {
@@ -145,18 +150,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // handle window resize
   window.addEventListener("resize", () => {
-    // Update chart sizes
+    // update chart sizes
     window.skillsChart.resize();
 
-    // Update tooltip responsive properties
+    // update tooltip responsive properties
     const newSizes = getResponsiveSizes();
     window.skillsChart.options.plugins.tooltip.titleFont.size =
       newSizes.titleSize;
     window.skillsChart.options.plugins.tooltip.bodyFont.size =
       newSizes.bodySize;
     window.skillsChart.options.plugins.tooltip.padding = newSizes.padding;
-    window.skillsChart.options.plugins.tooltip.boxWidth =
-      window.innerWidth <= 480 ? 120 : window.innerWidth <= 768 ? 160 : 200;
+    window.skillsChart.options.plugins.tooltip.boxWidth = getTooltipBoxWidth();
 
     window.skillsChart.update();
   });

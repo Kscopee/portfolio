@@ -7,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // handle video loading
   video.addEventListener("loadeddata", function () {
-    video.style.opacity = "0.3";
+    video.style.opacity = "0.5";
   });
 
   // handle loop transition
