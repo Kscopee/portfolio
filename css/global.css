@@ -65,7 +65,12 @@ h6 {
   height: 100vh;
   z-index: -1;
   object-fit: cover;
+  opacity: 0.5;
   pointer-events: none;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
 }
 
 main {

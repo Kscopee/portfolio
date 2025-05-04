@@ -23,6 +23,10 @@
   margin: 0 auto;
 }
 
+.about-top-left h2 {
+  font-size: 2.5rem;
+  font-weight: 500;
+}
 .skills-chart-container {
   background: rgba(38, 38, 38, 0.05);
   border-radius: 15px;
@@ -59,10 +63,9 @@
   background: rgba(255, 255, 255, 0.03);
   padding: 10px;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: visible !important; /* Ensure tooltips can extend outside */
+  overflow: visible !important;
 }
 
-/* Tooltip styles */
 #skillsPieChart {
   max-width: 100%;
   height: auto;
@@ -70,7 +73,6 @@
   z-index: 1;
 }
 
-/* Fix for chart.js tooltips */
 #skillsPieChart + div {
   overflow: visible !important;
   z-index: 10 !important;
@@ -200,6 +202,12 @@
   height: auto;
   width: 90%;
   margin-left: 1rem;
+}
+
+.about-rant h3 {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
 }
 
 .about-rant p {

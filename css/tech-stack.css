@@ -14,6 +14,8 @@
   font-size: 2rem;
   margin-bottom: 1.5rem;
   text-align: center;
+  font-weight: 500;
+  color: #000000;
 }
 
 .skill-columns {
@@ -38,10 +40,12 @@
   width: 50%;
 }
 
-.skill-list h3 {
+.skill-list h3,
+h4 {
   margin-bottom: 1rem;
   font-size: 1.5rem;
   color: black;
+  font-weight: 400;
 }
 
 .skill-list ul {
