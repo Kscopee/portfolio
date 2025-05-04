@@ -165,7 +165,7 @@
   z-index: 4;
 }
 
-/* Modal styling */
+/* Modal styling - Updated for Bootstrap 5 */
 .modal {
   backdrop-filter: blur(8px);
   background-color: rgba(38, 38, 38, 0.5);
@@ -174,17 +174,33 @@
 .modal-content {
   background-color: #fff;
   border-radius: 15px;
+  border: none;
 }
 
 .modal-header {
   border-bottom: 2px solid #d7f205;
+  padding: 1rem 1.5rem;
+}
+
+.modal-header .btn-close {
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+.modal-header .btn-close:hover {
+  opacity: 1;
+}
+
+.modal-body {
+  padding: 1.5rem;
 }
 
 .modal-footer {
   border-top: none;
+  padding: 1rem 1.5rem 1.5rem;
 }
 
-.modal .btn-primary {
+.btn-primary {
   background-color: #000000;
   border: none;
   border-radius: 50px;
@@ -192,17 +208,18 @@
   transition: background-color 300ms, color 300ms;
 }
 
-.modal .btn-primary:hover {
+.btn-primary:hover {
   background-color: #d7f205;
   color: black;
 }
 
-.modal .form-control {
+.form-control {
   border-radius: 10px;
   border: 1px solid #ddd;
+  padding: 0.75rem 1rem;
 }
 
-.modal .form-control:focus {
+.form-control:focus {
   border-color: #d7f205;
   box-shadow: 0 0 0 0.2rem rgba(215, 242, 5, 0.25);
 }

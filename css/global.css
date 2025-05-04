@@ -4,6 +4,11 @@
 :root {
   /* shape parameters */
   --shape-angle: calc(75% - 12vw);
+  /* colors */
+  --primary-color: #000000;
+  --accent-color: #d7f205;
+  --text-color: #333;
+  --light-text: #ffffff;
 }
 
 /* fonts */
@@ -12,6 +17,7 @@
   src: url("../Fonts/Print-Hongmeng-style.ttf") format("truetype");
   font-display: swap;
 }
+
 @font-face {
   font-family: "Tahoma";
   src: url("../Fonts/tahoma.ttf") format("truetype");
@@ -31,32 +37,31 @@ html {
 
 body {
   min-height: 100%;
-  color: #333;
+  color: var(--text-color);
   font-family: "Tahoma", system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
   position: relative;
   background: transparent;
 }
 
-.h1,
+h1,
 h2,
 h3,
 h4 {
   font-family: "Hongmengti", "Noto Sans TC", sans-serif;
-  font-size: 2rem;
 }
 
-.h4,
+h5,
 h6 {
   font-family: "Tahoma", "Noto Sans TC", sans-serif;
-  font-size: 1.5rem;
 }
 
-.p {
+p {
   font-family: "Tahoma", sans-serif;
   font-size: 1.125rem;
 }
 
+/* Video background */
 .bg-video {
   position: fixed;
   top: 0;
@@ -73,39 +78,31 @@ h6 {
   perspective: 1000;
 }
 
-main {
+.main-content {
   margin: 0 auto;
   max-width: 1200px;
   width: 100%;
-  padding: 1rem;
+  padding: 1rem 1rem 4rem 1rem;
   overflow-x: hidden;
   position: relative;
 }
 
-/* main media query */
+/* Media queries */
 @media (max-width: 768px) {
-  main {
-    padding: 1rem;
+  .main-content {
+    padding: 1rem 1rem 4rem 1rem;
     width: 100%;
-  }
-
-  .intro-left {
-    padding: 1rem 0 0.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  main {
-    padding: 1rem;
+  .main-content {
+    padding: 1rem 1rem 5rem 1rem;
     width: 100%;
-  }
-
-  .intro-left {
-    padding: 1rem 0 0.5rem;
   }
 }
 
-/* media query for video-bg */
+/* Video background media queries */
 @media (min-aspect-ratio: 16/9) {
   .bg-video {
     width: 100%;
@@ -118,4 +115,20 @@ main {
     width: auto;
     height: 100%;
   }
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-color);
+  border-color: var(--accent-color);
+  color: var(--primary-color);
+}
+
+.row {
+  margin-right: 0;
+  margin-left: 0;
 }
