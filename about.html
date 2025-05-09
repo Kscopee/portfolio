@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ashton James | About</title>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <!-- CSS files -->
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/header-nav.css" />
@@ -59,13 +64,6 @@
           <div class="top-highlight"></div>
           <!-- drop down content -->
           <h6>Follow Me</h6>
-          <a href="https://x.com" target="_blank" class="social-icon">
-            <img
-              src="web_portfolio_images/SVGs/x_icon_white.svg"
-              alt="X (Twitter)"
-            />
-            X
-          </a>
           <a
             href="https://github.com/Kscopee"
             target="_blank"
@@ -125,66 +123,68 @@
     <!-- main content -->
     <main class="main-content">
       <!-- ===== ABOUT ===== -->
-      <section id="about" class="section">
-        <!-- top left -->
-        <div class="about-top-left">
-          <h2>about.</h2>
-          <h2>Ashton James D. Caspe</h2>
-          <h5>"absolute cinema!" - Ashton James</h5>
-          <!-- info list - simplified -->
-          <dl class="bio-list">
-            <dt>Course:</dt>
-            <dd>Information Technology (Soon to be Degree)</dd>
-          </dl>
+      <section id="about" class="container-fluid p-4">
+        <div class="row">
+          <!-- top left -->
+          <div class="col-12 about-top-left text-center mb-4">
+            <h2 class="display-4">about.</h2>
+            <h2 class="display-5">Ashton James D. Caspe</h2>
+            <h5 class="fst-italic">"absolute cinema!" - Ashton James</h5>
+            <!-- info list - simplified -->
+            <dl class="bio-list d-inline-block text-start">
+              <dt>Course:</dt>
+              <dd>Information Technology (Soon to be Degree)</dd>
+            </dl>
 
-          <!-- Skills Distribution Chart -->
-          <div class="skills-chart-container mt-4">
-            <h4>Skills Distribution</h4>
-            <div class="chart-wrapper">
-              <canvas id="skillsPieChart"></canvas>
+            <!-- Skills Distribution Chart -->
+            <div class="skills-chart-container mt-4">
+              <h4 class="d-none">Skills Distribution</h4>
+              <div class="chart-wrapper">
+                <canvas id="skillsPieChart"></canvas>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- bottom left -->
-        <div class="about-bottom-left">
-          <div class="abstract-shape-container-left">
-            <div class="abstract-shape-about"></div>
-            <img
-              src="web_portfolio_images/PNGs/aboute_page_picture.png"
-              alt="Ashton"
-              class="profile-photo-about"
-            />
-            <div class="shape-highlight-about"></div>
+          <!-- bottom section -->
+          <div class="col-md-6 about-bottom-left">
+            <div class="abstract-shape-container-left">
+              <div class="abstract-shape-about"></div>
+              <img
+                src="web_portfolio_images/PNGs/aboute_page_picture.png"
+                alt="Ashton"
+                class="profile-photo-about img-fluid"
+              />
+              <div class="shape-highlight-about"></div>
+            </div>
           </div>
-        </div>
 
-        <!-- bottom right -->
-        <div class="about-bottom-right">
-          <article class="about-rant">
-            <h3>WAIT A MINUTE WHO ARE YOU?</h3>
-            <p>
-              My journey into the world of technology began with a spark ignited
-              by Nier: Automata—a game that masterfully intertwines existential
-              philosophy with immersive storytelling. This experience deepened
-              my fascination with how narratives and interactivity can coexist,
-              prompting me to pursue IT as a student. Beyond code, I channel
-              creativity through strumming melodies on my guitar, exploring the
-              rich tapestries of anime, and dissecting the nuances of literary
-              classics. These passions collectively shape my perspective,
-              blending analytical rigor with artistic sensibility.
-            </p>
-            <p>
-              As an aspiring software and web developer, I aim to craft
-              solutions that transcend functionality. My goal is to build
-              applications and digital experiences that serve as both practical
-              tools and reflective mirrors—empowering users to navigate life’s
-              challenges while inviting introspection. Whether through sleek
-              interfaces or dynamic systems, I strive to weave storytelling into
-              technology, creating platforms that resonate on a human level and
-              leave lasting impressions.
-            </p>
-          </article>
+          <div class="col-md-6 about-bottom-right">
+            <article class="about-rant">
+              <h3 class="mb-3">WAIT A MINUTE WHO ARE YOU?</h3>
+              <p class="mb-3">
+                My journey into the world of technology began with a spark
+                ignited by Nier: Automata—a game that masterfully intertwines
+                existential philosophy with immersive storytelling. This
+                experience deepened my fascination with how narratives and
+                interactivity can coexist, prompting me to pursue IT as a
+                student. Beyond code, I channel creativity through strumming
+                melodies on my guitar, exploring the rich tapestries of anime,
+                and dissecting the nuances of literary classics. These passions
+                collectively shape my perspective, blending analytical rigor
+                with artistic sensibility.
+              </p>
+              <p class="mb-3">
+                As an aspiring software and web developer, I aim to craft
+                solutions that transcend functionality. My goal is to build
+                applications and digital experiences that serve as both
+                practical tools and reflective mirrors—empowering users to
+                navigate life's challenges while inviting introspection. Whether
+                through sleek interfaces or dynamic systems, I strive to weave
+                storytelling into technology, creating platforms that resonate
+                on a human level and leave lasting impressions.
+              </p>
+            </article>
+          </div>
         </div>
       </section>
     </main>
