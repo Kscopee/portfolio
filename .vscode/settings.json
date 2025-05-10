@@ -19,5 +19,7 @@
     "titleBar.inactiveForeground": "#e7e7e799"
   },
   "peacock.color": "262626",
-  "cSpell.words": ["Alexandre", "Cristo", "Hongmeng", "Hongmengti", "Hongmenti"]
+  "cSpell.words": ["Alexandre", "Cristo", "Hongmeng", "Hongmengti", "Hongmenti"],
+  "editor.formatOnSave": false,
+  "editor.defaultFormatter": null
 }

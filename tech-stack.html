@@ -9,245 +9,142 @@
     <link rel="stylesheet" href="css/header-nav.css" />
     <link rel="stylesheet" href="css/tech-stack.css" />
     <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <!-- favicon -->
-    <link
-      rel="icon"
-      type="image/ico"
-      href="web_portfolio_images/Logo/portfolio_logo_favicon.ico"
-    />
+    <link rel="icon" type="image/ico" href="web_portfolio_images/Logo/portfolio_logo_favicon.ico" />
   </head>
-  <body>
-    <!-- Background Video -->
-    <video
-      class="bg-video"
-      autoplay
-      muted
-      loop
-      playsinline
-      preload="metadata"
-      width="1280"
-      height="720"
-    >
+  <body>    <!-- Background Video -->
+    <video class="bg-video" autoplay muted loop playsinline preload="metadata" width="1280" height="720">
       <source src="videos/portfolio_bg480.mp4" type="video/mp4" />
-      <track
-        kind="descriptions"
-        src="videos/portfolio_bg.vtt"
-        label="Video Description"
-        default
-      />
-      Your browser does not support the video tag.
-    </video>
-    <!-- header -->
+      <track kind="descriptions" src="videos/portfolio_bg.vtt" label="Video Description" default />
+      Your browser does not support the video tag.</video>    <!-- header -->
     <header class="header">
       <div class="logo">
-        <img
-          src="web_portfolio_images/Logo/portfolio_logo_android_chrome_192x192.png"
-          alt="Ashton James Logo"
-          height="24"
-          width="24"
-        />
-      </div>
+        <img src="web_portfolio_images/Logo/portfolio_logo_android_chrome_192x192.png" alt="Ashton James Logo" height="24" width="24" /></div>
       <!-- quote -->
       <div class="quote">Turn your idyllic fantasy into digital reality</div>
       <!-- socials -->
       <div class="socials">
-        <img
-          id="socials-logo"
-          src="web_portfolio_images/SVGs/socials_icon.svg"
-          alt="Socials logo"
-        />
-        <div class="socials-dropdown">
+        <img id="socials-logo" src="web_portfolio_images/SVGs/socials_icon.svg" alt="Socials logo" />        <div class="socials-dropdown">
           <div class="top-highlight"></div>
           <!-- drop down content -->
           <h6>Follow Me</h6>
-          <a
-            href="https://github.com/Kscopee"
-            target="_blank"
-            class="social-icon"
-          >
-            <img
-              src="web_portfolio_images/SVGs/github_icon_white.svg"
-              alt="GitHub"
-            />
-            GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/ashton-james-caspe-bba704363"
-            target="_blank"
-            class="social-icon"
-          >
-            <img
-              src="web_portfolio_images/SVGs/likedin_icon_white.svg"
-              alt="LinkedIn"
-            />
-            LinkedIn
-          </a>
-        </div>
-      </div>
-    </header>
-
-    <!-- left navbar -->
+          <a href="https://github.com/Kscopee" target="_blank" class="social-icon">
+            <img src="web_portfolio_images/SVGs/github_icon_white.svg" alt="GitHub" />GitHub</a>
+          <a href="https://www.linkedin.com/in/ashton-james-caspe-bba704363" target="_blank" class="social-icon">
+            <img src="web_portfolio_images/SVGs/likedin_icon_white.svg" alt="LinkedIn" />LinkedIn</a></div></div>
+    </header>    <!-- left navbar -->
     <nav class="vertical-nav" aria-label="Main Navigation">
       <ul>
-        <li>
-          <a href="index.html" class="nav-link" data-tooltip="Home">
-            <img
-              src="web_portfolio_images/SVGs/home_icon_white.svg"
-              alt="Home Page"
-            />
-          </a>
-        </li>
-        <li>
-          <a href="about.html" class="nav-link" data-tooltip="About">
-            <img
-              src="web_portfolio_images/SVGs/person_icon_white.svg"
-              alt="About Page"
-            />
-          </a>
-        </li>
-        <li>
-          <a
-            href="tech-stack.html"
-            class="nav-link active"
-            data-tooltip="Tech Stack"
-          >
-            <img
-              src="web_portfolio_images/SVGs/stack_icon_white.svg"
-              alt="Tech Stack"
-            />
-          </a>
-        </li>
-      </ul>
-    </nav>
+        <li><a href="index.html" class="nav-link" data-tooltip="Home">
+            <img src="web_portfolio_images/SVGs/home_icon_white.svg" alt="Home Page" /></a></li>
+        <li><a href="about.html" class="nav-link" data-tooltip="About">
+            <img src="web_portfolio_images/SVGs/person_icon_white.svg" alt="About Page" /></a></li>
+        <li><a href="tech-stack.html" class="nav-link active" data-tooltip="Tech Stack">
+            <img src="web_portfolio_images/SVGs/stack_icon_white.svg" alt="Tech Stack" /></a></li></ul></nav>
 
     <!-- main content -->
     <main class="main-content">
       <!-- ===== TECH STACK ===== -->
       <section id="tech-stack" class="section container-fluid">
         <!-- title -->
-        <h2 class="skills-title text-center">Tech Stack</h2>
-
-        <!-- skill toggle -->
+        <h2 class="skills-title text-center">Tech Stack</h2>        <!-- skill toggle -->
         <div class="skill-switcher d-flex justify-content-center mb-4">
           <div class="btn-group" role="group" aria-label="Skill categories">
-            <button class="skill-toggle active" data-type="technical">
-              Technical
-            </button>
-            <button class="skill-toggle" data-type="soft">Soft</button>
-          </div>
-        </div>
+            <button class="skill-toggle active" data-type="technical">Technical</button>
+            <button class="skill-toggle" data-type="soft">Soft</button></div></div>
 
         <!-- skills grid -->
-        <div class="skills-grid">
-          <!-- technical skills -->
+        <div class="skills-grid">          <!-- technical skills -->
           <div class="skill-section technical" data-active="true">
-            <div
-              class="skill-grid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4"
-            >
+            <div class="skill-grid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
               <div class="col">
                 <div class="skill-item d-flex flex-column align-items-center">
-                  <img
-                    src="web_portfolio_images/SVGs/html_logo.svg"
-                    alt="HTML logo"
-                    class="mb-3"
-                  />
-                  <h4 class="mb-0">HTML</h4>
-                </div>
-              </div>
+                  <img src="web_portfolio_images/SVGs/html_logo.svg" alt="HTML logo" class="mb-3" />
+                  <h4 class="mb-0">HTML</h4></div></div>
               <div class="col">
                 <div class="skill-item d-flex flex-column align-items-center">
-                  <img
-                    src="web_portfolio_images/SVGs/css_logo.svg"
-                    alt="CSS logo"
-                    class="mb-3"
-                  />
-                  <h4 class="mb-0">CSS</h4>
-                </div>
-              </div>
+                  <img src="web_portfolio_images/SVGs/css_logo.svg" alt="CSS logo" class="mb-3" />
+                  <h4 class="mb-0">CSS</h4></div></div>
               <div class="col">
                 <div class="skill-item d-flex flex-column align-items-center">
-                  <img
-                    src="web_portfolio_images/SVGs/javascript_logo.svg"
-                    alt="JavaScript logo"
-                    class="mb-3"
-                  />
-                  <h4 class="mb-0">JavaScript</h4>
-                </div>
-              </div>
+                  <img src="web_portfolio_images/SVGs/javascript_logo.svg" alt="JavaScript logo" class="mb-3" />
+                  <h4 class="mb-0">JavaScript</h4></div></div>
               <div class="col">
                 <div class="skill-item d-flex flex-column align-items-center">
-                  <img
-                    src="web_portfolio_images/SVGs/java_logo.svg"
-                    alt="Java logo"
-                    class="mb-3"
-                  />
-                  <h4 class="mb-0">Java</h4>
-                </div>
-              </div>
-            </div>
-          </div>
+                  <img src="web_portfolio_images/SVGs/bootstrap_logo.svg" alt="Bootstrap logo" class="mb-3" />
+                  <h4 class="mb-0">Bootstrap</h4></div></div>
+              <div class="col">
+                <div class="skill-item d-flex flex-column align-items-center">
+                  <img src="web_portfolio_images/SVGs/react_logo.svg" alt="React logo" class="mb-3" />
+                  <h4 class="mb-0">React</h4></div></div>
+              <div class="col">
+                <div class="skill-item d-flex flex-column align-items-center">
+                  <img src="web_portfolio_images/SVGs/java_logo.svg" alt="Java logo" class="mb-3" />
+                  <h4 class="mb-0">Java</h4></div></div>
+              <div class="col">
+                <div class="skill-item d-flex flex-column align-items-center">
+                  <img src="web_portfolio_images/SVGs/c_logo.svg" alt="C logo" class="mb-3" />
+                  <h4 class="mb-0">C</h4></div></div>
+              <div class="col">
+                <div class="skill-item d-flex flex-column align-items-center">
+                  <img src="web_portfolio_images/SVGs/my_sql_logo.svg" alt="MySQL logo" class="mb-3" />
+                  <h4 class="mb-0">MySQL</h4></div></div>
+              <div class="col">
+                <div class="skill-item d-flex flex-column align-items-center">
+                  <img src="web_portfolio_images/SVGs/git_logo.svg" alt="Git logo" class="mb-3" />
+                  <h4 class="mb-0">Git</h4></div></div>
+              <div class="col">
+                <div class="skill-item d-flex flex-column align-items-center">
+                  <img src="web_portfolio_images/SVGs/github_icon_white.svg" alt="Github logo" class="mb-3" />
+                  <h4 class="mb-0">Github</h4></div></div>
+              <div class="col">
+                <div class="skill-item d-flex flex-column align-items-center">
+                  <img src="web_portfolio_images/SVGs/vscode.svg" alt="VS Code logo" class="mb-3" />
+                  <h4 class="mb-0">VS Code</h4></div></div>
+              <div class="col">
+                <div class="skill-item d-flex flex-column align-items-center">
+                  <img src="web_portfolio_images/SVGs/android_studio_icon.svg" alt="Android Studio logo" class="mb-3" />
+                  <h4 class="mb-0">Android Studio</h4></div></div></div></div>
 
           <!-- soft skills -->
           <div class="skill-section soft" data-active="false">
-            <div
-              class="skill-grid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4"
-            >
+            <div class="skill-grid row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
               <div class="col">
                 <div class="skill-item d-flex flex-column align-items-center">
-                  <img
-                    src="web_portfolio_images/SVGs/communication_icon.svg"
-                    alt="Communication icon"
-                    class="mb-3"
-                  />
-                  <h4 class="mb-0">Communication</h4>
-                </div>
-              </div>
+                  <img src="web_portfolio_images/SVGs/communication_icon.svg" alt="Communication icon" class="mb-3" />
+                  <h4 class="mb-0">Communication</h4></div></div>
               <div class="col">
                 <div class="skill-item d-flex flex-column align-items-center">
-                  <img
-                    src="web_portfolio_images/SVGs/creativity_icon.svg"
-                    alt="Creativity icon"
-                    class="mb-3"
-                  />
-                  <h4 class="mb-0">Creativity</h4>
-                </div>
-              </div>
+                  <img src="web_portfolio_images/SVGs/networking_logo.svg" alt="Networking icon" class="mb-3" />
+                  <h4 class="mb-0">Networking</h4></div></div>
               <div class="col">
                 <div class="skill-item d-flex flex-column align-items-center">
-                  <img
-                    src="web_portfolio_images/SVGs/organization.svg"
-                    alt="Organization icon"
-                    class="mb-3"
-                  />
-                  <h4 class="mb-0">Organization</h4>
-                </div>
-              </div>
+                  <img src="web_portfolio_images/SVGs/organization.svg" alt="Organization icon" class="mb-3" />
+                  <h4 class="mb-0">Organization</h4></div></div>
               <div class="col">
                 <div class="skill-item d-flex flex-column align-items-center">
-                  <img
-                    src="web_portfolio_images/SVGs/dedication_icon.svg"
-                    alt="Dedication icon"
-                    class="mb-3"
-                  />
-                  <h4 class="mb-0">Dedication</h4>
-                </div>
-              </div>
-            </div>
-          </div>
+                  <img src="web_portfolio_images/SVGs/creativity_icon.svg" alt="Creativity icon" class="mb-3" />
+                  <h4 class="mb-0">Creativity</h4></div></div>
+              <div class="col">
+                <div class="skill-item d-flex flex-column align-items-center">
+                  <img src="web_portfolio_images/SVGs/curiosity_logo.svg" alt="Curiosity icon" class="mb-3" />
+                  <h4 class="mb-0">Curiosity</h4></div></div>
+              <div class="col">
+                <div class="skill-item d-flex flex-column align-items-center">
+                  <img src="web_portfolio_images/SVGs/dedication_icon.svg" alt="Dedication icon" class="mb-3" />
+                  <h4 class="mb-0">Dedication</h4></div></div>
+              <div class="col">
+                <div class="skill-item d-flex flex-column align-items-center">
+                  <img src="web_portfolio_images/SVGs/adaptability_logo.svg" alt="Adaptability icon" class="mb-3" />
+                  <h4 class="mb-0">Adaptability</h4></div></div></div></div>
         </div>
       </section>
-    </main>
-
-    <!-- Bootstrap JS and its dependencies -->
+    </main>    <!-- Bootstrap JS and its dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.min.js"></script>
     <!-- local java scripts -->
     <script src="js/navbar.js"></script>
     <script src="js/tv-carousel.js"></script>
-    <script src="js/video-background.js"></script>
-  </body>
+    <script src="js/video-background.js"></script></body>
 </html>
