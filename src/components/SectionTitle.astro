@@ -1,0 +1,93 @@
+---
+interface Props {
+  label: string;
+  number: string;
+  tone?: 'lime' | 'black' | 'paper';
+}
+
+const { label, number, tone = 'lime' } = Astro.props;
+---
+
+<header class:list={["section-title", `section-title--${tone}`]} data-section-title>
+  <span class="section-title__label">{label}</span>
+  <span class="section-title__number" aria-hidden="true">{number}</span>
+</header>
+
+<style>
+  .section-title {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    width: min(31rem, calc(100vw - 2rem));
+    min-height: clamp(10rem, 20vw, 17rem);
+    margin-inline-start: calc(var(--page-gutter) * -1);
+    padding: clamp(2.25rem, 5vw, 4.75rem) var(--shape-cut) 2rem var(--page-gutter);
+    align-content: center;
+    color: var(--color-black);
+    clip-path: polygon(0 0, calc(100% - var(--shape-cut)) 0, 100% 50%, calc(100% - var(--shape-cut)) 100%, 0 100%);
+  }
+
+  .section-title::after {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: repeating-linear-gradient(
+      108deg,
+      transparent 0,
+      transparent 7px,
+      rgb(0 0 0 / 7%) 7px,
+      rgb(0 0 0 / 7%) 9px
+    );
+    content: "";
+    pointer-events: none;
+  }
+
+  .section-title--lime {
+    background: var(--color-lime);
+  }
+
+  .section-title--black {
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .section-title--black::after {
+    background: repeating-linear-gradient(
+      108deg,
+      transparent 0,
+      transparent 7px,
+      rgb(255 255 255 / 9%) 7px,
+      rgb(255 255 255 / 9%) 9px
+    );
+  }
+
+  .section-title--paper {
+    background: var(--color-white);
+  }
+
+  .section-title__label,
+  .section-title__number {
+    font-family: var(--font-display);
+    font-style: italic;
+    line-height: 0.82;
+    text-transform: uppercase;
+  }
+
+  .section-title__label {
+    font-size: var(--step-2);
+    letter-spacing: -0.025em;
+  }
+
+  .section-title__number {
+    font-size: var(--step-4);
+    letter-spacing: -0.06em;
+  }
+
+  @media (max-width: 48rem) {
+    .section-title {
+      width: min(24rem, calc(100vw - 1rem));
+      min-height: 9rem;
+      padding-block: 2rem;
+    }
+  }
+</style>

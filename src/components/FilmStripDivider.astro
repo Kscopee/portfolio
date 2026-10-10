@@ -1,0 +1,25 @@
+<div class="film-strip" aria-hidden="true">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<style>
+  .film-strip {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    min-width: 58rem;
+    height: 2.4rem;
+    padding: 0.42rem 0.8rem;
+    grid-template-columns: repeat(12, 1fr);
+    gap: clamp(0.65rem, 1.8vw, 1.75rem);
+    overflow: hidden;
+    background: var(--color-black);
+    transform: rotate(-1deg) scale(1.04);
+  }
+
+  .film-strip span {
+    min-width: 2.5rem;
+    border-radius: 0.18rem;
+    background: var(--color-paper);
+  }
+</style>
