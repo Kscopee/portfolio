@@ -121,7 +121,7 @@ const tabs = [
         <WatermarkWord word="SHAPES" tone="dark" />
 
         <div class="guide-title-wrap guide-title-wrap--right">
-          <SectionTitle label="Shape kit" number="02" tone="lime" />
+          <SectionTitle label="Shape kit" number="02" tone="lime" side="right" />
         </div>
 
         <div class="shape-showcase__content">
@@ -382,24 +382,15 @@ const tabs = [
     justify-content: flex-end;
   }
 
-  .guide-title-wrap--right :global(.section-title) {
-    margin-inline: 0 calc(var(--page-gutter) * -1);
-    transform: scaleX(-1);
-  }
-
-  .guide-title-wrap--right :global(.section-title > *) {
-    transform: scaleX(-1);
-  }
-
   .foundation__content {
     position: relative;
     z-index: 2;
     display: grid;
     width: min(100%, var(--content-max));
-    margin: clamp(-3rem, -4vw, -1.5rem) auto 0;
-    grid-template-columns: 1.3fr 0.9fr;
+    margin: var(--space-7) auto 0;
+    grid-template-columns: 1.15fr 0.85fr;
     gap: clamp(2rem, 6vw, 7rem);
-    align-items: end;
+    align-items: start;
   }
 
   .foundation__content > *,
@@ -422,14 +413,17 @@ const tabs = [
   }
 
   .type-specimen h2 {
-    font-size: clamp(4rem, 8vw, 8rem);
+    font-size: clamp(3.6rem, 5.3vw, 5.25rem);
+    letter-spacing: -0.035em;
   }
 
   .type-specimen h2 em,
   .controls__headline h2 em {
-    color: var(--color-surface-raised);
+    display: inline-block;
+    padding-inline: 0.1em 0.14em;
+    background: var(--color-lime);
+    color: var(--color-black);
     font-style: inherit;
-    -webkit-text-stroke: 1px var(--color-black);
   }
 
   .body-sample {
@@ -476,8 +470,14 @@ const tabs = [
   }
 
   .swatch code {
+    flex: none;
     font-family: var(--font-body);
     font-size: var(--step--1);
+    white-space: nowrap;
+  }
+
+  .swatch span {
+    min-width: 0;
   }
 
   .swatch--lime {
@@ -548,7 +548,7 @@ const tabs = [
     z-index: 2;
     display: grid;
     width: min(100%, var(--content-max));
-    margin: clamp(-4rem, -5vw, -1rem) auto 0;
+    margin: var(--space-7) auto 0;
     grid-template-columns: minmax(17rem, 0.85fr) minmax(18rem, 1.15fr);
     gap: clamp(2rem, 7vw, 8rem);
     align-items: center;
@@ -570,7 +570,12 @@ const tabs = [
 
   .shape-notes h2 {
     color: var(--color-white);
-    font-size: clamp(3.4rem, 7vw, 7rem);
+    font-family: var(--font-body);
+    font-size: clamp(2.6rem, 4.6vw, 4.9rem);
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.025em;
+    line-height: 1.02;
   }
 
   .shape-notes > p:not(.spec-label) {
@@ -586,9 +591,12 @@ const tabs = [
   .shape-rule {
     display: grid;
     margin-top: var(--space-7);
+    padding: var(--space-4);
     grid-template-columns: 7rem 1fr;
     gap: 0.2rem 1.3rem;
     align-items: center;
+    background: var(--color-black);
+    border-left: 0.35rem solid var(--color-lime);
   }
 
   .shape-rule span {
@@ -600,8 +608,8 @@ const tabs = [
   }
 
   .shape-rule strong {
-    font-family: var(--font-display);
-    font-size: var(--step-2);
+    font-family: var(--font-body);
+    font-size: var(--step-1);
     line-height: 1;
   }
 
@@ -626,7 +634,7 @@ const tabs = [
     z-index: 2;
     display: grid;
     width: min(100%, 76rem);
-    margin: clamp(-2rem, -3vw, -0.5rem) auto 0;
+    margin: var(--space-7) auto 0;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-5);
   }
@@ -637,7 +645,7 @@ const tabs = [
   }
 
   .controls__headline h2 {
-    font-size: clamp(3.3rem, 7vw, 7rem);
+    font-size: clamp(3.3rem, 6vw, 6rem);
   }
 
   .control-stage {
@@ -803,6 +811,11 @@ const tabs = [
     .shape-notes h2,
     .controls__headline h2 {
       font-size: clamp(2.2rem, 9vw, 2.8rem);
+    }
+
+    .shape-notes .spec-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
     }
 
     .swatch {

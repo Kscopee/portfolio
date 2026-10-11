@@ -3,12 +3,13 @@ interface Props {
   label: string;
   number: string;
   tone?: 'lime' | 'black' | 'paper';
+  side?: 'left' | 'right';
 }
 
-const { label, number, tone = 'lime' } = Astro.props;
+const { label, number, tone = 'lime', side = 'left' } = Astro.props;
 ---
 
-<header class:list={["section-title", `section-title--${tone}`]} data-section-title>
+<header class:list={["section-title", `section-title--${tone}`, `section-title--${side}`]} data-section-title>
   <span class="section-title__label">{label}</span>
   <span class="section-title__number" aria-hidden="true">{number}</span>
 </header>
@@ -25,6 +26,13 @@ const { label, number, tone = 'lime' } = Astro.props;
     align-content: center;
     color: var(--color-black);
     clip-path: polygon(0 0, calc(100% - var(--shape-cut)) 0, 100% 50%, calc(100% - var(--shape-cut)) 100%, 0 100%);
+  }
+
+  .section-title--right {
+    margin-inline: auto calc(var(--page-gutter) * -1);
+    padding-inline: var(--shape-cut) var(--page-gutter);
+    text-align: right;
+    clip-path: polygon(var(--shape-cut) 0, 100% 0, 100% 100%, var(--shape-cut) 100%, 0 50%);
   }
 
   .section-title::after {
