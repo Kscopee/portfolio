@@ -26,6 +26,8 @@
 
   --font-display: "Hongmengti", Impact, Haettenschweiler, sans-serif;
   --font-body: "Tahoma Local", Tahoma, Arial, sans-serif;
+  --tracking-display-readable: 0.04em;
+  --leading-display-readable: 1.08;
 
   --step--1: clamp(0.78rem, 0.74rem + 0.16vw, 0.88rem);
   --step-0: clamp(1rem, 0.96rem + 0.18vw, 1.13rem);
@@ -176,7 +178,8 @@ h3,
 h4 {
   color: var(--color-black);
   font-family: var(--font-display);
-  line-height: 0.94;
+  letter-spacing: var(--tracking-display-readable);
+  line-height: var(--leading-display-readable);
 }
 
 .visually-hidden {

@@ -77,18 +77,19 @@ const { label, number, tone = 'lime', side = 'left' } = Astro.props;
   .section-title__number {
     font-family: var(--font-display);
     font-style: italic;
-    line-height: 0.82;
     text-transform: uppercase;
   }
 
   .section-title__label {
     font-size: var(--step-2);
-    letter-spacing: -0.025em;
+    letter-spacing: var(--tracking-display-readable);
+    line-height: var(--leading-display-readable);
   }
 
   .section-title__number {
     font-size: var(--step-4);
     letter-spacing: -0.06em;
+    line-height: 0.82;
   }
 
   @media (max-width: 48rem) {
