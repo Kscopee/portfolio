@@ -8,7 +8,7 @@ import PillTabs from '../components/PillTabs.astro';
 import SectionRail from '../components/SectionRail.astro';
 import SectionTitle from '../components/SectionTitle.astro';
 import WatermarkWord from '../components/WatermarkWord.astro';
-import '../styles/global.css';
+import BaseLayout from '../layouts/BaseLayout.astro';
 
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
@@ -27,17 +27,13 @@ const tabs = [
 ];
 ---
 
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <meta name="generator" content={Astro.generator} />
-    <meta name="robots" content="noindex, nofollow" />
-    <meta name="description" content="Development-only visual system preview for Ashton Caspe's portfolio." />
-    <title>Design System | Ashton Caspe Portfolio</title>
-  </head>
-  <body>
-    <main>
+<BaseLayout
+  title="Design System | Ashton Caspe Portfolio"
+  description="Development-only visual system preview for Ashton Caspe's portfolio."
+  robots="noindex, nofollow"
+  backgroundVideo={false}
+>
+    <div class="styleguide-main">
       <section id="styleguide-intro" class="guide-section guide-hero" aria-labelledby="guide-title">
         <DiagonalBands variant="split" />
         <WatermarkWord word="SYSTEM" tone="dark" />
@@ -194,7 +190,7 @@ const tabs = [
           </aside>
         </div>
       </section>
-    </main>
+    </div>
 
     <SectionRail sections={railSections} />
 
@@ -206,11 +202,10 @@ const tabs = [
         target?.scrollIntoView({ behavior: 'auto', block: 'start' });
       }, { once: true });
     </script>
-  </body>
-</html>
+</BaseLayout>
 
 <style>
-  main {
+  .styleguide-main {
     overflow: hidden;
   }
 
