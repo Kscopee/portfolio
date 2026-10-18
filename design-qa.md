@@ -1,4 +1,4 @@
-# Phase 4 Design QA
+# Phase 4-5 Design QA
 
 ## Evidence
 
@@ -44,5 +44,43 @@
 - Use the detail-page rail on desktop; confirm it reads 01 / 07, follows the numbered sections through 07, survives navigation from `/projects`, and is absent at 375px.
 
 Focused regions were required and checked for the filter bar/result card and the mobile contribution/objectives transition. The implementation is faithfully verified against the accepted reference direction, with no material mismatch remaining.
+
+final result: passed
+
+---
+
+# Phase 5 Credentials Design QA
+
+## Evidence
+
+- Source visual truth: `docs/reference/inspiration/10-videos-page-carousel-a.jpg`, `12-videos-page-grid-a.jpg`, `14-news-page.jpg`, and `20-login-modal.jpg`.
+- Browser method: the production build was served locally and exercised in headless Chromium through the Chrome DevTools Protocol because the in-app browser was not available.
+- Viewports checked: 1600 x 900 desktop and 375 x 812 mobile, both at device scale factor 1.
+- States checked: Certifications tab, Course Completions tab, completed certificate viewer, in-progress course viewer, previous/next navigation, focus loop, Escape close, return focus, and the mobile viewer.
+
+## Fidelity Ledger
+
+- Copy and content: all 4 certifications and 3 course entries come directly from the validated content collections. The above-the-fold copy adds no unsupported credential, award, claim, or ZZZ text.
+- Layout: the archive keeps the references' large light field, black diagonal region, faded watermark, three-column desktop rhythm, contained media cards, and black pill tabs. It becomes one column at 375px.
+- Typography and palette: the implementation uses the approved display/body roles and locked black, `#d7f205` lime, white, and light-grey palette. Lime surfaces always use black text.
+- Asset treatment: certificate images use `object-fit: contain`, never crop or spill from their frames, and are emitted as responsive WebP variants. Local badges are displayed without external embeds.
+- Viewer: the dark media stage and white information panel adapt the clean modal reference without copying its branding. The initial oversized in-progress heading clipped at desktop width; its scale was reduced and the final render fits cleanly.
+- Responsive behavior: the mobile hero copy, tab shell, cards, viewer close control, and modal bounds stay inside the readable viewport. The viewer stacks into one column and retains a fixed, reachable navigation bar.
+- Accessibility and interaction: tab buttons expose `aria-controls` and roving focus; the matching panels expose `role="tabpanel"`. Native buttons open the viewer, Left/Right cycles items, Tab remains trapped, Escape closes, scroll locking clears, and focus returns to the opener.
+
+## Intentional Adaptations
+
+- The source's copyrighted art, logos, fonts, and copy are not reproduced. Ashton's certificate images and badge assets fill the media role.
+- Discovering Entrepreneurship has no certificate because it is still in progress. Its viewer shows the supplied status and modules in a striped placeholder instead of inventing proof or a link.
+- Packet Tracer has no supplied public verification URL, so its local certificate PDF is the available proof link.
+
+## Core Workflow Verified
+
+- Open `/portfolio/credentials/` and switch between Certifications and Course Completions.
+- Open a completed credential, inspect its full certificate and use the provided Credly or PDF link.
+- Open the in-progress course and confirm its status and supplied modules appear without a fake certificate.
+- Navigate with Left/Right, cycle focus with Tab, close with Escape, and confirm focus returns to the opening control.
+
+The implementation was visually inspected against the accepted references and the latest desktop and mobile renders. No material mismatch remains.
 
 final result: passed

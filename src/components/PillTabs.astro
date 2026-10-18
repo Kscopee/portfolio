@@ -2,15 +2,17 @@
 interface TabItem {
   label: string;
   value: string;
+  controls?: string;
 }
 
 interface Props {
   label: string;
   items: TabItem[];
   active?: string;
+  id?: string;
 }
 
-const { label, items, active = items[0]?.value } = Astro.props;
+const { label, items, active = items[0]?.value, id } = Astro.props;
 ---
 
 <div class="pill-tabs-shell" data-pill-tabs-shell>
@@ -20,6 +22,8 @@ const { label, items, active = items[0]?.value } = Astro.props;
         class="pill-tabs__tab"
         type="button"
         role="tab"
+        id={id ? `${id}-${item.value}-tab` : undefined}
+        aria-controls={item.controls}
         aria-selected={item.value === active ? 'true' : 'false'}
         tabindex={item.value === active ? 0 : -1}
         data-value={item.value}
