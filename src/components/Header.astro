@@ -2,6 +2,8 @@
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path = '') => `${base}/${path.replace(/^\//, '')}`;
 const currentPath = Astro.url.pathname.replace(base, '').replace(/\/$/, '') || '/';
+const isCurrentRoute = (path: string) =>
+  path === '/' ? currentPath === '/' : currentPath === path || currentPath.startsWith(`${path}/`);
 
 const links = [
   { label: 'Home', path: '/' },
@@ -11,7 +13,7 @@ const links = [
 ];
 ---
 
-<header class="site-header" data-site-header>
+<header class="site-header" data-site-header data-base-path={base}>
   <a class="brand" href={withBase()} aria-label="Ashton James D. Caspe — home">
     <img src={withBase('/assets/brand/ashton-logo.png')} alt="" width="40" height="40" />
     <span>
@@ -22,7 +24,11 @@ const links = [
 
   <nav class="desktop-nav" aria-label="Primary navigation">
     {links.map(({ label, path }) => (
-      <a href={withBase(path === '/' ? '' : path)} aria-current={currentPath === path ? 'page' : undefined}>
+      <a
+        href={withBase(path === '/' ? '' : path)}
+        data-nav-path={path}
+        aria-current={isCurrentRoute(path) ? 'page' : undefined}
+      >
         {label}
       </a>
     ))}
@@ -44,7 +50,11 @@ const links = [
     <div class="mobile-menu__word" aria-hidden="true">MENU</div>
     <nav aria-label="Mobile navigation">
       {links.map(({ label, path }, index) => (
-        <a href={withBase(path === '/' ? '' : path)} aria-current={currentPath === path ? 'page' : undefined}>
+        <a
+          href={withBase(path === '/' ? '' : path)}
+          data-nav-path={path}
+          aria-current={isCurrentRoute(path) ? 'page' : undefined}
+        >
           <span>{String(index).padStart(2, '0')}</span>{label}
         </a>
       ))}
@@ -57,7 +67,23 @@ const links = [
 <script>
   const setupHeader = () => {
     const header = document.querySelector<HTMLElement>('[data-site-header]');
-    if (!header || header.dataset.ready === 'true') return;
+    if (!header) return;
+
+    const basePath = header.dataset.basePath ?? '';
+    const relativePath = window.location.pathname.startsWith(basePath)
+      ? window.location.pathname.slice(basePath.length)
+      : window.location.pathname;
+    const currentPath = `/${relativePath.replace(/^\/+|\/+$/g, '')}`;
+    header.querySelectorAll<HTMLElement>('[data-nav-path]').forEach((link) => {
+      const navPath = link.dataset.navPath ?? '/';
+      const isCurrent = navPath === '/'
+        ? currentPath === '/'
+        : currentPath === navPath || currentPath.startsWith(`${navPath}/`);
+      if (isCurrent) link.setAttribute('aria-current', 'page');
+      else link.removeAttribute('aria-current');
+    });
+
+    if (header.dataset.ready === 'true') return;
     header.dataset.ready = 'true';
 
     const button = header.querySelector<HTMLButtonElement>('.menu-toggle');

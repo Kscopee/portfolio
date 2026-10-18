@@ -19,9 +19,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <p>Turn your idyllic fantasy into digital reality</p>
       <PillButton href="#contact" label="Contact Ashton" tone="lime" />
     </div>
-    <div class="shell-preview__status" aria-label="Portfolio rebuild status">
-      <span>Phase</span><strong>02</strong><small>Shell complete</small>
-    </div>
   </section>
 </BaseLayout>
 
@@ -44,20 +41,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     content: '';
   }
   .shell-preview :global(.diagonal-bands) { opacity: 0.32; }
+  .shell-preview :global(.diagonal-bands__accent) { display: none; }
   .shell-preview :global(.watermark) { right: -0.08em; bottom: -0.05em; color: rgb(255 255 255 / 0.07); }
   .shell-preview__content { position: relative; z-index: 2; width: min(50rem, 68vw); margin-inline-start: max(0px, calc((100vw - var(--content-max)) / 2)); }
   .shell-preview__kicker { margin-bottom: var(--space-4); color: var(--color-lime); font-size: var(--step--1); font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; }
   .shell-preview h1 { margin-bottom: var(--space-5); color: var(--color-white); font-size: clamp(4rem, 8vw, 8.2rem); font-style: italic; letter-spacing: -0.055em; }
   .shell-preview h1 em { color: var(--color-lime); font-style: inherit; }
   .shell-preview__content > p:not(.shell-preview__kicker) { max-width: 37rem; margin-bottom: var(--space-6); color: var(--color-paper); font-size: var(--step-1); font-weight: 800; }
-  .shell-preview__status { position: absolute; right: max(var(--page-safe-end), 6vw); bottom: 8vh; z-index: 2; display: grid; padding: 1rem 1.3rem; background: var(--color-lime); color: var(--color-black); transform: skewX(calc(var(--shape-angle) * -1)); }
-  .shell-preview__status > * { transform: skewX(var(--shape-angle)); }
-  .shell-preview__status span, .shell-preview__status small { font-size: 0.65rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
-  .shell-preview__status strong { font-family: var(--font-display); font-size: 4rem; line-height: 0.8; }
   @media (max-width: 48rem) {
-    .shell-preview { min-height: calc(100svh - 4.25rem); padding-bottom: 10rem; }
+    .shell-preview { min-height: calc(100svh - 4.25rem); }
     .shell-preview__content { width: 100%; margin-inline-start: 0; }
     .shell-preview h1 { font-size: clamp(3.1rem, 14vw, 5rem); }
-    .shell-preview__status { right: var(--page-gutter); bottom: 3rem; }
   }
 </style>
