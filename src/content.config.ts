@@ -14,6 +14,7 @@ const projects = defineCollection({
     z
       .object({
         title: z.string(),
+        shortTitle: z.string(),
         slug: z.string(),
         type: z.enum(['capstone', 'iot', 'third-year', 'early-work']),
         status: z.enum(['completed', 'in-progress']),
@@ -26,6 +27,10 @@ const projects = defineCollection({
         myRole: z.string(),
         output: z.string(),
         links: z.array(projectLink),
+        cover: z.object({
+          image: image(),
+          alt: z.string(),
+        }),
         evidence: z
           .array(
             z.union([

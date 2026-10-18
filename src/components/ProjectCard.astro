@@ -18,29 +18,18 @@ const typeLabels = {
   'third-year': 'Third-Year',
   'early-work': 'Early Work',
 };
-const imageEvidence = data.evidence.filter((item) => typeof item !== 'string');
-const firstEvidence = data.slug === 'csoles-connect'
-  ? imageEvidence.find((item) => item.caption.toLowerCase().includes('dashboard')) ?? imageEvidence[0]
-  : imageEvidence[0];
 const projectNumber = String(index + 1).padStart(2, '0');
 ---
 
 <article class="project-card" data-project-card data-project-type={data.type}>
   <a class="project-card__media" href={projectUrl} aria-label={`View ${data.title}`}>
-    {firstEvidence ? (
-      <Image
-        src={firstEvidence.image}
-        alt={firstEvidence.caption}
-        widths={[520, 840]}
-        sizes="(max-width: 48rem) 92vw, (max-width: 78rem) 44vw, 38rem"
-        loading={index < 2 ? 'eager' : 'lazy'}
-      />
-    ) : (
-      <div class="project-card__missing">
-        <span>Content needed</span>
-        <strong>Project evidence</strong>
-      </div>
-    )}
+    <Image
+      src={data.cover.image}
+      alt={data.cover.alt}
+      widths={[520, 840]}
+      sizes="(max-width: 48rem) 92vw, (max-width: 78rem) 44vw, 38rem"
+      loading={index < 2 ? 'eager' : 'lazy'}
+    />
     <span class="project-card__number" aria-hidden="true">{projectNumber}</span>
   </a>
 
@@ -52,7 +41,7 @@ const projectNumber = String(index + 1).padStart(2, '0');
         {data.status === 'in-progress' ? 'In progress' : 'Completed'}
       </span>
     </div>
-    <h2><a href={projectUrl}>{data.title}</a></h2>
+    <h2><a href={projectUrl}>{data.shortTitle}</a></h2>
     <p>{data.description}</p>
     <PillButton href={projectUrl} label="View project" tone="black" />
   </div>
@@ -66,7 +55,7 @@ const projectNumber = String(index + 1).padStart(2, '0');
   .project-card__media {
     position: relative;
     display: block;
-    aspect-ratio: 16 / 9;
+    aspect-ratio: 2.1 / 1;
     overflow: hidden;
     border: 0.32rem solid var(--color-black);
     border-radius: 0 var(--radius-md) var(--radius-md) var(--radius-md);
@@ -80,6 +69,7 @@ const projectNumber = String(index + 1).padStart(2, '0');
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: transform var(--motion-slow) ease;
   }
 

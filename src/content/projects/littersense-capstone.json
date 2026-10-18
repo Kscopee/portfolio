@@ -1,5 +1,6 @@
 {
   "title": "LitterSense: A Multi-Sensor IoT-Based Smart Litter Monitoring System with Predictive Health Detection for Cat Care",
+  "shortTitle": "LitterSense",
   "slug": "littersense-smart-litter-monitoring",
   "type": "capstone",
   "status": "in-progress",
@@ -32,7 +33,7 @@
     "Google Gemini API",
     "iProgSMS API",
     "WebSockets",
-    "ESP32 / ESP32-CAM",
+    "ESP32-S3",
     "RFID identification",
     "Vercel",
     "Figma"
@@ -43,6 +44,10 @@
   "myRole": "Frontend and documentation lead. I made the moodboard and designed the web app's screens in Figma, then built the interface. Almost every screen has my work in it, and the main dashboard is the one that most reflects my design. Since the rest of the team moved their focus to the hardware, I've handled the bulk of the capstone documentation. That includes most of the Chapter 1 introduction and some of the system flowcharts. I don't work on the hardware.",
   "output": "Working prototype, now in testing. In the end-user evaluation (30 cat owners so far, using the ISO/IEC 25010 quality model), the overall rating was 4.53 out of 5, \"Strongly Agree.\" Usability scored highest at 4.58. The expert evaluation and the real-household deployment are still to come.",
   "links": [],
+  "cover": {
+    "image": "../../assets/content/projects/littersense/littersense-login.jpeg",
+    "alt": "LitterSense web app sign-in screen."
+  },
   "evidence": [
     {
       "image": "../../assets/content/projects/littersense/littersense-login.jpeg",

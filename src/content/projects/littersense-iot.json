@@ -1,5 +1,6 @@
 {
   "title": "LitterSense IoT Architecture: Edge Processing and Sensor Fusion for Resilient Feline Health Tracking",
+  "shortTitle": "LitterSense IoT",
   "slug": "littersense-iot-architecture",
   "type": "iot",
   "status": "completed",
@@ -35,6 +36,10 @@
       "url": "/projects/littersense-smart-litter-monitoring/"
     }
   ],
+  "cover": {
+    "image": "../../assets/content/projects/littersense/littersense-login.jpeg",
+    "alt": "LitterSense web app sign-in screen for the connected IoT system."
+  },
   "evidence": [
     "TODO: LitterSense IoT hardware photo from the team",
     "TODO: LitterSense IoT architecture diagram or Ashton's flowcharts",

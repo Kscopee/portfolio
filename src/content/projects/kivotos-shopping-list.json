@@ -1,5 +1,6 @@
 {
   "title": "Kivotos Shopping List",
+  "shortTitle": "Kivotos Shopping List",
   "slug": "kivotos-shopping-list",
   "type": "early-work",
   "status": "completed",
@@ -30,6 +31,10 @@
       "url": "https://github.com/Kscopee/KivotosShoppingList"
     }
   ],
+  "cover": {
+    "image": "../../assets/content/projects/kivotos/kivotos-shopping-list-2024.jpeg",
+    "alt": "Kivotos Shopping List web app."
+  },
   "evidence": [
     {
       "image": "../../assets/content/projects/kivotos/kivotos-shopping-list-2024.jpeg",

@@ -10,15 +10,17 @@ interface Props {
 }
 
 const { sections } = Astro.props;
+const total = String(sections.length).padStart(2, '0');
 ---
 
+{sections.length >= 2 && (
 <nav class="section-rail" aria-label="Page sections" data-section-rail>
   <button class="section-rail__arrow" type="button" aria-label="Previous section" data-rail-previous>
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 14.5 7-7 7 7" /></svg>
   </button>
   <span class="section-rail__current" aria-live="polite" data-rail-current>{sections[0]?.number}</span>
   <span class="section-rail__slash" aria-hidden="true">/</span>
-  <span class="section-rail__total">{sections.at(-1)?.number}</span>
+  <span class="section-rail__total">{total}</span>
   <ol class="section-rail__markers">
     {sections.map((section, index) => (
       <li>
@@ -36,54 +38,91 @@ const { sections } = Astro.props;
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 9.5 7 7 7-7" /></svg>
   </button>
 </nav>
+)}
 
 <script>
-  const rails = document.querySelectorAll<HTMLElement>('[data-section-rail]');
+  let cleanUpSectionRails = () => {};
 
-  rails.forEach((rail) => {
-    const markers = [...rail.querySelectorAll<HTMLButtonElement>('[data-rail-target]')];
-    const currentLabel = rail.querySelector<HTMLElement>('[data-rail-current]');
-    const previous = rail.querySelector<HTMLButtonElement>('[data-rail-previous]');
-    const next = rail.querySelector<HTMLButtonElement>('[data-rail-next]');
-    const targets = markers
-      .map((marker) => document.getElementById(marker.dataset.railTarget ?? ''))
-      .filter((target): target is HTMLElement => Boolean(target));
-    let currentIndex = 0;
+  const setupSectionRails = () => {
+    cleanUpSectionRails();
+    const cleanups: Array<() => void> = [];
 
-    const update = (index: number) => {
-      currentIndex = Math.max(0, Math.min(index, targets.length - 1));
-      markers.forEach((marker, markerIndex) => {
-        if (markerIndex === currentIndex) marker.setAttribute('aria-current', 'true');
-        else marker.removeAttribute('aria-current');
+    document.querySelectorAll<HTMLElement>('[data-section-rail]').forEach((rail) => {
+      const markers = [...rail.querySelectorAll<HTMLButtonElement>('[data-rail-target]')];
+      const currentLabel = rail.querySelector<HTMLElement>('[data-rail-current]');
+      const previous = rail.querySelector<HTMLButtonElement>('[data-rail-previous]');
+      const next = rail.querySelector<HTMLButtonElement>('[data-rail-next]');
+      const targets = markers
+        .map((marker) => document.getElementById(marker.dataset.railTarget ?? ''))
+        .filter((target): target is HTMLElement => Boolean(target));
+      if (targets.length < 2) {
+        rail.hidden = true;
+        return;
+      }
+
+      let currentIndex = -1;
+      let frame = 0;
+
+      const update = (index: number) => {
+        const nextIndex = Math.max(0, Math.min(index, targets.length - 1));
+        if (nextIndex === currentIndex) return;
+        currentIndex = nextIndex;
+        markers.forEach((marker, markerIndex) => {
+          if (markerIndex === currentIndex) marker.setAttribute('aria-current', 'true');
+          else marker.removeAttribute('aria-current');
+        });
+        if (currentLabel) currentLabel.textContent = markers[currentIndex]?.dataset.railNumber ?? String(currentIndex).padStart(2, '0');
+        if (previous) previous.disabled = currentIndex === 0;
+        if (next) next.disabled = currentIndex === targets.length - 1;
+      };
+
+      const goTo = (index: number) => {
+        targets[index]?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      };
+
+      const markerHandlers = markers.map((marker, index) => {
+        const handler = () => goTo(index);
+        marker.addEventListener('click', handler);
+        return () => marker.removeEventListener('click', handler);
       });
-      if (currentLabel) currentLabel.textContent = markers[currentIndex]?.dataset.railNumber ?? String(currentIndex).padStart(2, '0');
-      if (previous) previous.disabled = currentIndex === 0;
-      if (next) next.disabled = currentIndex === targets.length - 1;
-    };
+      const goPrevious = () => goTo(currentIndex - 1);
+      const goNext = () => goTo(currentIndex + 1);
+      previous?.addEventListener('click', goPrevious);
+      next?.addEventListener('click', goNext);
 
-    const goTo = (index: number) => {
-      targets[index]?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-    };
+      const syncToScroll = () => {
+        frame = 0;
+        const activationLine = window.innerHeight * 0.42;
+        let activeIndex = 0;
+        targets.forEach((target, index) => {
+          if (target.getBoundingClientRect().top <= activationLine) activeIndex = index;
+        });
+        update(activeIndex);
+      };
+      const requestSync = () => {
+        if (frame) return;
+        frame = requestAnimationFrame(syncToScroll);
+      };
 
-    markers.forEach((marker, index) => marker.addEventListener('click', () => goTo(index)));
-    previous?.addEventListener('click', () => goTo(currentIndex - 1));
-    next?.addEventListener('click', () => goTo(currentIndex + 1));
+      window.addEventListener('scroll', requestSync, { passive: true });
+      window.addEventListener('resize', requestSync);
+      syncToScroll();
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (!visible) return;
-        const index = targets.indexOf(visible.target as HTMLElement);
-        if (index >= 0) update(index);
-      },
-      { rootMargin: '-28% 0px -50% 0px', threshold: [0.1, 0.35, 0.6] }
-    );
+      cleanups.push(() => {
+        if (frame) cancelAnimationFrame(frame);
+        window.removeEventListener('scroll', requestSync);
+        window.removeEventListener('resize', requestSync);
+        markerHandlers.forEach((removeHandler) => removeHandler());
+        previous?.removeEventListener('click', goPrevious);
+        next?.removeEventListener('click', goNext);
+      });
+    });
 
-    targets.forEach((target) => observer.observe(target));
-    update(0);
-  });
+    cleanUpSectionRails = () => cleanups.forEach((cleanup) => cleanup());
+  };
+
+  document.addEventListener('astro:page-load', setupSectionRails);
+  setupSectionRails();
 </script>
 
 <style>
