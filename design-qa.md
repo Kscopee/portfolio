@@ -18,7 +18,7 @@
 - Image quality and asset fidelity: only Ashton's project screenshots are used. Dedicated cover fields feed centered 2.1:1 crops; the LitterSense logo remains visible and Csoles uses the purchases/wishlist screen instead of an arbitrary dashboard-tile crop. Astro produces responsive WebP variants, and full evidence views use `object-fit: contain`.
 - Copy and content: every visible project fact comes from the validated project collection. The above-the-fold copy diff found no unsupported claims or ZZZ text.
 - Responsive behavior: at 375px the layout becomes one column, the mobile menu control appears, the right rail is hidden, headings wrap cleanly, and readable content stays inside the viewport. Reported document overflow comes only from intentionally clipped decorative bands, the film strip, and the closed off-canvas menu; no readable content is clipped and horizontal page scrolling is suppressed by the shared shell.
-- Accessibility and interaction: filter tabs update `aria-selected`, roving tab focus remains available, and all labels fit at desktop and remain horizontally reachable at 375px. The detail rail derives a seven-section total, advances from 01 through 07 while scrolling, and reinitializes correctly after Astro client navigation. The IoT filter showed exactly one matching project, visible result text updated to “Showing 1 IoT project,” and project links retained the `/portfolio` base path.
+- Accessibility and interaction: filter tabs update `aria-selected`, roving tab focus remains available, and all labels fit at desktop and tablet widths without scrolling. At 375px, overflow is swipeable with the native scrollbar hidden; a right fade appears at the start and a left fade appears at the end, while keyboard selection brings the focused tab into view. The detail rail derives a seven-section total, advances from 01 through 07 while scrolling, and reinitializes correctly after Astro client navigation. The IoT filter showed exactly one matching project, visible result text updated to “Showing 1 IoT project,” and project links retained the `/portfolio` base path.
 
 ## Comparison History
 
@@ -28,6 +28,7 @@
 - Closeout P1: the rail stayed at `01 / 03`, detail-page numbers repeated, and the title could enter the black diagonal. Fixed with page-derived rail totals, scroll-position syncing, a single 01–07 document sequence, stacked numbered sections, and a protected paper-colored title region.
 - Closeout P1: project covers were inferred from evidence and cropped inconsistently. Fixed with required schema-backed cover assets, centered wide crops, the requested short titles, and a separate smaller full-title line.
 - Closeout P2: the filter's final label could be clipped. Fixed with a full desktop fit and a keyboard-compatible horizontal overflow bar on narrow screens.
+- Filter follow-up: removed the visible scrollbar and moved overflow behavior behind the 40rem phone breakpoint. Chromium checks at 1600px and 800px measured equal client/scroll widths with both edge tabs fully visible; at 375px the hidden-scrollbar region exposed direction-aware fades and kept the IoT filter functional.
 
 ## Intentional Adaptations
 

@@ -13,84 +13,116 @@ interface Props {
 const { label, items, active = items[0]?.value } = Astro.props;
 ---
 
-<div class="pill-tabs" role="tablist" aria-label={label} data-pill-tabs>
-  {items.map((item) => (
-    <button
-      class="pill-tabs__tab"
-      type="button"
-      role="tab"
-      aria-selected={item.value === active ? 'true' : 'false'}
-      tabindex={item.value === active ? 0 : -1}
-      data-value={item.value}
-    >
-      {item.label}
-    </button>
-  ))}
+<div class="pill-tabs-shell" data-pill-tabs-shell>
+  <div class="pill-tabs" role="tablist" aria-label={label} data-pill-tabs>
+    {items.map((item) => (
+      <button
+        class="pill-tabs__tab"
+        type="button"
+        role="tab"
+        aria-selected={item.value === active ? 'true' : 'false'}
+        tabindex={item.value === active ? 0 : -1}
+        data-value={item.value}
+      >
+        {item.label}
+      </button>
+    ))}
+  </div>
 </div>
 
 <script>
-  const setupPillTabs = () => document.querySelectorAll<HTMLElement>('[data-pill-tabs]').forEach((tabList) => {
-    if (tabList.dataset.ready === 'true') return;
-    tabList.dataset.ready = 'true';
-    const tabs = [...tabList.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+  let cleanUpPillTabs = () => {};
 
-    const selectTab = (tab: HTMLButtonElement) => {
-      tabs.forEach((item) => {
-        const selected = item === tab;
-        item.setAttribute('aria-selected', String(selected));
-        item.tabIndex = selected ? 0 : -1;
+  const setupPillTabs = () => {
+    cleanUpPillTabs();
+    const cleanups: Array<() => void> = [];
+
+    document.querySelectorAll<HTMLElement>('[data-pill-tabs]').forEach((tabList) => {
+      const shell = tabList.closest<HTMLElement>('[data-pill-tabs-shell]');
+      const tabs = [...tabList.querySelectorAll<HTMLButtonElement>('[role="tab"]')];
+      let frame = 0;
+
+      const syncOverflowCues = () => {
+        frame = 0;
+        const remaining = tabList.scrollWidth - tabList.clientWidth;
+        shell?.classList.toggle('can-scroll-start', remaining > 1 && tabList.scrollLeft > 1);
+        shell?.classList.toggle('can-scroll-end', remaining > 1 && tabList.scrollLeft < remaining - 1);
+      };
+      const requestCueSync = () => {
+        if (frame) return;
+        frame = requestAnimationFrame(syncOverflowCues);
+      };
+
+      const selectTab = (tab: HTMLButtonElement) => {
+        tabs.forEach((item) => {
+          const selected = item === tab;
+          item.setAttribute('aria-selected', String(selected));
+          item.tabIndex = selected ? 0 : -1;
+        });
+        tab.scrollIntoView({
+          behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'nearest',
+          inline: 'nearest',
+        });
+        tab.dispatchEvent(new CustomEvent('pill-tab-change', { bubbles: true, detail: { value: tab.dataset.value } }));
+      };
+
+      const tabCleanups = tabs.flatMap((tab, index) => {
+        const clickHandler = () => selectTab(tab);
+        const keyHandler = (event: KeyboardEvent) => {
+          if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+          event.preventDefault();
+          let nextIndex = index;
+          if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+          if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+          if (event.key === 'Home') nextIndex = 0;
+          if (event.key === 'End') nextIndex = tabs.length - 1;
+          const nextTab = tabs[nextIndex];
+          selectTab(nextTab);
+          nextTab.focus();
+        };
+        tab.addEventListener('click', clickHandler);
+        tab.addEventListener('keydown', keyHandler);
+        return [
+          () => tab.removeEventListener('click', clickHandler),
+          () => tab.removeEventListener('keydown', keyHandler),
+        ];
       });
-      tab.dispatchEvent(new CustomEvent('pill-tab-change', { bubbles: true, detail: { value: tab.dataset.value } }));
-    };
 
-    tabs.forEach((tab, index) => {
-      tab.addEventListener('click', () => selectTab(tab));
-      tab.addEventListener('keydown', (event) => {
-        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-        event.preventDefault();
-        let nextIndex = index;
-        if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
-        if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
-        if (event.key === 'Home') nextIndex = 0;
-        if (event.key === 'End') nextIndex = tabs.length - 1;
-        const nextTab = tabs[nextIndex];
-        selectTab(nextTab);
-        nextTab.focus();
+      tabList.addEventListener('scroll', requestCueSync, { passive: true });
+      const resizeObserver = new ResizeObserver(requestCueSync);
+      resizeObserver.observe(tabList);
+      syncOverflowCues();
+
+      cleanups.push(() => {
+        if (frame) cancelAnimationFrame(frame);
+        tabList.removeEventListener('scroll', requestCueSync);
+        resizeObserver.disconnect();
+        tabCleanups.forEach((cleanup) => cleanup());
       });
     });
-  });
+
+    cleanUpPillTabs = () => cleanups.forEach((cleanup) => cleanup());
+  };
 
   document.addEventListener('astro:page-load', setupPillTabs);
   setupPillTabs();
 </script>
 
 <style>
+  .pill-tabs-shell {
+    position: relative;
+    width: fit-content;
+    max-width: 100%;
+  }
+
   .pill-tabs {
     display: inline-flex;
     width: max-content;
-    max-width: 100%;
     padding: 0.3rem;
     gap: 0.15rem;
-    overflow-x: auto;
-    overscroll-behavior-inline: contain;
     border-radius: var(--radius-pill);
     background: var(--color-black);
-    scrollbar-color: var(--color-lime) var(--color-black);
-    scrollbar-width: thin;
-    scroll-padding-inline: 0.3rem;
-    scroll-snap-type: inline proximity;
-  }
-
-  .pill-tabs::-webkit-scrollbar {
-    height: 0.32rem;
-  }
-
-  .pill-tabs::-webkit-scrollbar-track {
-    background: var(--color-black);
-  }
-
-  .pill-tabs::-webkit-scrollbar-thumb {
-    background: var(--color-lime);
   }
 
   .pill-tabs__tab {
@@ -103,7 +135,6 @@ const { label, items, active = items[0]?.value } = Astro.props;
     color: var(--color-white);
     font-size: var(--step--1);
     font-weight: 800;
-    scroll-snap-align: start;
     white-space: nowrap;
     cursor: pointer;
   }
@@ -116,5 +147,59 @@ const { label, items, active = items[0]?.value } = Astro.props;
 
   .pill-tabs__tab:hover:not([aria-selected="true"]) {
     color: var(--color-lime);
+  }
+
+  @media (max-width: 40rem) {
+    .pill-tabs-shell {
+      width: 100%;
+    }
+
+    .pill-tabs-shell::before,
+    .pill-tabs-shell::after {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      z-index: 2;
+      width: 2.75rem;
+      opacity: 0;
+      pointer-events: none;
+      content: '';
+      transition: opacity var(--motion-fast) ease;
+    }
+
+    .pill-tabs-shell::before {
+      left: 0;
+      border-radius: var(--radius-pill) 0 0 var(--radius-pill);
+      background: linear-gradient(90deg, var(--color-black) 12%, transparent 100%);
+    }
+
+    .pill-tabs-shell::after {
+      right: 0;
+      border-radius: 0 var(--radius-pill) var(--radius-pill) 0;
+      background: linear-gradient(270deg, var(--color-black) 12%, transparent 100%);
+    }
+
+    .pill-tabs-shell.can-scroll-start::before,
+    .pill-tabs-shell.can-scroll-end::after {
+      opacity: 1;
+    }
+
+    .pill-tabs {
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      overscroll-behavior-inline: contain;
+      scrollbar-width: none;
+      scroll-padding-inline: 0.3rem;
+      scroll-snap-type: inline proximity;
+    }
+
+    .pill-tabs::-webkit-scrollbar {
+      display: none;
+    }
+
+    .pill-tabs__tab {
+      scroll-snap-align: start;
+    }
   }
 </style>
