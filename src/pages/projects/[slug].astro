@@ -1,0 +1,658 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ContentNeededTag from '../../components/ContentNeededTag.astro';
+import CutFrame from '../../components/CutFrame.astro';
+import FilmStripDivider from '../../components/FilmStripDivider.astro';
+import PillButton from '../../components/PillButton.astro';
+import SectionRail from '../../components/SectionRail.astro';
+import WatermarkWord from '../../components/WatermarkWord.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { slug: project.data.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}/${path.replace(/^\//, '')}`;
+const isExternal = (url: string) => /^https?:\/\//.test(url);
+const resolveLink = (url: string) => isExternal(url) ? url : withBase(url);
+const typeLabels = {
+  capstone: 'Capstone project',
+  iot: 'IoT project',
+  'third-year': 'Third-year project',
+  'early-work': 'Early work',
+};
+const firstEvidence = data.evidence.find((item) => typeof item !== 'string');
+const completedLabel = data.status === 'in-progress' ? 'In progress' : 'Completed';
+const sections = [
+  { id: 'overview', number: '01', label: 'Project overview' },
+  { id: 'contribution', number: '02', label: 'My role' },
+  { id: 'evidence', number: '03', label: 'Project evidence' },
+];
+---
+
+<BaseLayout
+  title={`${data.title} | Ashton Caspe`}
+  description={data.description}
+  backgroundVideo={false}
+  bodyClass="project-detail-page"
+>
+  <SectionRail sections={sections} />
+
+  <article class="project-detail">
+    <section class="project-hero" id="overview" aria-labelledby="project-title" data-rail-section>
+      <div class="project-hero__stripe" aria-hidden="true"></div>
+      <div class="project-hero__media">
+        <CutFrame accent="lime" variant="double" caption={firstEvidence?.caption}>
+          {firstEvidence ? (
+            <Image
+              src={firstEvidence.image}
+              alt={firstEvidence.caption}
+              widths={[720, 1080, 1440]}
+              sizes="(max-width: 60rem) 92vw, 48vw"
+              loading="eager"
+            />
+          ) : (
+            <ContentNeededTag text={data.evidence[0] as string} />
+          )}
+        </CutFrame>
+      </div>
+
+      <div class="project-hero__copy">
+        <a class="project-hero__back" href={`${base}/projects/`}>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7" /></svg>
+          All projects
+        </a>
+        <div class="project-hero__meta">
+          <span>{typeLabels[data.type]}</span>
+          <span>{data.year}</span>
+          <span class:list={{ 'is-active': data.status === 'in-progress' }}>{completedLabel}</span>
+        </div>
+        <h1 id="project-title">{data.title}</h1>
+        <p class="project-hero__description">{data.description}</p>
+        <dl class="project-facts">
+          <div>
+            <dt>Status</dt>
+            <dd>{completedLabel}</dd>
+          </div>
+          <div>
+            <dt>Year</dt>
+            <dd>{data.year}</dd>
+          </div>
+          <div>
+            <dt>Team</dt>
+            <dd>{data.team.join(', ')}</dd>
+          </div>
+          {data.course && (
+            <div class="project-facts__course">
+              <dt>Course</dt>
+              <dd>{data.course}</dd>
+            </div>
+          )}
+        </dl>
+      </div>
+    </section>
+
+    <FilmStripDivider />
+
+    <section class="project-work" id="contribution" aria-labelledby="role-heading" data-rail-section>
+      <WatermarkWord word="Contribution" tone="dark" />
+      <div class="role-panel">
+        <span class="role-panel__number" aria-hidden="true">02</span>
+        <div>
+          <p class="role-panel__label">My role / contribution</p>
+          <h2 id="role-heading">What I owned</h2>
+          <p>{data.myRole}</p>
+        </div>
+      </div>
+
+      <div class="project-work__grid">
+        <section class="detail-block detail-block--objectives" aria-labelledby="objectives-heading">
+          <p class="detail-block__index">01 / Objectives</p>
+          <h2 id="objectives-heading">What the project set out to do</h2>
+          <ol>
+            {data.objectives.map((objective) => <li>{objective}</li>)}
+          </ol>
+        </section>
+
+        <section class="detail-block detail-block--technology" aria-labelledby="technology-heading">
+          <p class="detail-block__index">02 / Technology</p>
+          <h2 id="technology-heading">Tools and components</h2>
+          <ul class="technology-list">
+            {data.technologies.map((technology) => <li>{technology}</li>)}
+          </ul>
+        </section>
+
+        <section class="detail-block detail-block--result" aria-labelledby="result-heading">
+          <p class="detail-block__index">03 / Output</p>
+          <h2 id="result-heading">Result</h2>
+          <p>{data.output}</p>
+        </section>
+
+        <section class="detail-block detail-block--links" aria-labelledby="links-heading">
+          <p class="detail-block__index">04 / Links</p>
+          <h2 id="links-heading">Project links</h2>
+          {data.links.length > 0 ? (
+            <div class="project-links">
+              {data.links.map((link) => (
+                <PillButton href={resolveLink(link.url)} label={link.label} tone="black" />
+              ))}
+            </div>
+          ) : (
+            <p>No public links are available for this project.</p>
+          )}
+        </section>
+      </div>
+    </section>
+
+    <section class="project-evidence" id="evidence" aria-labelledby="evidence-heading" data-rail-section>
+      <div class="project-evidence__head">
+        <p>03 / Project evidence</p>
+        <h2 id="evidence-heading">Screens, diagrams, and proof</h2>
+        <p>Available evidence is shown here. Striped panels mark the remaining files Ashton still needs to add.</p>
+      </div>
+
+      <div class="evidence-grid">
+        {data.evidence.map((item, index) => (
+          typeof item === 'string' ? (
+            <ContentNeededTag text={item} />
+          ) : (
+            <figure class:list={["evidence-item", { 'evidence-item--wide': index % 3 === 0 }]}>
+              <div class="evidence-item__image">
+                <Image
+                  src={item.image}
+                  alt={item.caption}
+                  widths={[520, 840, 1200]}
+                  sizes="(max-width: 48rem) 92vw, (max-width: 80rem) 44vw, 40rem"
+                  loading="lazy"
+                />
+              </div>
+              <figcaption><span>{String(index + 1).padStart(2, '0')}</span>{item.caption}</figcaption>
+            </figure>
+          )
+        ))}
+      </div>
+
+      <div class="project-evidence__return">
+        <PillButton href={`${base}/projects/`} label="Back to all projects" tone="lime" arrow="left" />
+      </div>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  :global(.project-detail-page) {
+    background: var(--color-paper);
+  }
+
+  .project-detail {
+    overflow: hidden;
+  }
+
+  .project-hero {
+    position: relative;
+    display: grid;
+    min-height: calc(100svh - 4.6rem);
+    padding: clamp(3rem, 7vw, 7rem) var(--page-safe-end) clamp(4rem, 8vw, 8rem) var(--page-gutter);
+    grid-template-columns: minmax(22rem, 1fr) minmax(26rem, 1.05fr);
+    align-items: center;
+    gap: clamp(2.5rem, 5vw, 6rem);
+    isolation: isolate;
+    background: var(--color-paper);
+  }
+
+  .project-hero::before {
+    position: absolute;
+    inset: 0 55% 0 -16%;
+    z-index: -2;
+    background:
+      repeating-linear-gradient(105deg, rgb(255 255 255 / 0.04) 0 7px, transparent 7px 11px),
+      var(--color-black);
+    content: '';
+    transform: skewX(calc(var(--shape-angle) * -1));
+  }
+
+  .project-hero__stripe {
+    position: absolute;
+    right: -18%;
+    bottom: -8%;
+    z-index: -1;
+    width: 70%;
+    height: 18%;
+    background: var(--color-lime);
+    transform: skewX(calc(var(--shape-angle) * -1));
+  }
+
+  .project-hero__media {
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-hero__media :global(.cut-frame__media) {
+    min-height: clamp(21rem, 45vw, 38rem);
+  }
+
+  .project-hero__media :global(img) {
+    object-fit: cover;
+  }
+
+  .project-hero__copy {
+    position: relative;
+    z-index: 1;
+  }
+
+  .project-hero__back {
+    display: inline-flex;
+    margin-bottom: var(--space-6);
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .project-hero__back svg {
+    width: 1.35rem;
+  }
+
+  .project-hero__back path {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    stroke-width: 3;
+  }
+
+  .project-hero__meta {
+    display: flex;
+    margin-bottom: var(--space-4);
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .project-hero__meta span {
+    padding: 0.25rem 0.7rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-black);
+    color: var(--color-white);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .project-hero__meta span.is-active {
+    background: var(--color-lime);
+    color: var(--color-black);
+  }
+
+  h1 {
+    max-width: 21ch;
+    margin-bottom: var(--space-5);
+    font-family: var(--font-body);
+    font-size: clamp(2.3rem, 1.55rem + 3vw, 5.5rem);
+    font-weight: 900;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+  }
+
+  .project-hero__description {
+    max-width: 62ch;
+    margin-bottom: var(--space-6);
+    color: var(--color-text);
+    font-size: clamp(1rem, 0.92rem + 0.35vw, 1.25rem);
+  }
+
+  .project-facts {
+    display: grid;
+    margin: 0;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    border-top: 0.18rem solid var(--color-black);
+    border-bottom: 0.18rem solid var(--color-black);
+  }
+
+  .project-facts div {
+    padding: 0.85rem 0.9rem 0.85rem 0;
+  }
+
+  .project-facts div + div {
+    padding-left: 0.9rem;
+    border-left: 1px solid var(--color-border);
+  }
+
+  .project-facts__course {
+    grid-column: 1 / -1;
+    border-top: 1px solid var(--color-border);
+    border-left: 0 !important;
+    padding-left: 0 !important;
+  }
+
+  .project-facts dt {
+    margin-bottom: 0.2rem;
+    font-size: 0.66rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .project-facts dd {
+    margin: 0;
+    font-size: 0.82rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .project-work {
+    position: relative;
+    padding: clamp(5rem, 10vw, 10rem) var(--page-safe-end) clamp(6rem, 10vw, 10rem) var(--page-gutter);
+    overflow: hidden;
+    background: var(--color-surface);
+    color: var(--color-paper);
+  }
+
+  .project-work :global(.watermark) {
+    top: 6rem;
+    right: -0.08em;
+  }
+
+  .role-panel,
+  .project-work__grid {
+    position: relative;
+    z-index: 1;
+    width: min(100%, var(--content-max));
+    margin-inline: auto;
+  }
+
+  .role-panel {
+    display: grid;
+    margin-bottom: clamp(4rem, 8vw, 8rem);
+    padding: clamp(2rem, 5vw, 5rem);
+    grid-template-columns: auto 1fr;
+    align-items: start;
+    gap: clamp(1.5rem, 4vw, 4rem);
+    background: var(--color-lime);
+    color: var(--color-black);
+    clip-path: polygon(0 0, calc(100% - 4rem) 0, 100% 4rem, 100% 100%, 4rem 100%, 0 calc(100% - 4rem));
+    box-shadow: var(--shadow-hard);
+  }
+
+  .role-panel__number {
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 12vw, 11rem);
+    font-style: italic;
+    letter-spacing: -0.06em;
+    line-height: 0.72;
+  }
+
+  .role-panel__label,
+  .detail-block__index,
+  .project-evidence__head > p:first-child {
+    margin-bottom: 0.45rem;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .role-panel h2 {
+    margin-bottom: var(--space-4);
+    font-size: clamp(2.1rem, 1.45rem + 2.7vw, 4.6rem);
+    font-style: italic;
+    text-transform: uppercase;
+  }
+
+  .role-panel p:last-child {
+    max-width: 75ch;
+    margin-bottom: 0;
+    font-size: clamp(1rem, 0.9rem + 0.42vw, 1.3rem);
+    font-weight: 700;
+  }
+
+  .project-work__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(3rem, 6vw, 6rem) clamp(2rem, 6vw, 7rem);
+  }
+
+  .detail-block {
+    min-width: 0;
+  }
+
+  .detail-block__index {
+    color: var(--color-lime);
+  }
+
+  .detail-block h2 {
+    margin-bottom: var(--space-5);
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: clamp(1.6rem, 1.25rem + 1.2vw, 2.7rem);
+    font-weight: 900;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+  }
+
+  .detail-block p,
+  .detail-block li {
+    color: var(--color-paper);
+  }
+
+  .detail-block ol {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    gap: var(--space-4);
+    list-style: none;
+    counter-reset: objectives;
+  }
+
+  .detail-block ol li {
+    position: relative;
+    min-height: 2.4rem;
+    padding-left: 3.25rem;
+    counter-increment: objectives;
+  }
+
+  .detail-block ol li::before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: grid;
+    width: 2.3rem;
+    height: 2.3rem;
+    place-items: center;
+    background: var(--color-lime);
+    color: var(--color-black);
+    content: counter(objectives, decimal-leading-zero);
+    font-size: 0.72rem;
+    font-weight: 900;
+    clip-path: polygon(0.45rem 0, 100% 0, calc(100% - 0.45rem) 100%, 0 100%);
+  }
+
+  .technology-list {
+    display: flex;
+    margin: 0;
+    padding: 0;
+    flex-wrap: wrap;
+    gap: 0.55rem;
+    list-style: none;
+  }
+
+  .technology-list li {
+    padding: 0.42rem 0.8rem;
+    border: 1px solid rgb(255 255 255 / 0.34);
+    border-radius: var(--radius-pill);
+    background: var(--color-black);
+    font-size: 0.78rem;
+    font-weight: 700;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .project-links :global(.pill-button) {
+    border-color: var(--color-lime);
+  }
+
+  .project-evidence {
+    position: relative;
+    padding: clamp(5rem, 9vw, 9rem) var(--page-safe-end) clamp(6rem, 10vw, 10rem) var(--page-gutter);
+    background: var(--color-paper);
+  }
+
+  .project-evidence__head,
+  .evidence-grid,
+  .project-evidence__return {
+    width: min(100%, var(--content-max));
+    margin-inline: auto;
+  }
+
+  .project-evidence__head {
+    display: grid;
+    max-width: 64rem;
+    margin-bottom: clamp(3rem, 6vw, 6rem);
+  }
+
+  .project-evidence__head h2 {
+    margin-bottom: var(--space-4);
+    font-size: clamp(2.3rem, 1.5rem + 3vw, 5rem);
+    font-style: italic;
+    text-transform: uppercase;
+  }
+
+  .project-evidence__head p:last-child {
+    max-width: 62ch;
+    margin-bottom: 0;
+  }
+
+  .evidence-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(2rem, 5vw, 5rem);
+  }
+
+  .evidence-item {
+    min-width: 0;
+    margin: 0;
+  }
+
+  .evidence-item--wide {
+    grid-column: span 2;
+  }
+
+  .evidence-item__image {
+    display: grid;
+    min-height: 18rem;
+    max-height: 42rem;
+    overflow: hidden;
+    place-items: center;
+    border: 0.38rem solid var(--color-black);
+    border-radius: var(--radius-sm);
+    background: var(--color-black);
+    clip-path: polygon(0 0, calc(100% - 2.8rem) 0, 100% 2.8rem, 100% 100%, 2.8rem 100%, 0 calc(100% - 2.8rem));
+  }
+
+  .evidence-item__image :global(img) {
+    width: 100%;
+    height: 100%;
+    max-height: 41.25rem;
+    object-fit: contain;
+  }
+
+  .evidence-item figcaption {
+    display: flex;
+    padding: 0.75rem 0.2rem 0;
+    align-items: baseline;
+    gap: 0.7rem;
+    font-size: 0.82rem;
+    font-weight: 700;
+  }
+
+  .evidence-item figcaption span {
+    color: var(--color-muted);
+    font-size: 0.67rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+  }
+
+  .project-evidence__return {
+    margin-top: clamp(3rem, 7vw, 7rem);
+  }
+
+  @media (max-width: 62rem) {
+    .project-hero {
+      grid-template-columns: 1fr;
+    }
+
+    .project-hero::before {
+      inset: -10% 18% 46% -18%;
+    }
+
+    .project-hero__media {
+      max-width: 50rem;
+    }
+
+    .project-work__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .project-hero {
+      min-height: auto;
+      padding-top: var(--space-7);
+    }
+
+    .project-hero__media :global(.cut-frame__media) {
+      min-height: 15rem;
+    }
+
+    .project-facts {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .project-facts div:nth-child(3) {
+      grid-column: 1 / -1;
+      border-top: 1px solid var(--color-border);
+      border-left: 0;
+      padding-left: 0;
+    }
+
+    .role-panel {
+      grid-template-columns: 1fr;
+      clip-path: polygon(0 0, calc(100% - 2.5rem) 0, 100% 2.5rem, 100% 100%, 2.5rem 100%, 0 calc(100% - 2.5rem));
+    }
+
+    .role-panel__number {
+      font-size: 5rem;
+    }
+
+    .evidence-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .evidence-item--wide {
+      grid-column: auto;
+    }
+
+    .evidence-item__image {
+      min-height: 13rem;
+    }
+  }
+</style>

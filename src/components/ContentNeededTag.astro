@@ -1,0 +1,52 @@
+---
+interface Props {
+  text: string;
+}
+
+const { text } = Astro.props;
+const detail = text.replace(/^TODO:\s*/, '');
+---
+
+<div class="content-needed" role="note">
+  <strong>Content needed</strong>
+  <span>{detail}</span>
+</div>
+
+<style>
+  .content-needed {
+    display: grid;
+    width: 100%;
+    min-height: 9rem;
+    padding: var(--space-5);
+    place-content: center;
+    gap: 0.55rem;
+    border: 0.22rem solid var(--color-black);
+    background:
+      repeating-linear-gradient(-45deg, var(--color-lime) 0 0.8rem, var(--color-black) 0.8rem 1.6rem);
+    color: var(--color-black);
+    text-align: center;
+  }
+
+  strong,
+  span {
+    width: fit-content;
+    max-width: 42rem;
+    margin-inline: auto;
+    padding: 0.28rem 0.6rem;
+    background: var(--color-lime);
+  }
+
+  strong {
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  span {
+    background: var(--color-black);
+    color: var(--color-white);
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+</style>
