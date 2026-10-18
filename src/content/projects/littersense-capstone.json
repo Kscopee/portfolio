@@ -1,0 +1,60 @@
+{
+  "title": "LitterSense: A Multi-Sensor IoT-Based Smart Litter Monitoring System with Predictive Health Detection for Cat Care",
+  "slug": "littersense-smart-litter-monitoring",
+  "type": "capstone",
+  "status": "in-progress",
+  "year": 2026,
+  "course": "ITC 100: Capstone Project 1, St. Dominic College of Asia",
+  "description": "LitterSense is a smart litter box system that helps Filipino cat owners spot health problems early. Sensors in the litter box identify which cat is using it by RFID collar tag, log each visit, and track litter level and air quality. A web app shows each cat's history, flags unusual patterns that can be early signs of urinary or kidney problems, and exports PDF/CSV reports owners can bring to the vet. It is built to keep working on unreliable Philippine internet: data is stored on the device and synced once the connection comes back.",
+  "objectives": [
+    "Study how Filipino cat owners currently monitor their cats' health, and where manual observation and commercial smart litter boxes fall short.",
+    "Design and build LitterSense as one system: a sensor-equipped litter box, cloud services, and a web app with real-time alerts and PDF/CSV health reports.",
+    "Test its accuracy and reliability: sensor readings, RFID identification, anomaly detection, and how the app behaves under unstable network conditions.",
+    "Deploy the prototype in a real household and evaluate how well it works day to day."
+  ],
+  "technologies": [
+    "Next.js 16",
+    "React 19",
+    "TypeScript 5",
+    "Tailwind CSS 4",
+    "Framer Motion",
+    "Recharts",
+    "Lucide React",
+    "Progressive Web App",
+    "Node.js",
+    "Firebase Authentication",
+    "Firebase Firestore",
+    "Firebase Cloud Storage",
+    "Firebase Admin SDK",
+    "Firebase Cloud Messaging",
+    "Firebase Security Rules",
+    "Supabase PostgreSQL",
+    "Google Gemini API",
+    "iProgSMS API",
+    "WebSockets",
+    "ESP32 / ESP32-CAM",
+    "RFID identification",
+    "Vercel",
+    "Figma"
+  ],
+  "team": [
+    "4-member team (names not shown for privacy)"
+  ],
+  "myRole": "Frontend and documentation lead. I made the moodboard and designed the web app's screens in Figma, then built the interface. Almost every screen has my work in it, and the main dashboard is the one that most reflects my design. Since the rest of the team moved their focus to the hardware, I've handled the bulk of the capstone documentation. That includes most of the Chapter 1 introduction and some of the system flowcharts. I don't work on the hardware.",
+  "output": "Working prototype, now in testing. In the end-user evaluation (30 cat owners so far, using the ISO/IEC 25010 quality model), the overall rating was 4.53 out of 5, \"Strongly Agree.\" Usability scored highest at 4.58. The expert evaluation and the real-household deployment are still to come.",
+  "links": [],
+  "evidence": [
+    {
+      "image": "../../assets/content/projects/littersense/littersense-login.jpeg",
+      "caption": "LitterSense web app sign-in screen."
+    },
+    "TODO: LitterSense main dashboard screenshot",
+    "TODO: LitterSense cat profile and history screenshot",
+    "TODO: LitterSense alert screenshot",
+    "TODO: LitterSense exported PDF report screenshot",
+    "TODO: LitterSense live camera screenshot",
+    "TODO: LitterSense litter box hardware photo",
+    "TODO: LitterSense IPO and context diagrams from the capstone paper"
+  ],
+  "featured": true
+}

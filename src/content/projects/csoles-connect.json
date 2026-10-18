@@ -1,0 +1,52 @@
+{
+  "title": "Csoles Connect: An AI-Powered Shoe Resale Marketplace",
+  "slug": "csoles-connect",
+  "type": "third-year",
+  "status": "completed",
+  "year": 2025,
+  "course": "IT 305: Application Development in Emerging Technology (BSIT 3A), St. Dominic College of Asia, September–November 2025",
+  "description": "A mobile marketplace app built for a real small shoe reseller who was running the whole business through Facebook Marketplace, Messenger, and a notebook. The app gives the seller one place to list shoes, manage stock and prices, and track orders. Buyers can browse, use a cart and wishlist, and choose cash on delivery, cash on pickup, or a meetup. An OpenAI-powered chatbot answers common customer questions.",
+  "objectives": [
+    "Build product listings the owner can manage, with images, sizes, condition, prices, and tags.",
+    "Give the owner tools for pricing, stock levels, order status, and order history.",
+    "Let buyers browse and sort products, use a cart and wishlist, and order with cash on delivery, cash on pickup, or a meetup."
+  ],
+  "technologies": [
+    "Flutter",
+    "Node.js",
+    "Express",
+    "MongoDB Atlas",
+    "Firebase Authentication",
+    "OpenAI API",
+    "Cloud image storage",
+    "Firebase Crashlytics",
+    "Render",
+    "Agile Scrum",
+    "GitHub feature branches and pull requests"
+  ],
+  "team": [
+    "4-member team (names not shown for privacy)"
+  ],
+  "myRole": "Design: system architecture, UI/UX design, and workflow diagrams. Building: the core app modules (login/authentication, product listing, cart and wishlist, and the order and payment flow). Also testing and documentation alongside the team.",
+  "output": "A working prototype that runs locally, built in one semester (about three months) as a proof of concept for the course. It was never deployed as a live app.",
+  "links": [],
+  "evidence": [
+    {
+      "image": "../../assets/content/projects/csoles/csoles-cart-empty.jpeg",
+      "caption": "Csoles Connect empty-cart screen."
+    },
+    {
+      "image": "../../assets/content/projects/csoles/csoles-owner-dashboard.jpeg",
+      "caption": "Csoles Connect prototype seller dashboard."
+    },
+    {
+      "image": "../../assets/content/projects/csoles/csoles-profile-wishlist.jpeg",
+      "caption": "Csoles Connect prototype buyer profile, purchases, and wishlist screen."
+    },
+    "TODO: Csoles Connect product-list screenshot",
+    "TODO: Csoles Connect product-page screenshot",
+    "TODO: Csoles Connect chatbot screenshot",
+    "TODO: Csoles Connect system diagrams from the paper"
+  ],
+  "featured": true
+}

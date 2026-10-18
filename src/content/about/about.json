@@ -1,0 +1,55 @@
+{
+  "name": "Ashton James D. Caspe",
+  "program": "BS Information Technology, 4th year, St. Dominic College of Asia. Expected to graduate in 2027.",
+  "tagline": "Turn your idyllic fantasy into digital reality",
+  "story": [
+    "I got into IT because of a game. NieR: Automata hit me so hard I cried, and when it was over I knew I wanted to tell stories like that one day, through games. To make games, I needed to learn how to program, so that's where I started.",
+    "Alongside school, I started teaching myself. In 2024 I followed Scrimba's free course and built Kivotos Shopping List, a small web app I themed myself and put online. It was simple, but it was the first thing I made that actually worked.",
+    "I kept building and testing myself after that: a Microsoft Office Specialist certification in 2024, then IT Specialist certifications in Databases (2025), HTML and CSS (2026), and Cybersecurity (2026). My first portfolio was built with Bootstrap because that was what I knew back then. This one is built the way I always wanted it to look.",
+    "In third year, my team built Csoles Connect, a marketplace app for a real small shoe reseller, in about three months. I worked on the design and built core parts of the app. It only ever ran locally, but it showed me how much goes into a real product.",
+    "Now, in fourth year, I'm the frontend and documentation lead on our capstone, LitterSense. I designed the app's screens in Figma, built the interface, and write most of our paper.",
+    "The road hasn't been ideal, but I've learned a lot along the way."
+  ],
+  "education": [
+    "BS Information Technology, St. Dominic College of Asia, 4th year (expected to graduate in 2027)"
+  ],
+  "goals": [
+    "Start my career as a web developer.",
+    "Move into game or software development later on, with the long-term goal of making story-driven games."
+  ],
+  "interests": [
+    "Music and guitar",
+    "Graphic design",
+    "VFX and video editing (the background video on this site is my own)"
+  ],
+  "skills": {
+    "technical": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Bootstrap",
+      "React",
+      "Java",
+      "C",
+      "MySQL",
+      "Git",
+      "GitHub",
+      "VS Code",
+      "Android Studio"
+    ],
+    "soft": [
+      "Communication",
+      "Networking",
+      "Organization",
+      "Creativity",
+      "Curiosity",
+      "Dedication",
+      "Adaptability"
+    ]
+  },
+  "links": {
+    "email": "projectkfiles@gmail.com",
+    "github": "https://github.com/Kscopee",
+    "linkedin": "https://www.linkedin.com/in/ashton-james-caspe/"
+  }
+}
