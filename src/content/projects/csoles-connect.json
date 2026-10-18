@@ -42,11 +42,7 @@
     {
       "image": "../../assets/content/projects/csoles/csoles-profile-wishlist.jpeg",
       "caption": "Csoles Connect prototype buyer profile, purchases, and wishlist screen."
-    },
-    "TODO: Csoles Connect product-list screenshot",
-    "TODO: Csoles Connect product-page screenshot",
-    "TODO: Csoles Connect chatbot screenshot",
-    "TODO: Csoles Connect system diagrams from the paper"
+    }
   ],
   "featured": true
 }
