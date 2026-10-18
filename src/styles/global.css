@@ -45,6 +45,9 @@
   --space-9: 7rem;
 
   --page-gutter: clamp(1rem, 4vw, 4.5rem);
+  --rail-width: 3.65rem;
+  --rail-clearance: 1.5rem;
+  --page-safe-end: var(--page-gutter);
   --content-max: 90rem;
   --shape-cut: clamp(3.5rem, 8vw, 9rem);
   --shape-angle: 14deg;
@@ -73,6 +76,13 @@ html {
   scrollbar-width: thin;
 }
 
+@supports selector(::-webkit-scrollbar) {
+  html {
+    scrollbar-color: auto;
+    scrollbar-width: auto;
+  }
+}
+
 html::-webkit-scrollbar {
   width: 0.7rem;
 }
@@ -85,6 +95,25 @@ html::-webkit-scrollbar-thumb {
   background: var(--color-lime);
   border: 2px solid var(--color-surface);
   border-radius: var(--radius-pill);
+}
+
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-button:single-button,
+::-webkit-scrollbar-button:vertical:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment {
+  display: none !important;
+  width: 0;
+  height: 0;
+  border: 0;
+  background: var(--color-surface) !important;
+  background-image: none !important;
+  color: transparent !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+html::-webkit-scrollbar-corner {
+  background: var(--color-surface);
 }
 
 body {

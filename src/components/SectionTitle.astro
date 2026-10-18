@@ -29,8 +29,8 @@ const { label, number, tone = 'lime', side = 'left' } = Astro.props;
   }
 
   .section-title--right {
-    margin-inline: auto calc(var(--page-gutter) * -1);
-    padding-inline: var(--shape-cut) var(--page-gutter);
+    margin-inline: auto calc(var(--page-safe-end) * -1);
+    padding-inline: var(--shape-cut) var(--page-safe-end);
     text-align: right;
     clip-path: polygon(var(--shape-cut) 0, 100% 0, 100% 100%, var(--shape-cut) 100%, 0 50%);
   }

@@ -87,13 +87,17 @@ const { sections } = Astro.props;
 </script>
 
 <style>
+  :global(html:has(.section-rail)) {
+    --page-safe-end: calc(var(--page-gutter) + var(--rail-width) + var(--rail-clearance));
+  }
+
   .section-rail {
     position: fixed;
     top: 50%;
     right: 0;
     z-index: 20;
     display: flex;
-    width: 3.65rem;
+    width: var(--rail-width);
     padding: 0.6rem 0.45rem;
     flex-direction: column;
     align-items: center;
@@ -179,6 +183,10 @@ const { sections } = Astro.props;
   }
 
   @media (max-width: 56rem) {
+    :global(html:has(.section-rail)) {
+      --page-safe-end: var(--page-gutter);
+    }
+
     .section-rail {
       display: none;
     }
