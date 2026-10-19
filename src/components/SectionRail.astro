@@ -7,10 +7,11 @@ interface RailSection {
 
 interface Props {
   sections: RailSection[];
+  totalNumber?: string;
 }
 
-const { sections } = Astro.props;
-const total = String(sections.length).padStart(2, '0');
+const { sections, totalNumber } = Astro.props;
+const total = totalNumber ?? String(sections.length).padStart(2, '0');
 ---
 
 {sections.length >= 2 && (
