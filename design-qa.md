@@ -53,7 +53,7 @@ final result: passed
 
 ## Evidence
 
-- Source visual truth: `docs/reference/inspiration/10-videos-page-carousel-a.jpg`, `12-videos-page-grid-a.jpg`, `14-news-page.jpg`, and `20-login-modal.jpg`.
+- Source visual truth: `docs/reference/inspiration/10-videos-page-carousel-a.jpg`, `12-videos-page-grid-a.jpg`, `14-news-page.jpg`, and especially `17-background-card-opened.jpg` for the revised viewer.
 - Browser method: the production build was served locally and exercised in headless Chromium through the Chrome DevTools Protocol because the in-app browser was not available.
 - Viewports checked: 1600 x 900 desktop and 375 x 812 mobile, both at device scale factor 1.
 - States checked: Certifications tab, Course Completions tab, completed certificate viewer, in-progress course viewer, previous/next navigation, focus loop, Escape close, return focus, and the mobile viewer.
@@ -64,8 +64,9 @@ final result: passed
 - Layout: the archive keeps the references' large light field, black diagonal region, faded watermark, three-column desktop rhythm, contained media cards, and black pill tabs. It becomes one column at 375px.
 - Typography and palette: the implementation uses the approved display/body roles and locked black, `#d7f205` lime, white, and light-grey palette. Lime surfaces always use black text.
 - Asset treatment: certificate images use `object-fit: contain`, never crop or spill from their frames, and are emitted as responsive WebP variants. Local badges are displayed without external embeds.
-- Viewer: the dark media stage and white information panel adapt the clean modal reference without copying its branding. The initial oversized in-progress heading clipped at desktop width; its scale was reduced and the final render fits cleanly.
-- Responsive behavior: the mobile hero copy, tab shell, cards, viewer close control, and modal bounds stay inside the readable viewport. The viewer stacks into one column and retains a fixed, reachable navigation bar.
+- Viewer: the revised modal follows reference 17's image-led composition: the page visibly blurs behind one dark surface, a large CutFrame gives the certificate priority, and the title, issuer/provider, date, and actions remain on that same surface. It intentionally has no white side panel, full-width lime navigation bar, or offset lime outline.
+- Cards: badges and numbers sit below the media so they never cover certificate details; numbering restarts at `01` in each tab. Certificate thumbnails have no haze overlay, completed items use an expand icon, and the in-progress card has no action icon.
+- Responsive behavior: the mobile hero copy, tab shell, cards, viewer close control, and modal bounds stay inside the readable viewport. The viewer stacks into one scrollable column with small previous/next arrows at the certificate sides.
 - Accessibility and interaction: tab buttons expose `aria-controls` and roving focus; the matching panels expose `role="tabpanel"`. Native buttons open the viewer, Left/Right cycles items, Tab remains trapped, Escape closes, scroll locking clears, and focus returns to the opener.
 
 ## Intentional Adaptations
@@ -81,6 +82,6 @@ final result: passed
 - Open the in-progress course and confirm its status and supplied modules appear without a fake certificate.
 - Navigate with Left/Right, cycle focus with Tab, close with Escape, and confirm focus returns to the opening control.
 
-The implementation was visually inspected against the accepted references and the latest desktop and mobile renders. No material mismatch remains.
+The implementation was visually inspected again on 2026-10-19 against reference 17 and the latest desktop and mobile renders. No material mismatch remains.
 
 final result: passed
