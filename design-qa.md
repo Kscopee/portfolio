@@ -51,6 +51,56 @@ final result: passed
 
 ---
 
+# Phase 6 About Design QA
+
+## Evidence
+
+- Source visual truth: `docs/reference/inspiration/15-background-cards-a.jpg`, `16-background-cards-b.jpg`, and `17-background-card-opened.jpg`; the legacy skill treatment is grounded by `docs/reference/current/06-techstack-technical.jpg` and `07-techstack-softskills.jpg`.
+- Latest rendered screenshots: `.qa/phase-6/about-desktop.png`, `about-dialog-desktop.png`, `about-skills-desktop.png`, `about-mobile.png`, `about-dialog-mobile.png`, and `about-skills-mobile.png`.
+- Browser method: the local Astro development server was opened and exercised in headless Microsoft Edge through the Chrome DevTools Protocol because the in-app browser was not available.
+- Desktop viewport: 1600 x 900 CSS pixels at device scale factor 1. A second implementation capture at `.qa/phase-6/about-source-native-viewport.png` uses 1600 x 763 to match the 1600 x 763 source card references without density normalization.
+- Mobile viewport: 375 x 812 CSS pixels at device scale factor 1.
+- States compared: initial card deck, open My Story detail, Skills Technical state, Skills Soft state, and all three equivalent mobile states.
+
+## Fidelity Ledger
+
+- Fonts and typography: short display labels, numbers, and card names use the approved display role with readable spacing; program, story, list, control, and skill text use Tahoma. Headings retain the source's heavy italic character without copying its font.
+- Spacing and layout rhythm: the initial view preserves the source's left title wedge, oversized focused card, dimmer side cards, outer arrows/dots, blurred moving backdrop, and edge-bleeding diagonals. The focused card no longer collides with the title wedge, and controls stay visually grouped below it.
+- Colors and visual tokens: black, `#d7f205`, white, grey surfaces, stripe texture, and hard cut corners all use the locked portfolio tokens. Lime surfaces use black text; small lime text remains on black/dark surfaces at strong contrast.
+- Image quality and asset fidelity: the page uses Ashton's second cut-out portrait, his Csoles screenshot, his LitterSense wireframe, the existing background-video poster, and the original legacy skill icons. Raster content is emitted through Astro's responsive WebP pipeline; all 19 skill icons completed with non-zero intrinsic width.
+- Copy and content: the story, education, goals, interests, program, tagline, and skills are rendered from the validated About collection. The above-the-fold diff found no unsupported personal claim, ZZZ copy, fake statistic, invented achievement, or new rubric section.
+- Detail state: compared with reference 17, the implementation keeps the required blurred page, one large high-contrast surface, prominent real media, clear title/body, close control, and next/previous navigation. The longer real story scrolls inside the details area without pushing controls off screen.
+- Responsive behavior: at 375px, the section title and intro stack, the card row becomes a 293px-wide swipe carousel, the mobile menu appears, the section rail hides, the dialog becomes one scrollable column, and the skills grid becomes two columns. Wide card content stays inside its intentional horizontal scroll viewport; decorative film-strip overflow remains clipped by the shared shell.
+- Accessibility and motion: native buttons cover card activation; ArrowLeft/ArrowRight and Home/End move selection; the native dialog traps focus; Escape closes it; focus returns to the opener; tabs use linked tab/tabpanel semantics; reduced motion pauses the background video and removes meaningful transition duration.
+
+## Comparison History
+
+- Initial P2: calling `scrollIntoView()` to center the first card could also move the page vertically at 375px, hiding the About title. Replaced it with horizontal scrolling on the carousel viewport only; the final mobile capture begins at scroll position zero with the full About 01 title visible.
+- Initial P2: the focused card sat too far left under the title wedge and its black media wedge obscured the portrait's focal point. Added deliberate carousel side padding, moved the title wedge behind the deck, reduced the black wedge, and adjusted the portrait focal position. The final render keeps the title, face, and card label readable.
+- Initial P2: the first desktop composition was too tall for the intended first-view rhythm. Reduced the side/focused card sizes and track height while preserving the active-card scale difference; the card and controls now fit the 1600 x 900 comparison view.
+- Post-fix evidence: the source card view and final 1600 x 900 implementation, plus the source open state and final dialog, were opened together with `view_image`. No actionable P0, P1, or P2 mismatch remains.
+
+## Intentional Adaptations
+
+- The source has three fictional-lore cards; the portfolio has four required real-content cards in the approved My Story / Education / Goals / Interests order.
+- Copyrighted ZZZ art, logos, icons, fonts, and copy are not reproduced. Ashton’s own portrait, screenshots, wireframe, video treatment, and legacy icons fill those roles.
+- The opened state uses a side-by-side desktop layout instead of the source's image-over-copy layout so Ashton's six-paragraph story remains readable; it stacks to the source-like vertical order on mobile.
+- The Skills section follows Ashton's existing grid-and-toggle concept, restyled with the revamp's cut corners, numbered tiles, watermark, and section title.
+
+## Core Workflow Verified
+
+- Use Previous/Next, dots, Left/Right, and Home/End to change the focused About card.
+- Open a card; use Previous/Next or Left/Right inside the dialog; cycle focus; close with Escape; confirm focus returns to the opener.
+- Scroll to Skills; switch Technical / Soft with click and keyboard-compatible tabs; confirm the matching panel is the only visible panel.
+- Scroll between Background 01 and Skills 02 and confirm the fixed rail updates on desktop and stays hidden at 375px.
+- Enable reduced motion and confirm the background video pauses and card movement is removed.
+
+Focused region comparisons were required and completed for card geometry, portrait crop, the open story panel, mobile dialog controls, the skills toggle, and icon tiles. The Phase 6 implementation was faithfully verified against the accepted reference direction, with no material mismatch remaining.
+
+final result: passed
+
+---
+
 # Phase 5 Credentials Design QA
 
 ## Evidence

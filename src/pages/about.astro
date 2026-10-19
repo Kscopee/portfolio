@@ -1,0 +1,245 @@
+---
+import { getCollection } from 'astro:content';
+import AboutCardDeck from '../components/AboutCardDeck.astro';
+import DiagonalBands from '../components/DiagonalBands.astro';
+import FilmStripDivider from '../components/FilmStripDivider.astro';
+import SectionRail from '../components/SectionRail.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import SkillsPanel from '../components/SkillsPanel.astro';
+import WatermarkWord from '../components/WatermarkWord.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import aboutPortrait from '../assets/content/about/ashton-about-portrait.png';
+import csolesDashboard from '../assets/content/projects/csoles/csoles-owner-dashboard.jpeg';
+import littersenseDashboard from '../assets/content/projects/littersense/littersense-capstone-dashboard-alert-wireframe.png';
+
+const aboutEntry = (await getCollection('about'))[0];
+if (!aboutEntry) throw new Error('The About content entry is missing.');
+const about = aboutEntry.data;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+const cards = [
+  {
+    title: 'My Story',
+    label: 'Where it started / how it grew',
+    content: about.story,
+    image: aboutPortrait,
+    alt: 'Ashton James D. Caspe wearing glasses and a black shirt.',
+    fit: 'contain' as const,
+    position: '68% bottom',
+  },
+  {
+    title: 'Education',
+    label: 'Formal learning',
+    content: about.education,
+    list: true,
+    image: csolesDashboard,
+    alt: 'Csoles Connect owner dashboard from a third-year course project.',
+    caption: 'Csoles Connect was built during Ashton’s third year.',
+    position: 'center 18%',
+  },
+  {
+    title: 'Goals',
+    label: 'What comes next',
+    content: about.goals,
+    list: true,
+    image: littersenseDashboard,
+    alt: 'LitterSense dashboard wireframe showing a cat health overview and unusual-behavior alert.',
+    caption: 'A LitterSense dashboard wireframe designed in Figma.',
+    position: 'center',
+  },
+  {
+    title: 'Interests',
+    label: 'Outside of IT',
+    content: about.interests,
+    list: true,
+    image: `${base}/assets/video/portfolio-poster.svg`,
+    alt: 'Black, grey, and lime poster graphic for the portfolio background video.',
+    caption: 'The background video on this site is Ashton’s own work.',
+    position: 'center',
+  },
+];
+
+const railSections = [
+  { id: 'background', number: '01', label: 'Background' },
+  { id: 'skills', number: '02', label: 'Skills' },
+];
+---
+
+<BaseLayout
+  title="About | Ashton Caspe"
+  description="The story, education, goals, interests, and skills of Ashton James D. Caspe."
+  backgroundVideo={true}
+  bodyClass="about-page"
+>
+  <section class="about-background" id="background" aria-labelledby="about-heading">
+    <DiagonalBands variant="dark" />
+    <div class="about-background__title">
+      <SectionTitle label="About" number="01" tone="lime" />
+    </div>
+    <div class="about-background__intro">
+      <p>{about.program}</p>
+      <h1 id="about-heading">{about.tagline}</h1>
+    </div>
+    <div class="about-background__deck">
+      <AboutCardDeck cards={cards} />
+    </div>
+  </section>
+
+  <FilmStripDivider />
+
+  <section class="about-skills" id="skills" aria-labelledby="skills-heading">
+    <WatermarkWord word="Skills" />
+    <div class="about-skills__title">
+      <SectionTitle label="Skills" number="02" tone="black" />
+    </div>
+    <h2 class="visually-hidden" id="skills-heading">Technical and soft skills</h2>
+    <div class="about-skills__content">
+      <SkillsPanel technical={about.skills.technical} soft={about.skills.soft} />
+    </div>
+  </section>
+
+  <SectionRail sections={railSections} />
+</BaseLayout>
+
+<style>
+  :global(.about-page) {
+    background: transparent;
+  }
+
+  .about-background {
+    position: relative;
+    min-height: calc(100svh - 4.6rem);
+    padding: clamp(1rem, 2vw, 2rem) var(--page-safe-end) clamp(3rem, 5vw, 5rem) var(--page-gutter);
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .about-background::before {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: rgb(16 16 16 / 0.46);
+    backdrop-filter: blur(8px) saturate(0.74);
+    content: '';
+  }
+
+  .about-background :global(.diagonal-bands) {
+    z-index: -1;
+    opacity: 0.86;
+  }
+
+  .about-background__title {
+    position: absolute;
+    top: clamp(1.2rem, 3vw, 3rem);
+    left: var(--page-gutter);
+    z-index: 1;
+  }
+
+  .about-background__intro {
+    position: absolute;
+    top: clamp(1.2rem, 3vw, 3rem);
+    right: var(--page-safe-end);
+    z-index: 2;
+    width: min(42vw, 38rem);
+    padding: clamp(1rem, 2vw, 1.7rem);
+    border-left: 0.55rem solid var(--color-lime);
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .about-background__intro p {
+    margin-bottom: 0.7rem;
+    color: var(--color-lime);
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .about-background__intro h1 {
+    margin: 0;
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2.45rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+  }
+
+  .about-background__deck {
+    min-width: 0;
+    margin-top: clamp(5.5rem, 8vw, 8rem);
+  }
+
+  .about-skills {
+    position: relative;
+    min-height: 52rem;
+    padding: clamp(4.5rem, 8vw, 8rem) var(--page-safe-end) clamp(6rem, 10vw, 10rem) var(--page-gutter);
+    overflow: hidden;
+    background: var(--color-paper);
+  }
+
+  .about-skills::after {
+    position: absolute;
+    right: -18vw;
+    bottom: -7rem;
+    width: 70vw;
+    height: 13rem;
+    background: var(--color-lime);
+    content: '';
+    transform: skewX(calc(var(--shape-angle) * -1));
+  }
+
+  .about-skills :global(.watermark) {
+    top: 3rem;
+    right: -0.05em;
+  }
+
+  .about-skills__title {
+    position: relative;
+    z-index: 2;
+    margin-bottom: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .about-skills__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 48rem) {
+    .about-background {
+      display: grid;
+      min-height: auto;
+      padding-top: var(--space-7);
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: var(--space-5);
+    }
+
+    .about-background__title,
+    .about-background__intro {
+      position: relative;
+      inset: auto;
+    }
+
+    .about-background__intro {
+      width: 100%;
+      justify-self: stretch;
+    }
+
+    .about-background__deck {
+      grid-column: 1;
+      margin-top: 0;
+      margin-inline: calc(var(--page-gutter) * -1);
+    }
+
+    .about-skills {
+      min-height: auto;
+      padding-top: var(--space-8);
+    }
+
+    .about-skills::after {
+      height: 8rem;
+    }
+  }
+</style>

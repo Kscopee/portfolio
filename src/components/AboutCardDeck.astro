@@ -1,0 +1,835 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface AboutCard {
+  title: string;
+  label: string;
+  content: string[];
+  list?: boolean;
+  image: ImageMetadata | string;
+  alt: string;
+  caption?: string;
+  fit?: 'cover' | 'contain';
+  position?: string;
+}
+
+interface Props {
+  cards: AboutCard[];
+}
+
+const { cards } = Astro.props;
+---
+
+<div class="about-deck" data-about-deck>
+  <p class="visually-hidden" id="about-deck-help">
+    Use the left and right arrow keys to move between cards. Press Enter to open the selected card.
+  </p>
+
+  <div class="about-deck__viewport" data-about-viewport aria-describedby="about-deck-help">
+    <div class="about-deck__track">
+      {cards.map((card, index) => (
+        <button
+          class="about-card"
+          type="button"
+          aria-haspopup="dialog"
+          aria-controls="about-detail-dialog"
+          aria-label={`Open ${card.title}`}
+          aria-current={index === 0 ? 'true' : undefined}
+          data-about-card
+          data-active={index === 0 ? 'true' : 'false'}
+          data-index={index}
+        >
+          <span class="about-card__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          <span class="about-card__media" style={`--media-position: ${card.position ?? 'center'}`}>
+            {typeof card.image === 'string' ? (
+              <img src={card.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} />
+            ) : (
+              <Image
+                src={card.image}
+                alt=""
+                widths={[360, 520, 700]}
+                sizes="(max-width: 48rem) 78vw, 25rem"
+                loading={index === 0 ? 'eager' : 'lazy'}
+              />
+            )}
+          </span>
+          <span class="about-card__shade" aria-hidden="true"></span>
+          <span class="about-card__copy">
+            <span class="about-card__label">{card.label}</span>
+            <strong>{card.title}</strong>
+            <span class="about-card__action">Open card <span aria-hidden="true">↗</span></span>
+          </span>
+        </button>
+      ))}
+    </div>
+  </div>
+
+  <div class="about-deck__controls" aria-label="About card controls">
+    <button type="button" aria-label="Previous about card" data-about-previous>
+      <span aria-hidden="true">←</span>
+    </button>
+    <div class="about-deck__dots" aria-label="Choose an about card">
+      {cards.map((card, index) => (
+        <button
+          type="button"
+          aria-label={`Show ${card.title}`}
+          aria-current={index === 0 ? 'true' : undefined}
+          data-about-dot
+          data-index={index}
+        ></button>
+      ))}
+    </div>
+    <button type="button" aria-label="Next about card" data-about-next>
+      <span aria-hidden="true">→</span>
+    </button>
+  </div>
+
+  <dialog class="about-dialog" id="about-detail-dialog" aria-label="About Ashton details" data-about-dialog>
+    <div class="about-dialog__surface">
+      <button class="about-dialog__close" type="button" aria-label="Close about details" data-about-close>
+        <span aria-hidden="true">×</span>
+      </button>
+
+      {cards.map((card, index) => (
+        <article class="about-detail" data-about-detail data-index={index} hidden={index !== 0}>
+          <div class:list={["about-detail__media", card.fit === 'contain' && 'about-detail__media--contain']} style={`--media-position: ${card.position ?? 'center'}`}>
+            {typeof card.image === 'string' ? (
+              <img src={card.image} alt={card.alt} loading="lazy" />
+            ) : (
+              <Image
+                src={card.image}
+                alt={card.alt}
+                widths={[640, 960, 1280]}
+                sizes="(max-width: 48rem) 88vw, 48vw"
+                loading="lazy"
+              />
+            )}
+            <span class="about-detail__index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+          </div>
+          <div class="about-detail__copy">
+            <p class="about-detail__label">{card.label}</p>
+            <h2>{card.title}</h2>
+            {card.list ? (
+              <ul>{card.content.map((item) => <li>{item}</li>)}</ul>
+            ) : (
+              card.content.map((paragraph) => <p>{paragraph}</p>)
+            )}
+            {card.caption && <p class="about-detail__caption">{card.caption}</p>}
+          </div>
+        </article>
+      ))}
+
+      <div class="about-dialog__nav">
+        <button type="button" data-dialog-previous><span aria-hidden="true">←</span> Previous</button>
+        <span data-dialog-count aria-live="polite">01 / {String(cards.length).padStart(2, '0')}</span>
+        <button type="button" data-dialog-next>Next <span aria-hidden="true">→</span></button>
+      </div>
+    </div>
+  </dialog>
+</div>
+
+<script>
+  let cleanUpAboutDecks = () => {};
+
+  const setupAboutDecks = () => {
+    cleanUpAboutDecks();
+    const cleanups: Array<() => void> = [];
+
+    document.querySelectorAll<HTMLElement>('[data-about-deck]').forEach((deck) => {
+      const viewport = deck.querySelector<HTMLElement>('[data-about-viewport]');
+      const cards = [...deck.querySelectorAll<HTMLButtonElement>('[data-about-card]')];
+      const dots = [...deck.querySelectorAll<HTMLButtonElement>('[data-about-dot]')];
+      const previous = deck.querySelector<HTMLButtonElement>('[data-about-previous]');
+      const next = deck.querySelector<HTMLButtonElement>('[data-about-next]');
+      const dialog = deck.querySelector<HTMLDialogElement>('[data-about-dialog]');
+      const dialogItems = [...deck.querySelectorAll<HTMLElement>('[data-about-detail]')];
+      const dialogCount = deck.querySelector<HTMLElement>('[data-dialog-count]');
+      const dialogPrevious = deck.querySelector<HTMLButtonElement>('[data-dialog-previous]');
+      const dialogNext = deck.querySelector<HTMLButtonElement>('[data-dialog-next]');
+      const closeButton = deck.querySelector<HTMLButtonElement>('[data-about-close]');
+      const reducedMotion = matchMedia('(prefers-reduced-motion: reduce)');
+      if (!viewport || !dialog || cards.length === 0) return;
+
+      let activeIndex = 0;
+      let dialogIndex = 0;
+      let scrollFrame = 0;
+      let lastOpener: HTMLButtonElement | null = null;
+
+      const normalizedIndex = (index: number) => (index + cards.length) % cards.length;
+
+      const selectCard = (index: number, options: { focus?: boolean; scroll?: boolean } = {}) => {
+        activeIndex = normalizedIndex(index);
+        cards.forEach((card, cardIndex) => {
+          const active = cardIndex === activeIndex;
+          card.dataset.active = String(active);
+          if (active) card.setAttribute('aria-current', 'true');
+          else card.removeAttribute('aria-current');
+        });
+        dots.forEach((dot, dotIndex) => {
+          if (dotIndex === activeIndex) dot.setAttribute('aria-current', 'true');
+          else dot.removeAttribute('aria-current');
+        });
+        if (options.scroll !== false) {
+          const activeCard = cards[activeIndex];
+          const left = activeCard
+            ? activeCard.offsetLeft - viewport.clientWidth / 2 + activeCard.offsetWidth / 2
+            : 0;
+          viewport.scrollTo({
+            left,
+            behavior: reducedMotion.matches ? 'auto' : 'smooth',
+          });
+        }
+        if (options.focus) cards[activeIndex]?.focus({ preventScroll: true });
+      };
+
+      const showDialogItem = (index: number) => {
+        dialogIndex = normalizedIndex(index);
+        dialogItems.forEach((item, itemIndex) => { item.hidden = itemIndex !== dialogIndex; });
+        if (dialogCount) dialogCount.textContent = `${String(dialogIndex + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+      };
+
+      const openDialog = (index: number) => {
+        selectCard(index, { scroll: false });
+        showDialogItem(index);
+        lastOpener = cards[index] ?? null;
+        dialog.showModal();
+        closeButton?.focus();
+      };
+
+      const goPrevious = () => selectCard(activeIndex - 1);
+      const goNext = () => selectCard(activeIndex + 1);
+      previous?.addEventListener('click', goPrevious);
+      next?.addEventListener('click', goNext);
+
+      const cardCleanups = cards.flatMap((card, index) => {
+        const clickHandler = () => openDialog(index);
+        const focusHandler = () => selectCard(index, { scroll: false });
+        card.addEventListener('click', clickHandler);
+        card.addEventListener('focus', focusHandler);
+        return [
+          () => card.removeEventListener('click', clickHandler),
+          () => card.removeEventListener('focus', focusHandler),
+        ];
+      });
+
+      const dotCleanups = dots.map((dot, index) => {
+        const handler = () => selectCard(index);
+        dot.addEventListener('click', handler);
+        return () => dot.removeEventListener('click', handler);
+      });
+
+      const deckKeyHandler = (event: KeyboardEvent) => {
+        if (!(event.target as HTMLElement).closest('[data-about-card]')) return;
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        if (event.key === 'ArrowLeft') selectCard(activeIndex - 1, { focus: true });
+        if (event.key === 'ArrowRight') selectCard(activeIndex + 1, { focus: true });
+        if (event.key === 'Home') selectCard(0, { focus: true });
+        if (event.key === 'End') selectCard(cards.length - 1, { focus: true });
+      };
+      deck.addEventListener('keydown', deckKeyHandler);
+
+      const syncCardFromScroll = () => {
+        scrollFrame = 0;
+        if (!matchMedia('(max-width: 48rem)').matches) return;
+        const center = viewport.getBoundingClientRect().left + viewport.clientWidth / 2;
+        let closestIndex = activeIndex;
+        let closestDistance = Number.POSITIVE_INFINITY;
+        cards.forEach((card, index) => {
+          const rect = card.getBoundingClientRect();
+          const distance = Math.abs(rect.left + rect.width / 2 - center);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+        if (closestIndex !== activeIndex) selectCard(closestIndex, { scroll: false });
+      };
+      const requestScrollSync = () => {
+        if (scrollFrame) return;
+        scrollFrame = requestAnimationFrame(syncCardFromScroll);
+      };
+      viewport.addEventListener('scroll', requestScrollSync, { passive: true });
+
+      const closeDialog = () => dialog.close();
+      const previousDialogItem = () => showDialogItem(dialogIndex - 1);
+      const nextDialogItem = () => showDialogItem(dialogIndex + 1);
+      closeButton?.addEventListener('click', closeDialog);
+      dialogPrevious?.addEventListener('click', previousDialogItem);
+      dialogNext?.addEventListener('click', nextDialogItem);
+
+      const dialogKeyHandler = (event: KeyboardEvent) => {
+        if (event.key === 'ArrowLeft') {
+          event.preventDefault();
+          previousDialogItem();
+        }
+        if (event.key === 'ArrowRight') {
+          event.preventDefault();
+          nextDialogItem();
+        }
+      };
+      const backdropHandler = (event: MouseEvent) => {
+        if (event.target === dialog) dialog.close();
+      };
+      const restoreFocus = () => lastOpener?.focus({ preventScroll: true });
+      dialog.addEventListener('keydown', dialogKeyHandler);
+      dialog.addEventListener('click', backdropHandler);
+      dialog.addEventListener('close', restoreFocus);
+
+      requestAnimationFrame(() => selectCard(0));
+
+      cleanups.push(() => {
+        if (scrollFrame) cancelAnimationFrame(scrollFrame);
+        previous?.removeEventListener('click', goPrevious);
+        next?.removeEventListener('click', goNext);
+        cardCleanups.forEach((cleanup) => cleanup());
+        dotCleanups.forEach((cleanup) => cleanup());
+        deck.removeEventListener('keydown', deckKeyHandler);
+        viewport.removeEventListener('scroll', requestScrollSync);
+        closeButton?.removeEventListener('click', closeDialog);
+        dialogPrevious?.removeEventListener('click', previousDialogItem);
+        dialogNext?.removeEventListener('click', nextDialogItem);
+        dialog.removeEventListener('keydown', dialogKeyHandler);
+        dialog.removeEventListener('click', backdropHandler);
+        dialog.removeEventListener('close', restoreFocus);
+        if (dialog.open) dialog.close();
+      });
+    });
+
+    cleanUpAboutDecks = () => cleanups.forEach((cleanup) => cleanup());
+  };
+
+  document.addEventListener('astro:page-load', setupAboutDecks);
+  setupAboutDecks();
+</script>
+
+<style>
+  .about-deck {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+  }
+
+  .about-deck__viewport {
+    width: 100%;
+    padding: 2.5rem 1rem 1.25rem;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+    scroll-padding-inline: 35vw;
+    scroll-snap-type: inline mandatory;
+  }
+
+  .about-deck__viewport::-webkit-scrollbar {
+    display: none;
+  }
+
+  .about-deck__track {
+    display: flex;
+    width: max-content;
+    min-width: 100%;
+    min-height: 30rem;
+    padding-inline: max(1rem, calc(42vw - 11rem));
+    align-items: center;
+    justify-content: flex-start;
+    gap: clamp(0.8rem, 2vw, 1.7rem);
+  }
+
+  .about-card {
+    position: relative;
+    display: block;
+    width: clamp(12.5rem, 15vw, 15.5rem);
+    height: clamp(20rem, 27vw, 23rem);
+    padding: 0;
+    flex: 0 0 auto;
+    overflow: hidden;
+    border: 0.2rem solid rgb(255 255 255 / 0.78);
+    background: var(--color-black);
+    color: var(--color-white);
+    text-align: left;
+    cursor: pointer;
+    opacity: 0.62;
+    filter: saturate(0.62) brightness(0.78);
+    clip-path: polygon(0 0, calc(100% - 2.4rem) 0, 100% 2.4rem, 100% 100%, 2.4rem 100%, 0 calc(100% - 2.4rem));
+    scroll-snap-align: center;
+    transition:
+      width var(--motion-base) var(--ease-snap),
+      height var(--motion-base) var(--ease-snap),
+      opacity var(--motion-fast) ease,
+      filter var(--motion-fast) ease,
+      transform var(--motion-base) var(--ease-snap);
+  }
+
+  .about-card[data-active='true'] {
+    width: clamp(18rem, 22vw, 22rem);
+    height: clamp(27rem, 34vw, 30rem);
+    z-index: 2;
+    border-color: var(--color-lime);
+    opacity: 1;
+    filter: none;
+    transform: translateY(-0.5rem);
+  }
+
+  .about-card:hover,
+  .about-card:focus-visible {
+    opacity: 1;
+    filter: none;
+  }
+
+  .about-card__media,
+  .about-card__media :global(img) {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .about-card__media :global(img) {
+    object-fit: cover;
+    object-position: var(--media-position);
+    transform: scale(1.02);
+    transition: transform var(--motion-slow) ease;
+  }
+
+  .about-card:hover .about-card__media :global(img),
+  .about-card:focus-visible .about-card__media :global(img) {
+    transform: scale(1.07);
+  }
+
+  .about-card__shade {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(180deg, rgb(0 0 0 / 0.96) 0 24%, transparent 58%),
+      linear-gradient(0deg, rgb(0 0 0 / 0.94) 0 13%, transparent 45%);
+  }
+
+  .about-card__shade::after {
+    position: absolute;
+    inset: 0 58% 45% -95%;
+    background: var(--color-black);
+    content: '';
+    transform: skewX(calc(var(--shape-angle) * -1));
+  }
+
+  .about-card__number,
+  .about-card__copy {
+    position: absolute;
+    z-index: 2;
+  }
+
+  .about-card__number {
+    top: 1rem;
+    right: 1.1rem;
+    color: var(--color-lime);
+    font-family: var(--font-display);
+    font-size: 1.3rem;
+    font-style: italic;
+  }
+
+  .about-card__copy {
+    inset: 1.5rem 1.35rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.35rem;
+  }
+
+  .about-card__label {
+    color: var(--color-lime);
+    font-size: 0.67rem;
+    font-weight: 900;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+  }
+
+  .about-card__copy strong {
+    max-width: 100%;
+    font-family: var(--font-display);
+    font-size: clamp(1.45rem, 1.8vw, 2.2rem);
+    font-style: italic;
+    letter-spacing: var(--tracking-display-readable);
+    line-height: var(--leading-display-readable);
+    text-transform: uppercase;
+  }
+
+  .about-card__action {
+    position: static;
+    display: flex;
+    width: max-content;
+    margin-top: auto;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--color-white);
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .about-card:not([data-active='true']) .about-card__action {
+    display: none;
+  }
+
+  .about-card[data-active='true'] .about-card__copy strong {
+    font-size: clamp(2.15rem, 2.7vw, 3rem);
+  }
+
+  .about-deck__controls {
+    display: flex;
+    width: fit-content;
+    margin: 0.6rem auto 0;
+    padding: 0.45rem;
+    align-items: center;
+    gap: 1rem;
+    border: 2px solid var(--color-white);
+    border-radius: var(--radius-pill);
+    background: var(--color-black);
+    box-shadow: 0.25rem 0.25rem 0 var(--color-lime);
+  }
+
+  .about-deck__controls > button,
+  .about-deck__dots button {
+    border: 0;
+    background: transparent;
+    color: var(--color-white);
+    cursor: pointer;
+  }
+
+  .about-deck__controls > button {
+    display: grid;
+    width: 2.5rem;
+    height: 2rem;
+    place-items: center;
+    border-radius: var(--radius-pill);
+    font-size: 1.35rem;
+    font-weight: 900;
+  }
+
+  .about-deck__controls > button:hover {
+    background: var(--color-lime);
+    color: var(--color-black);
+  }
+
+  .about-deck__dots {
+    display: flex;
+    align-items: center;
+    gap: 0.55rem;
+  }
+
+  .about-deck__dots button {
+    width: 0.62rem;
+    height: 0.62rem;
+    padding: 0;
+    border: 1px solid var(--color-white);
+    border-radius: 50%;
+    background: var(--color-surface-raised);
+    transition: width var(--motion-fast) var(--ease-snap), background var(--motion-fast) ease;
+  }
+
+  .about-deck__dots button[aria-current='true'] {
+    width: 2rem;
+    border-radius: var(--radius-pill);
+    background: var(--color-lime);
+  }
+
+  .about-dialog {
+    width: min(90rem, calc(100vw - 5rem));
+    max-width: none;
+    max-height: calc(100svh - 4rem);
+    padding: 0;
+    overflow: visible;
+    border: 0;
+    background: transparent;
+    color: var(--color-white);
+  }
+
+  .about-dialog::backdrop {
+    background: rgb(9 9 9 / 0.62);
+    backdrop-filter: blur(15px) saturate(0.65);
+  }
+
+  .about-dialog__surface {
+    position: relative;
+    display: grid;
+    max-height: calc(100svh - 4rem);
+    overflow: hidden;
+    border: 0.22rem solid var(--color-lime);
+    background: var(--color-surface);
+    box-shadow: 1rem 1rem 0 rgb(0 0 0 / 0.75);
+    clip-path: polygon(0 0, calc(100% - 4rem) 0, 100% 4rem, 100% 100%, 4rem 100%, 0 calc(100% - 4rem));
+  }
+
+  .about-dialog__close {
+    position: absolute;
+    top: 0.9rem;
+    right: 1.2rem;
+    z-index: 3;
+    display: grid;
+    width: 3.25rem;
+    height: 2.65rem;
+    padding: 0;
+    place-items: center;
+    border: 2px solid var(--color-black);
+    border-radius: var(--radius-pill);
+    background: var(--color-lime);
+    color: var(--color-black);
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .about-detail {
+    display: grid;
+    min-height: min(42rem, calc(100svh - 8rem));
+    grid-template-columns: minmax(0, 1.08fr) minmax(23rem, 0.92fr);
+  }
+
+  .about-detail[hidden] {
+    display: none;
+  }
+
+  .about-detail__media {
+    position: relative;
+    min-height: 30rem;
+    overflow: hidden;
+    background: var(--color-black);
+    clip-path: polygon(0 0, 100% 0, calc(100% - 5rem) 100%, 0 100%);
+  }
+
+  .about-detail__media :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: var(--media-position);
+  }
+
+  .about-detail__media--contain :global(img) {
+    object-fit: contain;
+  }
+
+  .about-detail__index {
+    position: absolute;
+    right: 4.5rem;
+    bottom: 0.75rem;
+    color: var(--color-lime);
+    font-family: var(--font-display);
+    font-size: clamp(4rem, 8vw, 8rem);
+    font-style: italic;
+    line-height: 0.8;
+    opacity: 0.9;
+  }
+
+  .about-detail__copy {
+    max-height: calc(100svh - 8rem);
+    padding: clamp(4.5rem, 6vw, 6rem) clamp(2rem, 4vw, 4.5rem) 6rem clamp(1rem, 3vw, 2.5rem);
+    overflow-y: auto;
+    scrollbar-color: var(--color-lime) var(--color-surface);
+    scrollbar-width: thin;
+  }
+
+  .about-detail__copy::-webkit-scrollbar {
+    width: 0.55rem;
+  }
+
+  .about-detail__copy::-webkit-scrollbar-track {
+    background: var(--color-surface);
+  }
+
+  .about-detail__copy::-webkit-scrollbar-thumb {
+    background: var(--color-lime);
+  }
+
+  .about-detail__label {
+    margin-bottom: 0.5rem;
+    color: var(--color-lime);
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .about-detail h2 {
+    margin-bottom: 1.5rem;
+    color: var(--color-white);
+    font-size: clamp(2.5rem, 4vw, 5rem);
+    font-style: italic;
+    text-transform: uppercase;
+  }
+
+  .about-detail p,
+  .about-detail li {
+    color: var(--color-paper);
+    font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1.03rem);
+  }
+
+  .about-detail p {
+    margin-bottom: 1rem;
+  }
+
+  .about-detail ul {
+    display: grid;
+    margin: 0;
+    padding: 0;
+    gap: 0.8rem;
+    list-style: none;
+  }
+
+  .about-detail li {
+    padding: 0.8rem 1rem;
+    border-left: 0.32rem solid var(--color-lime);
+    background: var(--color-surface-raised);
+  }
+
+  .about-detail__caption {
+    padding-top: 0.8rem;
+    border-top: 1px solid rgb(255 255 255 / 0.25);
+    color: var(--color-lime) !important;
+    font-size: 0.76rem !important;
+    font-weight: 800;
+  }
+
+  .about-dialog__nav {
+    position: absolute;
+    right: 2rem;
+    bottom: 1rem;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+  }
+
+  .about-dialog__nav button,
+  .about-dialog__nav > span {
+    min-height: 2.5rem;
+    padding: 0.55rem 0.9rem;
+    border: 2px solid var(--color-white);
+    border-radius: var(--radius-pill);
+    background: var(--color-black);
+    color: var(--color-white);
+    font-size: 0.72rem;
+    font-weight: 900;
+  }
+
+  .about-dialog__nav button {
+    cursor: pointer;
+  }
+
+  .about-dialog__nav button:hover {
+    border-color: var(--color-lime);
+    color: var(--color-lime);
+  }
+
+  @media (max-width: 72rem) {
+    .about-deck__track {
+      justify-content: flex-start;
+    }
+
+    .about-card,
+    .about-card[data-active='true'] {
+      width: clamp(17rem, 28vw, 21rem);
+    }
+
+    .about-detail {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 48rem) {
+    .about-deck__viewport {
+      padding-inline: 0;
+      scroll-padding-inline: 11vw;
+    }
+
+    .about-deck__track {
+      min-height: 30rem;
+      padding-inline: 11vw;
+      gap: 1rem;
+    }
+
+    .about-card,
+    .about-card[data-active='true'] {
+      width: 78vw;
+      height: 28rem;
+      opacity: 1;
+      filter: none;
+      transform: none;
+    }
+
+    .about-card[data-active='true'] {
+      border-color: var(--color-lime);
+      box-shadow: inset 0 -0.35rem 0 var(--color-lime);
+    }
+
+    .about-deck__controls {
+      gap: 0.6rem;
+    }
+
+    .about-dialog {
+      width: calc(100vw - 1rem);
+      max-height: calc(100svh - 1rem);
+    }
+
+    .about-dialog__surface {
+      max-height: calc(100svh - 1rem);
+      clip-path: polygon(0 0, calc(100% - 2.2rem) 0, 100% 2.2rem, 100% 100%, 2.2rem 100%, 0 calc(100% - 2.2rem));
+    }
+
+    .about-detail {
+      min-height: 0;
+      max-height: calc(100svh - 1rem);
+      overflow-y: auto;
+      grid-template-columns: 1fr;
+    }
+
+    .about-detail__media {
+      min-height: 15.5rem;
+      height: 32svh;
+      clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2.5rem), calc(100% - 2.5rem) 100%, 0 100%);
+    }
+
+    .about-detail__index {
+      right: 1.2rem;
+      bottom: 0.8rem;
+      font-size: 4.8rem;
+    }
+
+    .about-detail__copy {
+      max-height: none;
+      padding: 2rem 1.2rem 5.5rem;
+      overflow: visible;
+    }
+
+    .about-detail h2 {
+      font-size: clamp(2.1rem, 11vw, 3.5rem);
+    }
+
+    .about-dialog__close {
+      top: 0.6rem;
+      right: 0.7rem;
+    }
+
+    .about-dialog__nav {
+      right: 0.8rem;
+      bottom: 0.7rem;
+      left: 0.8rem;
+      justify-content: space-between;
+      padding: 0.35rem;
+      border-radius: var(--radius-pill);
+      background: var(--color-surface);
+    }
+
+    .about-dialog__nav button {
+      padding-inline: 0.75rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .about-card,
+    .about-card__media :global(img) {
+      transition: none;
+    }
+  }
+</style>
