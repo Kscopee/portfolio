@@ -66,6 +66,8 @@ final result: passed
 - Asset treatment: certificate images use `object-fit: contain`, never crop or spill from their frames, and are emitted as responsive WebP variants. Local badges are displayed without external embeds.
 - Viewer: the revised modal follows reference 17's image-led composition: the page visibly blurs behind one dark surface, a large CutFrame gives the certificate priority, and the title, issuer/provider, date, and actions remain on that same surface. It intentionally has no white side panel, full-width lime navigation bar, or offset lime outline.
 - Cards: badges and numbers sit below the media so they never cover certificate details; numbering restarts at `01` in each tab. Certificate thumbnails have no haze overlay, completed items use an expand icon, and the in-progress card has no action icon.
+- Viewer follow-up: the details column measures 496px at 1600px, its dark-track/lime-thumb scrollbar matches the page, and both arrows sit inside the certificate region. Certificate images compute to `object-fit: contain` with no transform, so the CutFrame clips the corners without tilting, skewing, cropping, or stretching the document.
+- Badge and module follow-up: artificial circular badge containers are removed. Pearson, PowerPoint, and Cisco badges preserve their original silhouettes inside consistent image boxes on cards and in the viewer. Module dates appear once in the heading; list items contain only module names.
 - Responsive behavior: the mobile hero copy, tab shell, cards, viewer close control, and modal bounds stay inside the readable viewport. The viewer stacks into one scrollable column with small previous/next arrows at the certificate sides.
 - Accessibility and interaction: tab buttons expose `aria-controls` and roving focus; the matching panels expose `role="tabpanel"`. Native buttons open the viewer, Left/Right cycles items, Tab remains trapped, Escape closes, scroll locking clears, and focus returns to the opener.
 
@@ -82,6 +84,6 @@ final result: passed
 - Open the in-progress course and confirm its status and supplied modules appear without a fake certificate.
 - Navigate with Left/Right, cycle focus with Tab, close with Escape, and confirm focus returns to the opening control.
 
-The implementation was visually inspected again on 2026-10-19 against reference 17 and the latest desktop and mobile renders. No material mismatch remains.
+The implementation was visually inspected again on 2026-10-19 against reference 17 and the latest desktop, PowerPoint, Cisco/module, card, and mobile renders. No material mismatch remains.
 
 final result: passed
