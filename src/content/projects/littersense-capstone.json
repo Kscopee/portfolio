@@ -53,6 +53,21 @@
       "image": "../../assets/content/projects/littersense/littersense-login.jpeg",
       "caption": "LitterSense web app sign-in screen."
     },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-capstone-dashboard-alert-wireframe.png",
+      "caption": "Dashboard wireframe showing an unusual-behavior alert (design mockup, not the final app).",
+      "tag": "Wireframe"
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-capstone-health-reports-wireframe.png",
+      "caption": "Health Reports wireframe for generating vet reports (design mockup, not the final app).",
+      "tag": "Wireframe"
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-capstone-empty-state-wireframe.png",
+      "caption": "Wireframe of the first-time screen shown before any cat is registered (design mockup, not the final app).",
+      "tag": "Wireframe"
+    },
     "TODO: LitterSense main dashboard screenshot",
     "TODO: LitterSense cat profile and history screenshot",
     "TODO: LitterSense alert screenshot",

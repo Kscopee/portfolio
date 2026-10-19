@@ -17,11 +17,10 @@
   ],
   "technologies": [
     "ESP32-S3 microcontroller with OV2640 camera",
-    "RDM6300 RFID reader with TK4100 collar tags",
+    "YRM100 UHF RFID reader module with UHF RFID tags",
     "HC-SR04 ultrasonic sensor",
     "MQ-135 ammonia gas sensor",
     "MQ-136 hydrogen sulfide gas sensor",
-    "ADS1115 analog-to-digital converter",
     "Firebase Realtime Database REST API over HTTPS/TLS",
     "Local buffering with automatic sync"
   ],
@@ -61,8 +60,15 @@
       "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-overview.jpeg",
       "caption": "Full view of the prototype enclosure."
     },
-    "TODO: LitterSense IoT architecture diagram or Ashton's flowcharts",
-    "TODO: LitterSense IoT app screens designed by Ashton"
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-logic-flowchart.jpg",
+      "caption": "System logic flowchart I made for LitterSense."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-dashboard-wireframe.png",
+      "caption": "Dashboard wireframe I designed in Figma (design mockup, not the final app).",
+      "tag": "Wireframe"
+    }
   ],
   "featured": false
 }

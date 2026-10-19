@@ -37,6 +37,7 @@ const projects = defineCollection({
               z.object({
                 image: image(),
                 caption: z.string(),
+                tag: z.literal('Wireframe').optional(),
               }),
               todo,
             ]),

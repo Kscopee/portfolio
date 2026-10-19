@@ -13,6 +13,7 @@
 
 - No actionable P0, P1, or P2 mismatch remains.
 - LitterSense IoT evidence follow-up (2026-10-19): the side-wiring enclosure photo is the project cover, and all five tightly cropped enclosure photos load with the exact supplied captions. Desktop at 1600 x 900 and mobile at 375 x 812 both measured zero horizontal overflow; only the architecture/flowcharts and app-screen placeholders remain for this project.
+- LitterSense wireframe follow-up (2026-10-19): the IoT flowchart and dashboard wireframe replace both IoT placeholders, while three capstone wireframes appear immediately after the real login screenshot. Rendered checks found exactly three `Wireframe` badges on the capstone and one on IoT; none appears on the login screenshot, flowchart, or enclosure photos. Captions and alt text retain the supplied design-mockup wording, all evidence images load, and desktop/mobile layouts have no horizontal overflow.
 - Fonts and typography: cards and detail heroes use the requested short project names as their prominent headings. Each complete project title remains directly below the detail heading in smaller Tahoma text.
 - Spacing and layout rhythm: the listing keeps the source's large light field, black diagonal region, watermark type, clipped media, and pill filters. Detail pages preserve the reference's asymmetric media/text split and large-name hierarchy.
 - Colors and visual tokens: the implementation uses the locked portfolio palette—black, `#d7f205` lime, white, and light grey—with black text on lime.

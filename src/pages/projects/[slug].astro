@@ -176,6 +176,7 @@ const sections = [
                   sizes="(max-width: 48rem) 92vw, (max-width: 80rem) 44vw, 40rem"
                   loading="lazy"
                 />
+                {item.tag && <span class="evidence-item__tag" aria-hidden="true">{item.tag}</span>}
               </div>
               <figcaption><span>{String(index + 1).padStart(2, '0')}</span>{item.caption}</figcaption>
             </figure>
@@ -583,6 +584,7 @@ const sections = [
   }
 
   .evidence-item__image {
+    position: relative;
     display: grid;
     min-height: 18rem;
     max-height: 42rem;
@@ -599,6 +601,24 @@ const sections = [
     height: 100%;
     max-height: 41.25rem;
     object-fit: contain;
+  }
+
+  .evidence-item__tag {
+    position: absolute;
+    inset-block-start: 0.8rem;
+    inset-inline-start: 0.8rem;
+    z-index: 1;
+    padding: 0.38rem 0.65rem;
+    border: 0.12rem solid var(--color-black);
+    border-radius: 999px;
+    background: var(--color-lime);
+    box-shadow: 0.18rem 0.18rem 0 var(--color-black);
+    color: var(--color-black);
+    font-size: 0.68rem;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    line-height: 1;
+    text-transform: uppercase;
   }
 
   .evidence-item figcaption {
