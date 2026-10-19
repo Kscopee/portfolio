@@ -9,13 +9,13 @@ import SkillsPanel from '../components/SkillsPanel.astro';
 import WatermarkWord from '../components/WatermarkWord.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import aboutPortrait from '../assets/content/about/ashton-about-portrait.png';
-import csolesDashboard from '../assets/content/projects/csoles/csoles-owner-dashboard.jpeg';
-import littersenseDashboard from '../assets/content/projects/littersense/littersense-capstone-dashboard-alert-wireframe.png';
+import educationImage from '../assets/content/about/about-education.png';
+import goalsImage from '../assets/content/about/about-goals.webp';
+import videoEditingImage from '../assets/content/about/about-video-editing.jpeg';
 
 const aboutEntry = (await getCollection('about'))[0];
 if (!aboutEntry) throw new Error('The About content entry is missing.');
 const about = aboutEntry.data;
-const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 
 const cards = [
   {
@@ -24,38 +24,37 @@ const cards = [
     content: about.story,
     image: aboutPortrait,
     alt: 'Ashton James D. Caspe wearing glasses and a black shirt.',
-    fit: 'contain' as const,
-    position: '68% bottom',
+    position: '48% 30%',
   },
   {
     title: 'Education',
     label: 'Formal learning',
     content: about.education,
     list: true,
-    image: csolesDashboard,
-    alt: 'Csoles Connect owner dashboard from a third-year course project.',
-    caption: 'Csoles Connect was built during Ashton’s third year.',
-    position: 'center 18%',
+    image: educationImage,
+    alt: 'The St. Dominic College of Asia campus building with a Philippine flag in front.',
+    caption: 'St. Dominic College of Asia',
+    position: '54% 46%',
   },
   {
     title: 'Goals',
     label: 'What comes next',
     content: about.goals,
     list: true,
-    image: littersenseDashboard,
-    alt: 'LitterSense dashboard wireframe showing a cat health overview and unusual-behavior alert.',
-    caption: 'A LitterSense dashboard wireframe designed in Figma.',
-    position: 'center',
+    image: goalsImage,
+    alt: 'NieR:Automata seventh anniversary artwork showing 2B and 9S overlooking a ruined city.',
+    caption: 'NieR:Automata 7th anniversary art © SQUARE ENIX. The game that got me into IT.',
+    position: '52% 78%',
   },
   {
     title: 'Interests',
     label: 'Outside of IT',
     content: about.interests,
     list: true,
-    image: `${base}/assets/video/portfolio-poster.svg`,
-    alt: 'Black, grey, and lime poster graphic for the portfolio background video.',
-    caption: 'The background video on this site is Ashton’s own work.',
-    position: 'center',
+    image: videoEditingImage,
+    alt: 'A pink video-editing frame featuring characters from Zenless Zone Zero.',
+    caption: 'A frame from one of my video edits. Character art from Zenless Zone Zero © COGNOSPHERE PTE. LTD.',
+    position: '70% 46%',
   },
 ];
 
@@ -88,9 +87,9 @@ const railSections = [
   <FilmStripDivider />
 
   <section class="about-skills" id="skills" aria-labelledby="skills-heading">
-    <WatermarkWord word="Skills" />
+    <WatermarkWord word="Skills" tone="dark" />
     <div class="about-skills__title">
-      <SectionTitle label="Skills" number="02" tone="black" />
+      <SectionTitle label="Skills" number="02" tone="lime" />
     </div>
     <h2 class="visually-hidden" id="skills-heading">Technical and soft skills</h2>
     <div class="about-skills__content">
@@ -168,7 +167,8 @@ const railSections = [
 
   .about-background__deck {
     min-width: 0;
-    margin-top: clamp(5.5rem, 8vw, 8rem);
+    margin-top: clamp(9rem, 13vw, 12rem);
+    margin-inline: calc(var(--page-gutter) * -1) calc(var(--page-safe-end) * -1);
   }
 
   .about-skills {
@@ -176,7 +176,7 @@ const railSections = [
     min-height: 52rem;
     padding: clamp(4.5rem, 8vw, 8rem) var(--page-safe-end) clamp(6rem, 10vw, 10rem) var(--page-gutter);
     overflow: hidden;
-    background: var(--color-paper);
+    background: var(--color-ink);
   }
 
   .about-skills::after {

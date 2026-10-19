@@ -10,7 +10,6 @@ interface AboutCard {
   image: ImageMetadata | string;
   alt: string;
   caption?: string;
-  fit?: 'cover' | 'contain';
   position?: string;
 }
 
@@ -58,7 +57,7 @@ const { cards } = Astro.props;
           <span class="about-card__copy">
             <span class="about-card__label">{card.label}</span>
             <strong>{card.title}</strong>
-            <span class="about-card__action">Open card <span aria-hidden="true">↗</span></span>
+            <span class="about-card__action">Open card <span aria-hidden="true">→</span></span>
           </span>
         </button>
       ))}
@@ -93,7 +92,7 @@ const { cards } = Astro.props;
 
       {cards.map((card, index) => (
         <article class="about-detail" data-about-detail data-index={index} hidden={index !== 0}>
-          <div class:list={["about-detail__media", card.fit === 'contain' && 'about-detail__media--contain']} style={`--media-position: ${card.position ?? 'center'}`}>
+          <div class="about-detail__media" style={`--media-position: ${card.position ?? 'center'}`}>
             {typeof card.image === 'string' ? (
               <img src={card.image} alt={card.alt} loading="lazy" />
             ) : (
@@ -220,7 +219,13 @@ const { cards } = Astro.props;
       });
 
       const deckKeyHandler = (event: KeyboardEvent) => {
-        if (!(event.target as HTMLElement).closest('[data-about-card]')) return;
+        const card = (event.target as HTMLElement).closest<HTMLButtonElement>('[data-about-card]');
+        if (!card) return;
+        if (event.key === 'Enter') {
+          event.preventDefault();
+          openDialog(Number(card.dataset.index));
+          return;
+        }
         if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
         event.preventDefault();
         if (event.key === 'ArrowLeft') selectCard(activeIndex - 1, { focus: true });
@@ -260,6 +265,19 @@ const { cards } = Astro.props;
       dialogNext?.addEventListener('click', nextDialogItem);
 
       const dialogKeyHandler = (event: KeyboardEvent) => {
+        if (event.key === 'Tab') {
+          const focusable = [...dialog.querySelectorAll<HTMLElement>('button:not([disabled]), a[href], input:not([disabled]), textarea:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])')]
+            .filter((element) => !element.closest('[hidden]'));
+          const first = focusable[0];
+          const last = focusable.at(-1);
+          if (event.shiftKey && document.activeElement === first) {
+            event.preventDefault();
+            last?.focus();
+          } else if (!event.shiftKey && document.activeElement === last) {
+            event.preventDefault();
+            first?.focus();
+          }
+        }
         if (event.key === 'ArrowLeft') {
           event.preventDefault();
           previousDialogItem();
@@ -319,6 +337,8 @@ const { cards } = Astro.props;
     scrollbar-width: none;
     scroll-padding-inline: 35vw;
     scroll-snap-type: inline mandatory;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 3.5rem, #000 calc(100% - 5rem), transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 3.5rem, #000 calc(100% - 5rem), transparent);
   }
 
   .about-deck__viewport::-webkit-scrollbar {
@@ -330,7 +350,7 @@ const { cards } = Astro.props;
     width: max-content;
     min-width: 100%;
     min-height: 30rem;
-    padding-inline: max(1rem, calc(42vw - 11rem));
+    padding-inline: max(1rem, calc(50vw - 11rem));
     align-items: center;
     justify-content: flex-start;
     gap: clamp(0.8rem, 2vw, 1.7rem);
@@ -405,14 +425,6 @@ const { cards } = Astro.props;
       linear-gradient(0deg, rgb(0 0 0 / 0.94) 0 13%, transparent 45%);
   }
 
-  .about-card__shade::after {
-    position: absolute;
-    inset: 0 58% 45% -95%;
-    background: var(--color-black);
-    content: '';
-    transform: skewX(calc(var(--shape-angle) * -1));
-  }
-
   .about-card__number,
   .about-card__copy {
     position: absolute;
@@ -429,7 +441,7 @@ const { cards } = Astro.props;
   }
 
   .about-card__copy {
-    inset: 1.5rem 1.35rem;
+    inset: 4rem 1.35rem 1.5rem;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -437,10 +449,13 @@ const { cards } = Astro.props;
   }
 
   .about-card__label {
+    display: block;
+    width: 100%;
     color: var(--color-lime);
     font-size: 0.67rem;
     font-weight: 900;
     letter-spacing: 0.13em;
+    line-height: 1.35;
     text-transform: uppercase;
   }
 
@@ -606,10 +621,6 @@ const { cards } = Astro.props;
     object-position: var(--media-position);
   }
 
-  .about-detail__media--contain :global(img) {
-    object-fit: contain;
-  }
-
   .about-detail__index {
     position: absolute;
     right: 4.5rem;
@@ -662,6 +673,7 @@ const { cards } = Astro.props;
   .about-detail p,
   .about-detail li {
     color: var(--color-paper);
+    font-family: var(--font-body);
     font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1.03rem);
   }
 
@@ -727,7 +739,10 @@ const { cards } = Astro.props;
       justify-content: flex-start;
     }
 
-    .about-card,
+    .about-card {
+      width: clamp(13rem, 22vw, 15rem);
+    }
+
     .about-card[data-active='true'] {
       width: clamp(17rem, 28vw, 21rem);
     }
@@ -741,6 +756,8 @@ const { cards } = Astro.props;
     .about-deck__viewport {
       padding-inline: 0;
       scroll-padding-inline: 11vw;
+      -webkit-mask-image: none;
+      mask-image: none;
     }
 
     .about-deck__track {
@@ -749,16 +766,15 @@ const { cards } = Astro.props;
       gap: 1rem;
     }
 
-    .about-card,
-    .about-card[data-active='true'] {
-      width: 78vw;
-      height: 28rem;
-      opacity: 1;
-      filter: none;
+    .about-card {
+      width: 68vw;
+      height: 25rem;
       transform: none;
     }
 
     .about-card[data-active='true'] {
+      width: 78vw;
+      height: 28rem;
       border-color: var(--color-lime);
       box-shadow: inset 0 -0.35rem 0 var(--color-lime);
     }

@@ -7,19 +7,23 @@
     position: relative;
     z-index: 2;
     display: grid;
-    min-width: 58rem;
-    height: 2.4rem;
-    padding: 0.42rem 0.8rem;
+    width: calc(100% - 2rem);
+    min-width: 0;
+    height: 1.8rem;
+    margin-inline: 1rem;
+    padding: 0.32rem 0.8rem;
     grid-template-columns: repeat(12, 1fr);
     gap: clamp(0.65rem, 1.8vw, 1.75rem);
     overflow: hidden;
-    background: var(--color-black);
-    transform: rotate(-1deg) scale(1.04);
+    border-block: 2px solid rgb(215 242 5 / 0.75);
+    background: var(--color-surface);
+    transform: rotate(-1deg);
   }
 
   .film-strip span {
-    min-width: 2.5rem;
-    border-radius: 0.18rem;
-    background: var(--color-paper);
+    min-width: 2rem;
+    border-radius: 0.12rem;
+    background: var(--color-lime);
+    opacity: 0.72;
   }
 </style>
