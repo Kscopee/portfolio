@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1200" role="img" aria-labelledby="title desc">
+  <title id="title">A path from web development to game and software development</title>
+  <desc id="desc">An original abstract composition using black, lime, grey, and white geometric shapes.</desc>
+  <rect width="1600" height="1200" fill="#101010"/>
+  <path d="M-160 980 690 130h520L360 980Z" fill="#d7fa3a"/>
+  <path d="m980-100 780 0-690 690H290Z" fill="#262626"/>
+  <path d="M-120 1110 1020-30h230L110 1110Z" fill="#f2f2f2" opacity=".18"/>
+  <g fill="none" stroke="#f4f4f1" stroke-width="18">
+    <rect x="150" y="650" width="510" height="330" rx="20"/>
+    <path d="M150 730h510M210 690h18m42 0h18m42 0h18"/>
+  </g>
+  <path d="m530 780 310-310h305" fill="none" stroke="#101010" stroke-width="38"/>
+  <path d="m1080 392 126 78-126 78" fill="none" stroke="#101010" stroke-linecap="square" stroke-linejoin="miter" stroke-width="38"/>
+  <g transform="translate(1050 300)" fill="#101010">
+    <path d="M0 220c0-118 95-213 213-213h44c118 0 213 95 213 213v165c0 63-76 95-121 50l-74-74h-80l-74 74C76 480 0 448 0 385Z"/>
+    <rect x="102" y="185" width="112" height="30" rx="15" fill="#d7fa3a"/>
+    <rect x="143" y="144" width="30" height="112" rx="15" fill="#d7fa3a"/>
+    <circle cx="347" cy="172" r="25" fill="#f4f4f1"/>
+    <circle cx="401" cy="226" r="25" fill="#f4f4f1"/>
+  </g>
+  <g font-family="Arial, Helvetica, sans-serif" font-weight="900" letter-spacing="8">
+    <text x="190" y="1080" fill="#f4f4f1" font-size="48">01 / WEB</text>
+    <text x="1010" y="900" fill="#d7fa3a" font-size="48">02 / GAME + SOFTWARE</text>
+    <text x="1015" y="1090" fill="#f4f4f1" font-size="170" font-style="italic" opacity=".08">NEXT</text>
+  </g>
+  <g fill="#f4f4f1" opacity=".45">
+    <circle cx="1320" cy="690" r="8"/><circle cx="1380" cy="690" r="8"/><circle cx="1440" cy="690" r="8"/>
+    <circle cx="1320" cy="750" r="8"/><circle cx="1380" cy="750" r="8"/><circle cx="1440" cy="750" r="8"/>
+  </g>
+</svg>

@@ -5,6 +5,7 @@ import DiagonalBands from '../../components/DiagonalBands.astro';
 import FilmStripDivider from '../../components/FilmStripDivider.astro';
 import PillTabs from '../../components/PillTabs.astro';
 import ProjectCard from '../../components/ProjectCard.astro';
+import SectionRail from '../../components/SectionRail.astro';
 import SectionTitle from '../../components/SectionTitle.astro';
 import WatermarkWord from '../../components/WatermarkWord.astro';
 
@@ -20,6 +21,11 @@ const tabs = [
   { label: 'Third-Year', value: 'third-year' },
   { label: 'Early Work', value: 'early-work' },
 ];
+
+const railSections = [
+  { id: 'projects-intro', number: '01', label: 'Projects introduction' },
+  { id: 'projects-archive', number: '02', label: 'Project archive' },
+];
 ---
 
 <BaseLayout
@@ -28,10 +34,10 @@ const tabs = [
   backgroundVideo={false}
   bodyClass="projects-page"
 >
-  <section class="projects-hero" aria-labelledby="projects-heading">
+  <section class="projects-hero" id="projects-intro" aria-labelledby="projects-heading">
     <DiagonalBands variant="split" />
     <div class="projects-hero__title">
-      <SectionTitle label="Projects" number="02" tone="lime" />
+      <SectionTitle label="Projects" number="01" tone="lime" />
     </div>
     <div class="projects-hero__copy">
       <p class="projects-hero__lead" id="projects-heading">
@@ -45,8 +51,11 @@ const tabs = [
 
   <FilmStripDivider />
 
-  <section class="project-library" aria-labelledby="project-library-heading" data-project-library>
+  <section class="project-library" id="projects-archive" aria-labelledby="project-library-heading" data-project-library>
     <WatermarkWord word="Projects" />
+    <div class="project-library__title">
+      <SectionTitle label="Archive" number="02" tone="dark" />
+    </div>
     <div class="project-library__head">
       <div>
         <p class="project-library__eyebrow">Selected work / 2024–2026</p>
@@ -61,6 +70,8 @@ const tabs = [
       {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
     </div>
   </section>
+
+  <SectionRail sections={railSections} />
 </BaseLayout>
 
 <script>
@@ -156,6 +167,13 @@ const tabs = [
   .project-library :global(.watermark) {
     top: 2.7rem;
     right: -0.06em;
+  }
+
+  .project-library__title {
+    position: relative;
+    z-index: 1;
+    width: min(100%, var(--content-max));
+    margin: 0 auto clamp(3rem, 6vw, 6rem);
   }
 
   .project-library__head,
