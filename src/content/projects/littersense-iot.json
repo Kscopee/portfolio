@@ -37,11 +37,30 @@
     }
   ],
   "cover": {
-    "image": "../../assets/content/projects/littersense/littersense-login.jpeg",
-    "alt": "LitterSense web app sign-in screen for the connected IoT system."
+    "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-side-wiring.jpeg",
+    "alt": "Prototype enclosure: control box with the ESP32-S3 and wiring mounted on the side, ultrasonic sensor under the lid."
   },
   "evidence": [
-    "TODO: LitterSense IoT hardware photo from the team",
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-side-wiring.jpeg",
+      "caption": "Prototype enclosure: control box with the ESP32-S3 and wiring mounted on the side, ultrasonic sensor under the lid."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-front-angle.jpeg",
+      "caption": "Front corner of the acrylic litter box enclosure with the control box attached."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-top-wiring.jpeg",
+      "caption": "Sensor wiring routed along the top frame to the sensor module inside."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-entrance.jpeg",
+      "caption": "The cat entrance, where each visit begins."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-overview.jpeg",
+      "caption": "Full view of the prototype enclosure."
+    },
     "TODO: LitterSense IoT architecture diagram or Ashton's flowcharts",
     "TODO: LitterSense IoT app screens designed by Ashton"
   ],
