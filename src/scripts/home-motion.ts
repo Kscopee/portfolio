@@ -51,6 +51,73 @@ const setupHomeMotion = () => {
     });
   }
 
+  const projectPreview = document.querySelector<HTMLElement>('[data-home-projects]');
+  if (projectPreview) {
+    const tabList = projectPreview.querySelector<HTMLElement>('[data-home-project-tabs]');
+    const tabs = [...projectPreview.querySelectorAll<HTMLButtonElement>('[data-home-project-tab]')];
+    const panels = [...projectPreview.querySelectorAll<HTMLElement>('[data-home-project-panel]')];
+    let panelAnimation: Animation | null = null;
+
+    const activateProject = (nextIndex: number, moveFocus = false) => {
+      if (!tabs.length || tabs.length !== panels.length) return;
+      const index = (nextIndex + tabs.length) % tabs.length;
+
+      tabs.forEach((tab, tabIndex) => {
+        const isActive = tabIndex === index;
+        tab.setAttribute('aria-selected', String(isActive));
+        tab.tabIndex = isActive ? 0 : -1;
+        panels[tabIndex].hidden = !isActive;
+      });
+
+      const activeTab = tabs[index];
+      const activePanel = panels[index];
+      if (moveFocus) activeTab.focus();
+
+      if (tabList && tabList.scrollWidth > tabList.clientWidth) {
+        tabList.scrollTo({
+          left: Math.max(0, activeTab.offsetLeft - tabList.clientWidth / 2 + activeTab.offsetWidth / 2),
+          behavior: reducedMotion.matches ? 'auto' : 'smooth',
+        });
+      }
+
+      panelAnimation?.cancel();
+      if (!reducedMotion.matches) {
+        panelAnimation = activePanel.animate(
+          [
+            { opacity: 0, transform: 'translateY(0.75rem)' },
+            { opacity: 1, transform: 'translateY(0)' },
+          ],
+          { duration: 260, easing: 'cubic-bezier(0.2, 0.8, 0.2, 1)' },
+        );
+      }
+    };
+
+    const tabCleanups = tabs.map((tab, index) => {
+      const clickHandler = () => activateProject(index);
+      const keyHandler = (event: KeyboardEvent) => {
+        let nextIndex: number | undefined;
+        if (event.key === 'ArrowRight') nextIndex = index + 1;
+        if (event.key === 'ArrowLeft') nextIndex = index - 1;
+        if (event.key === 'Home') nextIndex = 0;
+        if (event.key === 'End') nextIndex = tabs.length - 1;
+        if (nextIndex === undefined) return;
+        event.preventDefault();
+        activateProject(nextIndex, true);
+      };
+      tab.addEventListener('click', clickHandler);
+      tab.addEventListener('keydown', keyHandler);
+      return () => {
+        tab.removeEventListener('click', clickHandler);
+        tab.removeEventListener('keydown', keyHandler);
+      };
+    });
+
+    cleanups.push(() => {
+      panelAnimation?.cancel();
+      tabCleanups.forEach((cleanup) => cleanup());
+    });
+  }
+
   const hero = document.getElementById('home');
   const video = document.querySelector<HTMLVideoElement>('[data-background-video]');
   if (hero && video) {

@@ -148,7 +148,7 @@ final result: passed
 
 - Source visual truth: `docs/reference/inspiration/01` through `06`, with the existing site shape kit and Ashton's supplied portrait, project, certificate, and video assets.
 - Accepted concept direction: the four generated previews in `D:/Users/ZcarinaCaspeExpertCo/.codex/generated_images/01a15663-a47d-7cf1-95b1-f5802509c51c/` for Hero, About, Projects, and Credentials.
-- Latest rendered screenshots: `.qa/phase-8/hero-final.png`, `about-final.png`, `projects-final.png`, `credentials-final.png`, and their `mobile-*-final.png` equivalents.
+- Latest rendered screenshots: `.qa/phase-8-fixes/hero-final.png`, `about-final.png`, `projects-final.png`, `projects-csoles-final.png`, `projects-3-keyboard.png`, `credentials-final.png`, and the `mobile-*-final.png` captures.
 - Browser method: the production build was opened in headless Microsoft Edge through the Chrome DevTools Protocol because the in-app browser was unavailable.
 - Native viewports: 1600 x 900 and 375 x 812 CSS pixels, device scale factor 1.
 
@@ -156,17 +156,20 @@ final result: passed
 
 - Hero balance and copy: the final render keeps the reference's large left-aligned display name, bold lime accent line, prominent cut-out portrait, angled edge bands, and visible video texture. The above-the-fold copy diff contains only Ashton's name, validated tagline, action label, site navigation, and shared header copy; it adds no unsupported claim or statistic.
 - Diagonal geometry: all four strips use the established `14deg` desktop / `9deg` phone angle, edge-bleeding black/lime/paper bands, stripe texture, hard shadows, and film-strip dividers instead of centered Bootstrap-style boxes.
-- Media containment: the hero portrait, About portrait, LitterSense cover, and Cybersecurity certificate stay inside reusable cut-corner frames. The certificate uses `object-fit: contain`; no supplied image is cropped incorrectly or spills from its frame.
+- Media containment: the hero portrait, About portrait, all four project covers, and Cybersecurity certificate stay inside reusable cut-corner frames. Project covers and the certificate use `object-fit: contain`; no supplied image is cropped incorrectly or spills from its frame. Project copy and media occupy separate grid areas, with measured intersection area of zero.
 - Number hierarchy and rail: the hero is `00`, previews are `01`-`03`, and the fixed desktop rail shows the matching current number over total `03`. Its Next arrow moved from `00` to `01`; scroll checks reached `02` and `03`; it computes to `display: none` at 375px.
-- Real-content previews: About reads the first validated story and education entries; Projects features the capstone LitterSense record and exposes three real project names; Credentials uses the latest certification plus collection-derived counts. No copied ZZZ art, logo, font, or text appears.
+- Real-content previews: About reads the first validated story and education entries. Projects exposes all four records in the same order as `/projects`; selecting a name updates its category/year, title, description, full cover, and direct detail link. Credentials uses the latest certification and the exact requested collection-derived sentence: “4 certifications and 2 completed Cisco courses, with 1 more in progress.” No copied ZZZ art, logo, font, or text appears.
 - Motion and accessibility: GSAP reveals finish within 560ms, do not alter native scrolling, and clean up across Astro transitions. With reduced motion enabled, reveal opacity is `1`, transform is `none`, and the video is paused. The video also pauses after the hero leaves the viewport.
-- Responsive behavior: at 375px the name remains readable, the project title stays on one line, Credentials clears its title wedge, the mobile menu replaces desktop navigation, and document width remains below viewport width. The desktop Credentials action remains fully visible at 1600 x 900.
+- Responsive behavior: at 375px the name remains readable, long project titles wrap clear of media, Credentials clears its title wedge, the project-name strip can swipe horizontally, the mobile menu replaces desktop navigation, and document width remains below viewport width. The desktop Credentials action remains fully visible at 1600 x 900.
 
 ## Comparison History
 
 - Hero: reduced the display sizing and protected each name line so `James D.` no longer wraps while preserving the oversized reference hierarchy.
 - Projects: selected the capstone explicitly, moved the real cover into the dominant right-hand frame, and compacted the copy/media rhythm so the complete preview reads within one desktop viewport.
+- Projects fix pass: expanded the switcher from three static labels to all four name-only tabs, connected click and arrow-key state changes, separated title and media, showed every cover whole, removed the unintended pale wedge under the header, and kept the tabs visible at the bottom of the 1600 x 900 capture.
 - Credentials: tightened vertical spacing so the heading, counts, action, and certificate all appear together at 1600 x 900; added phone clearance so the heading no longer sits under the `03` wedge.
+- Section clearance: converted the `01`, `02`, and `03` title wedges into layout rows. Geometry checks report no overlap between any title block and its first content heading at either tested viewport.
+- Hero fix pass: moved the decorative lime diagonal to the bottom of the portrait field so it no longer crosses behind Ashton's head.
 - Mobile Projects: reduced the title scale and kept `LitterSense` intact instead of clipping its final letters.
 - Final source/concept and implementation pairs were opened together with `view_image`. No actionable P0, P1, or P2 mismatch remains.
 
@@ -174,11 +177,13 @@ final result: passed
 
 - Copyrighted ZZZ artwork, logos, fonts, character images, and copy are not reproduced. Ashton's own media and original CSS/SVG geometry fill those roles.
 - The inspiration uses game-character and news content; the homepage uses the required real portfolio sequence and content model while preserving the asymmetric visual rhythm.
+- The accepted Projects concept showed three numbered tabs; the final intentionally uses four names without tab numbers to match the requested Projects-page order and avoid competing with the section number.
 - Auto-cycling hero content remains a Phase 9 nice-to-have and was not added during Phase 8.
 
 ## Core Workflow Verified
 
-- Open `/portfolio/`, use the hero action to jump to Projects, and use each preview action to open its full page.
+- Open `/portfolio/`, use the hero action to jump to Projects, click each of the four project names, and confirm its matching preview and direct `View project` link.
+- Focus a project name and use Left/Right (plus Home/End); confirm focus, highlight, and preview move together and wrap at the ends.
 - Scroll through `00`-`03`; confirm the desktop rail updates and its arrows and markers move between sections.
 - Repeat at 375px; confirm the rail is absent, the full-screen menu is available, and each strip stacks without horizontal scrolling.
 - Enable reduced motion; confirm all content is immediately visible and the background video remains paused.
