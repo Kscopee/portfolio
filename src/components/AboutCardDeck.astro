@@ -11,6 +11,7 @@ interface AboutCard {
   alt: string;
   caption?: string;
   position?: string;
+  mediaScale?: number;
 }
 
 interface Props {
@@ -40,7 +41,7 @@ const { cards } = Astro.props;
           data-index={index}
         >
           <span class="about-card__number" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-          <span class="about-card__media" style={`--media-position: ${card.position ?? 'center'}`}>
+          <span class="about-card__media" style={`--media-position: ${card.position ?? 'center'}; --media-scale: ${card.mediaScale ?? 1.02}`}>
             {typeof card.image === 'string' ? (
               <img src={card.image} alt="" loading={index === 0 ? 'eager' : 'lazy'} />
             ) : (
@@ -92,7 +93,7 @@ const { cards } = Astro.props;
 
       {cards.map((card, index) => (
         <article class="about-detail" data-about-detail data-index={index} hidden={index !== 0}>
-          <div class="about-detail__media" style={`--media-position: ${card.position ?? 'center'}`}>
+          <div class="about-detail__media" style={`--media-position: ${card.position ?? 'center'}; --media-scale: ${card.mediaScale ?? 1}`}>
             {typeof card.image === 'string' ? (
               <img src={card.image} alt={card.alt} loading="lazy" />
             ) : (
@@ -408,13 +409,13 @@ const { cards } = Astro.props;
   .about-card__media :global(img) {
     object-fit: cover;
     object-position: var(--media-position);
-    transform: scale(1.02);
+    transform: scale(var(--media-scale));
     transition: transform var(--motion-slow) ease;
   }
 
   .about-card:hover .about-card__media :global(img),
   .about-card:focus-visible .about-card__media :global(img) {
-    transform: scale(1.07);
+    transform: scale(calc(var(--media-scale) + 0.05));
   }
 
   .about-card__shade {
@@ -619,6 +620,7 @@ const { cards } = Astro.props;
     height: 100%;
     object-fit: cover;
     object-position: var(--media-position);
+    transform: scale(var(--media-scale));
   }
 
   .about-detail__index {

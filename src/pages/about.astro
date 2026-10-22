@@ -10,7 +10,7 @@ import WatermarkWord from '../components/WatermarkWord.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import aboutPortrait from '../assets/content/about/ashton-about-portrait.png';
 import educationImage from '../assets/content/about/about-education.png';
-import goalsImage from '../assets/content/about/about-goals-path.svg';
+import goalsImage from '../assets/content/about/about-goals-nier-automata.webp';
 import videoEditingImage from '../assets/content/about/about-video-editing.jpeg';
 
 const aboutEntry = (await getCollection('about'))[0];
@@ -34,7 +34,7 @@ const cards = [
     image: educationImage,
     alt: 'The St. Dominic College of Asia campus building with a Philippine flag in front.',
     caption: 'St. Dominic College of Asia',
-    position: '54% 46%',
+    position: '0% 46%',
   },
   {
     title: 'Goals',
@@ -42,9 +42,10 @@ const cards = [
     content: about.goals,
     list: true,
     image: goalsImage,
-    alt: 'An original black, lime, grey, and white path graphic representing a move from web development toward game and software development.',
-    caption: 'An original path graphic representing my goal of moving from web development into game or software development.',
-    position: '50% 50%',
+    alt: 'NieR:Automata seventh anniversary artwork showing 2B and 9S together in the center of a ruined city.',
+    caption: 'NieR:Automata 7th anniversary art © SQUARE ENIX. The game that got me into IT.',
+    position: '50% 52%',
+    mediaScale: 1.08,
   },
   {
     title: 'Interests',

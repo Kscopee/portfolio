@@ -171,6 +171,8 @@ final result: passed
 - Section clearance: converted the `01`, `02`, and `03` title wedges into layout rows. Geometry checks report no overlap between any title block and its first content heading at either tested viewport.
 - Hero fix pass: moved the decorative lime diagonal to the bottom of the portrait field so it no longer crosses behind Ashton's head.
 - Mobile Projects: reduced the title scale and kept `LitterSense` intact instead of clipping its final letters.
+- Typography follow-up (2026-10-22): audited LitterSense, Csoles Connect, LitterSense IoT, and Kivotos Shopping List at 1440, 1280, 1024, 768, and 375 px. Computed styles were `word-break: normal`, `overflow-wrap: normal`, and `hyphens: none`; every word returned one line rectangle and every heading stayed within its column.
+- About-media follow-up (2026-10-22): `.qa/phase-8-fix2/about-goals-card.png`, `about-goals-panel.png`, and their 375 px equivalents confirm the supplied NieR art is centered on both characters, fills the frame without letterbox edges, and carries the exact credit. The matching Education captures confirm the campus building leads both crops rather than the flag.
 - Final source/concept and implementation pairs were opened together with `view_image`. No actionable P0, P1, or P2 mismatch remains.
 
 ## Intentional Adaptations
@@ -178,6 +180,7 @@ final result: passed
 - Copyrighted ZZZ artwork, logos, fonts, character images, and copy are not reproduced. Ashton's own media and original CSS/SVG geometry fill those roles.
 - The inspiration uses game-character and news content; the homepage uses the required real portfolio sequence and content model while preserving the asymmetric visual rhythm.
 - The accepted Projects concept showed three numbered tabs; the final intentionally uses four names without tab numbers to match the requested Projects-page order and avoid competing with the section number.
+- The About Goals media intentionally departs from the original-art-only decision because Ashton explicitly approved the supplied NieR:Automata anniversary image as an exception on 2026-10-22. Its publisher credit is visible in the open panel.
 - Auto-cycling hero content remains a Phase 9 nice-to-have and was not added during Phase 8.
 
 ## Core Workflow Verified
