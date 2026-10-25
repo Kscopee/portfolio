@@ -1,0 +1,246 @@
+---
+import { getCollection } from 'astro:content';
+import AboutCardDeck from '../components/AboutCardDeck.astro';
+import DiagonalBands from '../components/DiagonalBands.astro';
+import FilmStripDivider from '../components/FilmStripDivider.astro';
+import SectionRail from '../components/SectionRail.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import SkillsPanel from '../components/SkillsPanel.astro';
+import WatermarkWord from '../components/WatermarkWord.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import aboutPortrait from '../assets/content/about/ashton-about-portrait.png';
+import educationImage from '../assets/content/about/about-education.png';
+import goalsImage from '../assets/content/about/about-goals-nier-automata.webp';
+import videoEditingImage from '../assets/content/about/about-video-editing.jpeg';
+
+const aboutEntry = (await getCollection('about'))[0];
+if (!aboutEntry) throw new Error('The About content entry is missing.');
+const about = aboutEntry.data;
+
+const cards = [
+  {
+    title: 'My Story',
+    label: 'Where it started / how it grew',
+    content: about.story,
+    image: aboutPortrait,
+    alt: 'Ashton James D. Caspe wearing glasses and a black shirt.',
+    position: '48% 30%',
+  },
+  {
+    title: 'Education',
+    label: 'Formal learning',
+    content: about.education,
+    list: true,
+    image: educationImage,
+    alt: 'The St. Dominic College of Asia campus building with a Philippine flag in front.',
+    caption: 'St. Dominic College of Asia',
+    position: '0% 46%',
+  },
+  {
+    title: 'Goals',
+    label: 'What comes next',
+    content: about.goals,
+    list: true,
+    image: goalsImage,
+    alt: 'NieR:Automata seventh anniversary artwork showing 2B and 9S together in the center of a ruined city.',
+    caption: 'NieR:Automata 7th anniversary art © SQUARE ENIX. The game that got me into IT.',
+    position: '50% 52%',
+    mediaScale: 1.08,
+  },
+  {
+    title: 'Interests',
+    label: 'Outside of IT',
+    content: about.interests,
+    list: true,
+    image: videoEditingImage,
+    alt: 'A pink video-editing frame featuring characters from Zenless Zone Zero.',
+    caption: 'A frame from one of my video edits. Character art from Zenless Zone Zero © COGNOSPHERE PTE. LTD.',
+    position: '70% 46%',
+  },
+];
+
+const railSections = [
+  { id: 'background', number: '01', label: 'Background' },
+  { id: 'skills', number: '02', label: 'Skills' },
+];
+---
+
+<BaseLayout
+  title="About | Ashton Caspe"
+  description="My story, education, goals, interests, and skills as a BS Information Technology student."
+  backgroundVideo={true}
+  bodyClass="about-page"
+>
+  <section class="about-background" id="background" aria-labelledby="about-heading">
+    <DiagonalBands variant="dark" />
+    <div class="about-background__title">
+      <SectionTitle label="About" number="01" tone="lime" />
+    </div>
+    <div class="about-background__intro">
+      <p>{about.program}</p>
+      <h1 id="about-heading">{about.tagline}</h1>
+    </div>
+    <div class="about-background__deck">
+      <AboutCardDeck cards={cards} />
+    </div>
+  </section>
+
+  <FilmStripDivider />
+
+  <section class="about-skills" id="skills" aria-labelledby="skills-heading">
+    <WatermarkWord word="Skills" tone="dark" />
+    <div class="about-skills__title">
+      <SectionTitle label="Skills" number="02" tone="lime" />
+    </div>
+    <h2 class="visually-hidden" id="skills-heading">Technical and soft skills</h2>
+    <div class="about-skills__content">
+      <SkillsPanel technical={about.skills.technical} soft={about.skills.soft} />
+    </div>
+  </section>
+
+  <SectionRail sections={railSections} />
+</BaseLayout>
+
+<style>
+  :global(.about-page) {
+    background: transparent;
+  }
+
+  .about-background {
+    position: relative;
+    min-height: calc(100svh - 4.6rem);
+    padding: clamp(1rem, 2vw, 2rem) var(--page-safe-end) clamp(3rem, 5vw, 5rem) var(--page-gutter);
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .about-background::before {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: rgb(16 16 16 / 0.46);
+    backdrop-filter: blur(8px) saturate(0.74);
+    content: '';
+  }
+
+  .about-background :global(.diagonal-bands) {
+    z-index: -1;
+    opacity: 0.86;
+  }
+
+  .about-background__title {
+    position: absolute;
+    top: clamp(1.2rem, 3vw, 3rem);
+    left: var(--page-gutter);
+    z-index: 1;
+  }
+
+  .about-background__intro {
+    position: absolute;
+    top: clamp(1.2rem, 3vw, 3rem);
+    right: var(--page-safe-end);
+    z-index: 2;
+    width: min(42vw, 38rem);
+    padding: clamp(1rem, 2vw, 1.7rem);
+    border-left: 0.55rem solid var(--color-lime);
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .about-background__intro p {
+    margin-bottom: 0.7rem;
+    color: var(--color-lime);
+    font-size: 0.74rem;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .about-background__intro h1 {
+    margin: 0;
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: clamp(1.4rem, 1.1rem + 1.2vw, 2.45rem);
+    font-weight: 900;
+    letter-spacing: -0.035em;
+    line-height: 1.05;
+  }
+
+  .about-background__deck {
+    min-width: 0;
+    margin-top: clamp(9rem, 13vw, 12rem);
+    margin-inline: calc(var(--page-gutter) * -1) calc(var(--page-safe-end) * -1);
+  }
+
+  .about-skills {
+    position: relative;
+    min-height: 52rem;
+    padding: clamp(4.5rem, 8vw, 8rem) var(--page-safe-end) clamp(6rem, 10vw, 10rem) var(--page-gutter);
+    overflow: hidden;
+    background: var(--color-ink);
+  }
+
+  .about-skills::after {
+    position: absolute;
+    right: -18vw;
+    bottom: -7rem;
+    width: 70vw;
+    height: 13rem;
+    background: var(--color-lime);
+    content: '';
+    transform: skewX(calc(var(--shape-angle) * -1));
+  }
+
+  .about-skills :global(.watermark) {
+    top: 3rem;
+    right: -0.05em;
+  }
+
+  .about-skills__title {
+    position: relative;
+    z-index: 2;
+    margin-bottom: clamp(2.5rem, 5vw, 5rem);
+  }
+
+  .about-skills__content {
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (max-width: 48rem) {
+    .about-background {
+      display: grid;
+      min-height: auto;
+      padding-top: var(--space-7);
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+      gap: var(--space-5);
+    }
+
+    .about-background__title,
+    .about-background__intro {
+      position: relative;
+      inset: auto;
+    }
+
+    .about-background__intro {
+      width: 100%;
+      justify-self: stretch;
+    }
+
+    .about-background__deck {
+      grid-column: 1;
+      margin-top: 0;
+      margin-inline: calc(var(--page-gutter) * -1);
+    }
+
+    .about-skills {
+      min-height: auto;
+      padding-top: var(--space-8);
+    }
+
+    .about-skills::after {
+      height: 8rem;
+    }
+  }
+</style>

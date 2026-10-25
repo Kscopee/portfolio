@@ -1,0 +1,242 @@
+---
+interface RailSection {
+  id: string;
+  number: string;
+  label: string;
+}
+
+interface Props {
+  sections: RailSection[];
+  totalNumber?: string;
+}
+
+const { sections, totalNumber } = Astro.props;
+const total = totalNumber ?? String(sections.length).padStart(2, '0');
+---
+
+{sections.length >= 2 && (
+<nav class="section-rail" aria-label="Page sections" data-section-rail>
+  <button class="section-rail__arrow" type="button" aria-label="Previous section" data-rail-previous>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 14.5 7-7 7 7" /></svg>
+  </button>
+  <span class="section-rail__current" aria-live="polite" data-rail-current>{sections[0]?.number}</span>
+  <span class="section-rail__slash" aria-hidden="true">/</span>
+  <span class="section-rail__total">{total}</span>
+  <ol class="section-rail__markers">
+    {sections.map((section, index) => (
+      <li>
+        <button
+          type="button"
+          aria-label={`Go to ${section.label}`}
+          aria-current={index === 0 ? 'true' : undefined}
+          data-rail-target={section.id}
+          data-rail-number={section.number}
+        ></button>
+      </li>
+    ))}
+  </ol>
+  <button class="section-rail__arrow" type="button" aria-label="Next section" data-rail-next>
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 9.5 7 7 7-7" /></svg>
+  </button>
+</nav>
+)}
+
+<script>
+  let cleanUpSectionRails = () => {};
+
+  const setupSectionRails = () => {
+    cleanUpSectionRails();
+    const cleanups: Array<() => void> = [];
+
+    document.querySelectorAll<HTMLElement>('[data-section-rail]').forEach((rail) => {
+      const markers = [...rail.querySelectorAll<HTMLButtonElement>('[data-rail-target]')];
+      const currentLabel = rail.querySelector<HTMLElement>('[data-rail-current]');
+      const previous = rail.querySelector<HTMLButtonElement>('[data-rail-previous]');
+      const next = rail.querySelector<HTMLButtonElement>('[data-rail-next]');
+      const targets = markers
+        .map((marker) => document.getElementById(marker.dataset.railTarget ?? ''))
+        .filter((target): target is HTMLElement => Boolean(target));
+      if (targets.length < 2) {
+        rail.hidden = true;
+        return;
+      }
+
+      let currentIndex = -1;
+      let frame = 0;
+
+      const update = (index: number) => {
+        const nextIndex = Math.max(0, Math.min(index, targets.length - 1));
+        if (nextIndex === currentIndex) return;
+        currentIndex = nextIndex;
+        markers.forEach((marker, markerIndex) => {
+          if (markerIndex === currentIndex) marker.setAttribute('aria-current', 'true');
+          else marker.removeAttribute('aria-current');
+        });
+        if (currentLabel) currentLabel.textContent = markers[currentIndex]?.dataset.railNumber ?? String(currentIndex).padStart(2, '0');
+        if (previous) previous.disabled = currentIndex === 0;
+        if (next) next.disabled = currentIndex === targets.length - 1;
+      };
+
+      const goTo = (index: number) => {
+        targets[index]?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+      };
+
+      const markerHandlers = markers.map((marker, index) => {
+        const handler = () => goTo(index);
+        marker.addEventListener('click', handler);
+        return () => marker.removeEventListener('click', handler);
+      });
+      const goPrevious = () => goTo(currentIndex - 1);
+      const goNext = () => goTo(currentIndex + 1);
+      previous?.addEventListener('click', goPrevious);
+      next?.addEventListener('click', goNext);
+
+      const syncToScroll = () => {
+        frame = 0;
+        const activationLine = window.innerHeight * 0.42;
+        let activeIndex = 0;
+        targets.forEach((target, index) => {
+          if (target.getBoundingClientRect().top <= activationLine) activeIndex = index;
+        });
+        update(activeIndex);
+      };
+      const requestSync = () => {
+        if (frame) return;
+        frame = requestAnimationFrame(syncToScroll);
+      };
+
+      window.addEventListener('scroll', requestSync, { passive: true });
+      window.addEventListener('resize', requestSync);
+      syncToScroll();
+
+      cleanups.push(() => {
+        if (frame) cancelAnimationFrame(frame);
+        window.removeEventListener('scroll', requestSync);
+        window.removeEventListener('resize', requestSync);
+        markerHandlers.forEach((removeHandler) => removeHandler());
+        previous?.removeEventListener('click', goPrevious);
+        next?.removeEventListener('click', goNext);
+      });
+    });
+
+    cleanUpSectionRails = () => cleanups.forEach((cleanup) => cleanup());
+  };
+
+  document.addEventListener('astro:page-load', setupSectionRails);
+  setupSectionRails();
+</script>
+
+<style>
+  :global(html:has(.section-rail)) {
+    --page-safe-end: calc(var(--page-gutter) + var(--rail-width) + var(--rail-clearance));
+  }
+
+  .section-rail {
+    position: fixed;
+    top: 50%;
+    right: 0;
+    z-index: 20;
+    display: flex;
+    width: var(--rail-width);
+    padding: 0.6rem 0.45rem;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+    border: 2px solid var(--color-white);
+    border-right: 0;
+    border-radius: 0.8rem 0 0 0.8rem;
+    background: var(--color-black);
+    color: var(--color-white);
+    box-shadow: 0 0 0 1px var(--color-black);
+    transform: translateY(-50%);
+  }
+
+  .section-rail__arrow {
+    display: grid;
+    width: 2.35rem;
+    height: 2.1rem;
+    padding: 0.25rem;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    color: var(--color-lime);
+    cursor: pointer;
+  }
+
+  .section-rail__arrow:disabled {
+    color: var(--color-surface-raised);
+    cursor: not-allowed;
+  }
+
+  .section-rail__arrow svg {
+    width: 1.35rem;
+  }
+
+  .section-rail__arrow path {
+    fill: none;
+    stroke: currentColor;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+    stroke-width: 3.5;
+  }
+
+  .section-rail__current,
+  .section-rail__total,
+  .section-rail__slash {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1;
+    writing-mode: vertical-rl;
+  }
+
+  .section-rail__current {
+    color: var(--color-lime);
+  }
+
+  .section-rail__slash {
+    margin-block: 0.15rem;
+    color: var(--color-muted-on-dark);
+  }
+
+  .section-rail__markers {
+    display: grid;
+    margin: 0.6rem 0;
+    padding: 0;
+    gap: 0;
+    list-style: none;
+  }
+
+  .section-rail__markers button {
+    display: grid;
+    width: 1.5rem;
+    height: 1.5rem;
+    padding: 0;
+    place-items: center;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .section-rail__markers button::before {
+    width: 0.48rem;
+    height: 0.48rem;
+    background: var(--color-surface-raised);
+    content: '';
+  }
+
+  .section-rail__markers button[aria-current="true"]::before {
+    height: 1.25rem;
+    background: var(--color-lime);
+  }
+
+  @media (max-width: 56rem) {
+    :global(html:has(.section-rail)) {
+      --page-safe-end: var(--page-gutter);
+    }
+
+    .section-rail {
+      display: none;
+    }
+  }
+</style>

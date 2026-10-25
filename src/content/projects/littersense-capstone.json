@@ -1,0 +1,97 @@
+{
+  "title": "LitterSense: A Multi-Sensor IoT-Based Smart Litter Monitoring System with Predictive Health Detection for Cat Care",
+  "shortTitle": "LitterSense",
+  "slug": "littersense-smart-litter-monitoring",
+  "type": "capstone",
+  "status": "in-progress",
+  "year": 2026,
+  "course": "ITC 100: Capstone Project 1, St. Dominic College of Asia",
+  "description": "LitterSense is a smart litter box system that helps Filipino cat owners spot health problems early. Sensors in the litter box identify which cat is using it by RFID collar tag, log each visit, and track litter level and air quality. A web app shows each cat's history, flags unusual patterns that can be early signs of urinary or kidney problems, and exports PDF/CSV reports owners can bring to the vet. It is built to keep working on unreliable Philippine internet: data is stored on the device and synced once the connection comes back.",
+  "objectives": [
+    "Study how Filipino cat owners currently monitor their cats' health, and where manual observation and commercial smart litter boxes fall short.",
+    "Design and build LitterSense as one system: a sensor-equipped litter box, cloud services, and a web app with real-time alerts and PDF/CSV health reports.",
+    "Test its accuracy and reliability: sensor readings, RFID identification, anomaly detection, and how the app behaves under unstable network conditions.",
+    "Deploy the prototype in a real household and evaluate how well it works day to day."
+  ],
+  "technologies": [
+    "Next.js 16",
+    "React 19",
+    "TypeScript 5",
+    "Tailwind CSS 4",
+    "Framer Motion",
+    "Recharts",
+    "Lucide React",
+    "Progressive Web App",
+    "Node.js",
+    "Firebase Authentication",
+    "Firebase Firestore",
+    "Firebase Cloud Storage",
+    "Firebase Admin SDK",
+    "Firebase Cloud Messaging",
+    "Firebase Security Rules",
+    "Supabase PostgreSQL",
+    "Google Gemini API",
+    "iProgSMS API",
+    "WebSockets",
+    "ESP32-S3",
+    "RFID identification",
+    "Vercel",
+    "Figma"
+  ],
+  "team": [
+    "4-member team (names not shown for privacy)"
+  ],
+  "myRole": "I am the frontend and documentation lead. I made the moodboard and designed the web app's screens in Figma, then built the interface. Almost every screen has my work in it, and the main dashboard is the one that most reflects my design. Since the rest of the team moved their focus to the hardware, I've handled the bulk of the capstone documentation. That includes most of the Chapter 1 introduction and some of the system flowcharts. I don't work on the hardware.",
+  "output": "Working prototype, now in testing. In the end-user evaluation (30 cat owners so far, using the ISO/IEC 25010 quality model), the overall rating was 4.53 out of 5, \"Strongly Agree.\" Usability scored highest at 4.58. The expert evaluation and the real-household deployment are still to come.",
+  "links": [],
+  "cover": {
+    "image": "../../assets/content/projects/littersense/littersense-login.jpeg",
+    "alt": "LitterSense web app sign-in screen."
+  },
+  "evidence": [
+    {
+      "image": "../../assets/content/projects/littersense/littersense-login.jpeg",
+      "caption": "LitterSense web app sign-in screen."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-capstone-dashboard-alert-wireframe.png",
+      "caption": "Dashboard wireframe showing an unusual-behavior alert (design mockup, not the final app).",
+      "tag": "Wireframe"
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-capstone-health-reports-wireframe.png",
+      "caption": "Health Reports wireframe for generating vet reports (design mockup, not the final app).",
+      "tag": "Wireframe"
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-capstone-empty-state-wireframe.png",
+      "caption": "Wireframe of the first-time screen shown before any cat is registered (design mockup, not the final app).",
+      "tag": "Wireframe"
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-capstone-home.jpeg",
+      "caption": "Home screen for a new account, before any cat is added."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-capstone-live.jpeg",
+      "caption": "Live camera page, waiting for the camera feed."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-capstone-health-analysis.jpeg",
+      "caption": "Predictive Health Analysis page, where each cat's behavior baseline is reviewed."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-capstone-reports.jpeg",
+      "caption": "Litter box activity reports, generated per cat and date range."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-capstone-settings.jpeg",
+      "caption": "Notification settings for health, urine, stool and RFID alerts."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-side-wiring.jpeg",
+      "caption": "Prototype enclosure: control box with the ESP32-S3 and wiring mounted on the side, ultrasonic sensor under the lid."
+    }
+  ],
+  "featured": true
+}

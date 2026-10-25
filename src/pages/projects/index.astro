@@ -1,0 +1,256 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import DiagonalBands from '../../components/DiagonalBands.astro';
+import FilmStripDivider from '../../components/FilmStripDivider.astro';
+import PillTabs from '../../components/PillTabs.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import SectionRail from '../../components/SectionRail.astro';
+import SectionTitle from '../../components/SectionTitle.astro';
+import WatermarkWord from '../../components/WatermarkWord.astro';
+
+const projects = (await getCollection('projects')).sort((a, b) => {
+  if (a.data.featured !== b.data.featured) return a.data.featured ? -1 : 1;
+  return b.data.year - a.data.year || a.data.title.localeCompare(b.data.title);
+});
+
+const tabs = [
+  { label: 'All', value: 'all' },
+  { label: 'Capstone', value: 'capstone' },
+  { label: 'IoT', value: 'iot' },
+  { label: 'Third-Year', value: 'third-year' },
+  { label: 'Early Work', value: 'early-work' },
+];
+
+const railSections = [
+  { id: 'projects-intro', number: '01', label: 'Projects introduction' },
+  { id: 'projects-archive', number: '02', label: 'Project archive' },
+];
+---
+
+<BaseLayout
+  title="Projects | Ashton Caspe"
+  description="My software, IoT, capstone, and early web projects, including the objectives, tools, results, and my contribution."
+  backgroundVideo={false}
+  bodyClass="projects-page"
+>
+  <section class="projects-hero" id="projects-intro" aria-labelledby="projects-heading">
+    <DiagonalBands variant="split" />
+    <div class="projects-hero__title">
+      <SectionTitle label="Projects" number="01" tone="lime" />
+    </div>
+    <div class="projects-hero__copy">
+      <p class="projects-hero__lead" id="projects-heading">
+        Systems, apps, and experiments built while learning how ideas become useful technology.
+      </p>
+      <p>
+        Filter the work by category, then open any project for its objectives, tools, evidence, result, and my exact contribution.
+      </p>
+    </div>
+  </section>
+
+  <FilmStripDivider />
+
+  <section class="project-library" id="projects-archive" aria-labelledby="project-library-heading" data-project-library>
+    <WatermarkWord word="Projects" />
+    <div class="project-library__title">
+      <SectionTitle label="Archive" number="02" tone="dark" />
+    </div>
+    <div class="project-library__head">
+      <div>
+        <p class="project-library__eyebrow">Selected work / 2024–2026</p>
+        <h1 id="project-library-heading">Project archive</h1>
+      </div>
+      <PillTabs label="Filter projects" items={tabs} active="all" />
+    </div>
+    <p class="project-library__count" aria-live="polite" data-project-count>
+      Showing all {projects.length} projects
+    </p>
+    <div class="project-grid" data-project-grid>
+      {projects.map((project, index) => <ProjectCard project={project} index={index} />)}
+    </div>
+  </section>
+
+  <SectionRail sections={railSections} />
+</BaseLayout>
+
+<script>
+  const setupProjectFilters = () => {
+    const library = document.querySelector<HTMLElement>('[data-project-library]');
+    if (!library || library.dataset.ready === 'true') return;
+    library.dataset.ready = 'true';
+
+    const tabList = library.querySelector<HTMLElement>('[data-pill-tabs]');
+    const cards = [...library.querySelectorAll<HTMLElement>('[data-project-card]')];
+    const count = library.querySelector<HTMLElement>('[data-project-count]');
+
+    const filterProjects = (value = 'all') => {
+      let visible = 0;
+      cards.forEach((card) => {
+        const matches = value === 'all' || card.dataset.projectType === value;
+        card.hidden = !matches;
+        if (matches) visible += 1;
+      });
+
+      if (count) {
+        const label = value === 'all'
+          ? 'all'
+          : tabList?.querySelector<HTMLElement>(`[data-value="${value}"]`)?.textContent?.trim() ?? value;
+        count.textContent = value === 'all'
+          ? `Showing all ${visible} projects`
+          : `Showing ${visible} ${label} project${visible === 1 ? '' : 's'}`;
+      }
+    };
+
+    tabList?.addEventListener('pill-tab-change', (event) => {
+      filterProjects((event as CustomEvent<{ value: string }>).detail.value);
+    });
+  };
+
+  document.addEventListener('astro:page-load', setupProjectFilters);
+  setupProjectFilters();
+</script>
+
+<style>
+  :global(.projects-page) {
+    background: var(--color-paper);
+  }
+
+  .projects-hero {
+    position: relative;
+    display: grid;
+    min-height: clamp(31rem, 67vh, 45rem);
+    padding: clamp(3rem, 7vw, 6.5rem) var(--page-safe-end) clamp(4rem, 8vw, 7rem) var(--page-gutter);
+    grid-template-columns: minmax(18rem, 0.9fr) minmax(20rem, 1.1fr);
+    align-items: center;
+    gap: clamp(2rem, 6vw, 7rem);
+    isolation: isolate;
+    overflow: hidden;
+  }
+
+  .projects-hero__title {
+    align-self: start;
+  }
+
+  .projects-hero__copy {
+    position: relative;
+    z-index: 2;
+    max-width: 44rem;
+    padding: clamp(1.5rem, 3vw, 3rem);
+    border-left: 0.65rem solid var(--color-lime);
+    background: var(--color-paper);
+  }
+
+  .projects-hero__copy p:last-child {
+    max-width: 55ch;
+    margin-bottom: 0;
+  }
+
+  .projects-hero__lead {
+    margin-bottom: var(--space-5);
+    color: var(--color-black);
+    font-family: var(--font-body);
+    font-size: clamp(1.7rem, 1.2rem + 2vw, 3.5rem);
+    font-weight: 900;
+    line-height: 1.04;
+    letter-spacing: -0.035em;
+  }
+
+  .project-library {
+    position: relative;
+    min-height: 50rem;
+    padding: clamp(5rem, 9vw, 9rem) var(--page-safe-end) clamp(6rem, 10vw, 10rem) var(--page-gutter);
+    overflow: hidden;
+    background: var(--color-paper);
+  }
+
+  .project-library :global(.watermark) {
+    top: 2.7rem;
+    right: -0.06em;
+  }
+
+  .project-library__title {
+    position: relative;
+    z-index: 1;
+    width: min(100%, var(--content-max));
+    margin: 0 auto clamp(3rem, 6vw, 6rem);
+  }
+
+  .project-library__head,
+  .project-library__count,
+  .project-grid {
+    position: relative;
+    z-index: 1;
+    width: min(100%, var(--content-max));
+    margin-inline: auto;
+  }
+
+  .project-library__head {
+    display: flex;
+    margin-bottom: var(--space-4);
+    align-items: end;
+    justify-content: space-between;
+    gap: var(--space-6);
+  }
+
+  .project-library__eyebrow {
+    margin-bottom: 0.35rem;
+    font-size: 0.72rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  h1 {
+    margin-bottom: 0;
+    font-size: clamp(2.7rem, 2rem + 3vw, 5.7rem);
+    font-style: italic;
+    text-transform: uppercase;
+  }
+
+  .project-library__count {
+    margin-bottom: var(--space-7);
+    color: var(--color-muted);
+    font-size: 0.8rem;
+    font-weight: 800;
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: clamp(3.5rem, 7vw, 7rem) clamp(2rem, 5vw, 5rem);
+  }
+
+  .project-grid :global([hidden]) {
+    display: none;
+  }
+
+  @media (max-width: 70rem) {
+    .project-library__head {
+      align-items: start;
+      flex-direction: column;
+    }
+
+  }
+
+  @media (max-width: 48rem) {
+    .projects-hero {
+      min-height: auto;
+      padding-top: var(--space-7);
+      grid-template-columns: 1fr;
+      gap: var(--space-6);
+    }
+
+    .projects-hero__copy {
+      padding: var(--space-5);
+    }
+
+    .project-library {
+      padding-top: var(--space-9);
+    }
+
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

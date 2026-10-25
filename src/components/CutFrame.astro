@@ -1,0 +1,88 @@
+---
+interface Props {
+  caption?: string;
+  variant?: 'single' | 'double';
+  accent?: 'lime' | 'black' | 'white';
+}
+
+const { caption, variant = 'double', accent = 'lime' } = Astro.props;
+---
+
+<figure class:list={["cut-frame", `cut-frame--${variant}`, `cut-frame--${accent}`]}>
+  <div class="cut-frame__media">
+    <slot />
+  </div>
+  {caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+  .cut-frame {
+    --frame-accent: var(--color-lime);
+    width: 100%;
+    margin: 0;
+    filter: drop-shadow(0.65rem 0.65rem 0 var(--color-black));
+  }
+
+  .cut-frame--black {
+    --frame-accent: var(--color-black);
+  }
+
+  .cut-frame--white {
+    --frame-accent: var(--color-white);
+  }
+
+  .cut-frame__media {
+    display: grid;
+    min-height: 17rem;
+    overflow: hidden;
+    background: var(--frame-accent);
+    border: 0.45rem solid var(--frame-accent);
+    clip-path: polygon(0 0, calc(100% - 4rem) 0, 100% 4rem, 100% 100%, 4rem 100%, 0 calc(100% - 4rem));
+  }
+
+  .cut-frame--single .cut-frame__media {
+    clip-path: polygon(0 0, calc(100% - 4rem) 0, 100% 4rem, 100% 100%, 0 100%);
+  }
+
+  .cut-frame__media :global(img),
+  .cut-frame__media :global(video),
+  .cut-frame__media :global(picture) {
+    width: 100%;
+    height: 100%;
+    min-height: inherit;
+    object-fit: cover;
+    overflow: hidden;
+    border-radius: 0.65rem;
+  }
+
+  figcaption {
+    width: fit-content;
+    max-width: 90%;
+    margin: 0 1.2rem;
+    padding: 0.45rem 0.9rem;
+    background: var(--color-black);
+    color: var(--color-white);
+    font-size: var(--step--1);
+    font-weight: 700;
+  }
+
+  @media (max-width: 40rem) {
+    .cut-frame__media {
+      min-height: 13rem;
+      clip-path: polygon(0 0, calc(100% - 2.5rem) 0, 100% 2.5rem, 100% 100%, 2.5rem 100%, 0 calc(100% - 2.5rem));
+    }
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .cut-frame {
+      transition: transform var(--motion-base) var(--ease-snap), filter var(--motion-base) ease;
+    }
+
+    .cut-frame:has(a:hover),
+    .cut-frame:has(a:focus-visible),
+    .cut-frame:hover {
+      transform: translateY(-0.45rem) rotate(-0.6deg);
+      filter: drop-shadow(0.9rem 0.9rem 0 var(--color-black));
+    }
+  }
+</style>

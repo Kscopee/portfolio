@@ -6,3 +6,15 @@ content-inbox/
 
 # Visual Studio junk
 .vs/
+
+# Astro build output and local dependencies
+node_modules/
+dist/
+.astro/
+.qa/
+
+# Logs and local environment files
+npm-debug.log*
+.env
+.env.*
+!.env.example

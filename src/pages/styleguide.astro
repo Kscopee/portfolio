@@ -1,0 +1,847 @@
+---
+import CarouselControls from '../components/CarouselControls.astro';
+import CutFrame from '../components/CutFrame.astro';
+import DiagonalBands from '../components/DiagonalBands.astro';
+import FilmStripDivider from '../components/FilmStripDivider.astro';
+import PillButton from '../components/PillButton.astro';
+import PillTabs from '../components/PillTabs.astro';
+import SectionRail from '../components/SectionRail.astro';
+import SectionTitle from '../components/SectionTitle.astro';
+import WatermarkWord from '../components/WatermarkWord.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL;
+const withBase = (path: string) => `${base.replace(/\/$/, '')}/${path.replace(/^\//, '')}`;
+const railSections = [
+  { id: 'styleguide-intro', number: '00', label: 'Style guide introduction' },
+  { id: 'styleguide-foundation', number: '01', label: 'Foundation' },
+  { id: 'styleguide-shapes', number: '02', label: 'Shape kit' },
+  { id: 'styleguide-controls', number: '03', label: 'Controls and motion' },
+];
+
+const tabs = [
+  { label: 'All', value: 'all' },
+  { label: 'Projects', value: 'projects' },
+  { label: 'Credentials', value: 'credentials' },
+  { label: 'About', value: 'about' },
+];
+---
+
+<BaseLayout
+  title="Design System | Ashton Caspe Portfolio"
+  description="Development-only visual system preview for my portfolio."
+  robots="noindex, nofollow"
+  backgroundVideo={false}
+>
+    <div class="styleguide-main">
+      <section id="styleguide-intro" class="guide-section guide-hero" aria-labelledby="guide-title">
+        <DiagonalBands variant="split" />
+        <WatermarkWord word="SYSTEM" tone="dark" />
+
+        <div class="guide-masthead">
+          <span>AC // 2026</span>
+          <span>Phase 01 · Visual system</span>
+        </div>
+
+        <div class="guide-hero__copy" data-reveal>
+          <p class="guide-kicker">Design language</p>
+          <h1 id="guide-title">LOUD SHAPES.<br /><em>CLEAR SIGNAL.</em></h1>
+          <p>
+            A high-contrast system for my portfolio: sharp geometry, oversized type,
+            clipped media and fast, purposeful movement.
+          </p>
+          <PillButton href="#styleguide-foundation" label="Explore the kit" tone="lime" />
+        </div>
+
+        <div class="guide-hero__stamp" aria-hidden="true">
+          <span>01</span>
+          <strong>DESIGN<br />SYSTEM</strong>
+        </div>
+
+        <div class="guide-scroll-cue" aria-hidden="true">
+          <span>Scroll to inspect</span>
+          <svg viewBox="0 0 24 24"><path d="m5 9.5 7 7 7-7" /></svg>
+        </div>
+      </section>
+
+      <div class="guide-divider"><FilmStripDivider /></div>
+
+      <section id="styleguide-foundation" class="guide-section foundation" aria-labelledby="foundation-heading">
+        <WatermarkWord word="FOUNDATION" />
+        <div class="guide-title-wrap">
+          <SectionTitle label="Foundation" number="01" tone="lime" />
+        </div>
+
+        <div class="foundation__content">
+          <div class="type-specimen" data-reveal>
+            <p class="spec-label">Display / Print Hongmeng</p>
+            <h2 id="foundation-heading">MAKE IT<br /><em>UNMISSABLE.</em></h2>
+            <p class="body-sample">
+              Tahoma keeps longer text direct and readable. The display face is reserved for
+              section numbers, short headings and oversized background words.
+            </p>
+            <div class="type-meta">
+              <span>Aa</span>
+              <span>0123456789</span>
+              <span>200–600ms motion</span>
+            </div>
+          </div>
+
+          <div class="swatch-stack" data-reveal="right" aria-label="Color tokens">
+            <article class="swatch swatch--lime">
+              <span>Lime</span><code>#D7F205</code>
+            </article>
+            <article class="swatch swatch--black">
+              <span>Black</span><code>#000000</code>
+            </article>
+            <article class="swatch swatch--surface">
+              <span>Surface</span><code>#262626</code>
+            </article>
+            <article class="swatch swatch--paper">
+              <span>Paper</span><code>#F5F5F5</code>
+            </article>
+            <article class="swatch swatch--white">
+              <span>White</span><code>#FFFFFF</code>
+            </article>
+          </div>
+
+          <div class="spacing-ruler" data-reveal>
+            <p class="spec-label">Spacing rhythm</p>
+            <div><span style="--ruler-size: 1rem">04</span><span style="--ruler-size: 2rem">08</span><span style="--ruler-size: 3rem">12</span><span style="--ruler-size: 4rem">16</span><span style="--ruler-size: 6rem">24</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="styleguide-shapes" class="guide-section shape-showcase" aria-labelledby="shape-heading">
+        <DiagonalBands variant="dark" />
+        <WatermarkWord word="SHAPES" tone="dark" />
+
+        <div class="guide-title-wrap guide-title-wrap--right">
+          <SectionTitle label="Shape kit" number="02" tone="lime" side="right" />
+        </div>
+
+        <div class="shape-showcase__content">
+          <div class="frame-demo" data-reveal>
+            <CutFrame caption="CutFrame · two clipped corners · lime keyline">
+              <img
+                src={withBase('assets/images/ashton-portrait.png')}
+                alt="Ashton Caspe wearing glasses and a dark jacket"
+                width="432"
+                height="577"
+              />
+            </CutFrame>
+          </div>
+
+          <div class="shape-notes" data-reveal="right">
+            <p class="spec-label spec-label--lime">One angle. Repeated with intent.</p>
+            <h2 id="shape-heading">MEDIA STAYS<br />INSIDE THE CUT.</h2>
+            <p>
+              The frame, title wedge and background bands share one directional slant. That
+              repetition makes asymmetric layouts feel deliberate instead of chaotic.
+            </p>
+            <div class="shape-rule">
+              <span aria-hidden="true"></span>
+              <strong>14° desktop</strong>
+              <small>9° on narrow screens</small>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="guide-divider guide-divider--lime"><FilmStripDivider /></div>
+
+      <section id="styleguide-controls" class="guide-section controls" aria-labelledby="controls-heading">
+        <WatermarkWord word="CONTROLS" />
+        <div class="guide-title-wrap">
+          <SectionTitle label="Controls" number="03" tone="black" />
+        </div>
+
+        <div class="controls__content">
+          <div class="controls__headline" data-reveal>
+            <p class="spec-label">Keyboard-ready interface pieces</p>
+            <h2 id="controls-heading">FAST TO READ.<br /><em>HARD TO MISS.</em></h2>
+          </div>
+
+          <div class="control-stage control-stage--dark" data-reveal="right">
+            <span class="control-stage__label">Pill buttons</span>
+            <div class="control-row">
+              <PillButton label="View more" />
+              <PillButton label="Selected" tone="lime" />
+              <PillButton label="Previous" tone="white" arrow="left" />
+            </div>
+          </div>
+
+          <div class="control-stage" data-reveal>
+            <span class="control-stage__label">Filter tabs · use arrow keys</span>
+            <PillTabs label="Style guide categories" items={tabs} active="all" />
+          </div>
+
+          <div class="control-stage control-stage--lime" data-reveal="right">
+            <span class="control-stage__label">Cycle controls</span>
+            <CarouselControls count={5} active={1} />
+          </div>
+
+          <aside class="motion-note" data-reveal>
+            <strong>Motion rule</strong>
+            <p>
+              Elements enter along the same diagonal in 200–600ms. With reduced motion enabled,
+              they appear immediately. Native scrolling always stays in control.
+            </p>
+          </aside>
+        </div>
+      </section>
+    </div>
+
+    <SectionRail sections={railSections} />
+
+    <script src="../scripts/styleguide-motion.ts"></script>
+    <script>
+      window.addEventListener('load', () => {
+        if (!window.location.hash) return;
+        const target = document.querySelector<HTMLElement>(window.location.hash);
+        target?.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }, { once: true });
+    </script>
+</BaseLayout>
+
+<style>
+  .styleguide-main {
+    overflow: hidden;
+  }
+
+  .guide-section {
+    position: relative;
+    isolation: isolate;
+    min-height: 100svh;
+    padding-block: var(--space-8);
+    padding-inline: var(--page-gutter) var(--page-safe-end);
+    scroll-margin-top: 1rem;
+  }
+
+  .guide-hero {
+    min-height: 100svh;
+    padding-top: clamp(2rem, 6vh, 5rem);
+    background: var(--color-paper);
+    color: var(--color-white);
+  }
+
+  .guide-hero :global(.watermark) {
+    right: -3vw;
+    bottom: 8vh;
+  }
+
+  .guide-masthead {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    max-width: var(--content-max);
+    margin-inline: auto;
+    justify-content: space-between;
+    gap: var(--space-4);
+    color: var(--color-white);
+    font-size: var(--step--1);
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+
+  .guide-hero__copy {
+    position: relative;
+    z-index: 3;
+    width: min(47rem, 50vw);
+    max-width: var(--content-max);
+    margin: clamp(7rem, 17vh, 12rem) auto 0;
+    margin-inline-start: max(0px, calc((100vw - var(--content-max)) / 2));
+  }
+
+  .guide-kicker,
+  .spec-label {
+    margin-bottom: var(--space-3);
+    font-size: var(--step--1);
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .guide-kicker {
+    color: var(--color-lime);
+  }
+
+  .guide-hero h1 {
+    max-width: none;
+    margin-bottom: var(--space-5);
+    color: var(--color-white);
+    font-size: clamp(4rem, 6.35vw, 6.75rem);
+    font-style: italic;
+    white-space: nowrap;
+  }
+
+  .guide-hero h1 em {
+    color: var(--color-lime);
+    font-style: inherit;
+  }
+
+  .guide-hero__copy > p:not(.guide-kicker) {
+    max-width: 43rem;
+    margin-bottom: var(--space-6);
+    color: var(--color-paper);
+    font-size: var(--step-1);
+  }
+
+  .guide-hero__stamp {
+    position: absolute;
+    right: clamp(5rem, 10vw, 12rem);
+    bottom: 14vh;
+    z-index: 3;
+    display: flex;
+    align-items: flex-end;
+    gap: 1rem;
+    color: var(--color-black);
+    transform: rotate(-4deg);
+  }
+
+  .guide-hero__stamp span {
+    color: var(--color-lime);
+    font-family: var(--font-display);
+    font-size: clamp(5rem, 10vw, 9rem);
+    font-style: italic;
+    line-height: 0.7;
+  }
+
+  .guide-hero__stamp strong {
+    font-family: var(--font-display);
+    font-size: var(--step-1);
+    letter-spacing: var(--tracking-display-readable);
+    line-height: var(--leading-display-readable);
+  }
+
+  .guide-scroll-cue {
+    position: absolute;
+    bottom: 1.4rem;
+    left: var(--page-gutter);
+    z-index: 4;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--color-white);
+    font-size: var(--step--1);
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .guide-scroll-cue svg {
+    width: 1.35rem;
+  }
+
+  .guide-scroll-cue path {
+    fill: none;
+    stroke: var(--color-lime);
+    stroke-linecap: square;
+    stroke-width: 3;
+  }
+
+  .guide-divider {
+    position: relative;
+    z-index: 5;
+    height: 0;
+  }
+
+  .guide-divider :global(.film-strip) {
+    transform: translateY(-50%) rotate(-1deg) scale(1.04);
+  }
+
+  .guide-divider--lime :global(.film-strip) {
+    background: var(--color-lime);
+  }
+
+  .foundation {
+    display: grid;
+    min-height: 115svh;
+    padding-top: var(--space-9);
+    align-items: start;
+    background: var(--color-white);
+  }
+
+  .foundation :global(.watermark) {
+    top: 12%;
+    right: -4vw;
+  }
+
+  .guide-title-wrap {
+    position: relative;
+    z-index: 3;
+  }
+
+  .guide-title-wrap--right {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .foundation__content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: min(100%, var(--content-max));
+    margin: var(--space-7) auto 0;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: clamp(2rem, 6vw, 7rem);
+    align-items: start;
+  }
+
+  .foundation__content > *,
+  .shape-showcase__content > *,
+  .controls__content > * {
+    min-width: 0;
+  }
+
+  .type-specimen {
+    padding-inline-start: clamp(0rem, 6vw, 7rem);
+  }
+
+  .type-specimen h2,
+  .shape-notes h2,
+  .controls__headline h2 {
+    margin-bottom: var(--space-5);
+    font-size: var(--step-3);
+    font-style: italic;
+  }
+
+  .type-specimen h2 {
+    font-size: clamp(3.6rem, 5.3vw, 5.25rem);
+  }
+
+  .type-specimen h2 em,
+  .controls__headline h2 em {
+    display: inline-block;
+    padding-inline: 0.1em 0.14em;
+    background: var(--color-lime);
+    color: var(--color-black);
+    font-style: inherit;
+  }
+
+  .body-sample {
+    max-width: 38rem;
+    font-size: var(--step-1);
+  }
+
+  .type-meta {
+    display: flex;
+    margin-top: var(--space-6);
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+
+  .type-meta span {
+    padding: 0.4rem 0.8rem;
+    border: 2px solid var(--color-black);
+    font-size: var(--step--1);
+    font-weight: 800;
+  }
+
+  .swatch-stack {
+    display: grid;
+    align-self: center;
+    transform: rotate(1.5deg);
+  }
+
+  .swatch {
+    display: flex;
+    min-height: 4.2rem;
+    padding: 0.85rem 1.2rem;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border: 2px solid var(--color-black);
+    color: var(--color-black);
+    font-weight: 800;
+    box-shadow: 0.45rem 0.45rem 0 var(--color-black);
+    transform: translateX(var(--offset, 0));
+  }
+
+  .swatch + .swatch {
+    margin-top: -2px;
+  }
+
+  .swatch code {
+    flex: none;
+    font-family: var(--font-body);
+    font-size: var(--step--1);
+    white-space: nowrap;
+  }
+
+  .swatch span {
+    min-width: 0;
+  }
+
+  .swatch--lime {
+    --offset: -2rem;
+    background: var(--color-lime);
+  }
+
+  .swatch--black {
+    --offset: 1.5rem;
+    background: var(--color-black);
+    color: var(--color-white);
+  }
+
+  .swatch--surface {
+    --offset: -0.5rem;
+    background: var(--color-surface);
+    color: var(--color-white);
+  }
+
+  .swatch--paper {
+    --offset: 2.5rem;
+    background: var(--color-paper);
+  }
+
+  .swatch--white {
+    --offset: 0.5rem;
+    background: var(--color-white);
+  }
+
+  .spacing-ruler {
+    grid-column: 1 / -1;
+    margin-top: var(--space-5);
+    padding-inline-start: clamp(0rem, 6vw, 7rem);
+  }
+
+  .spacing-ruler > div {
+    display: flex;
+    align-items: end;
+    gap: clamp(0.6rem, 2vw, 2rem);
+  }
+
+  .spacing-ruler span {
+    display: grid;
+    width: var(--ruler-size);
+    height: var(--ruler-size);
+    place-items: center;
+    background: var(--color-black);
+    color: var(--color-lime);
+    font-size: 0.65rem;
+    font-weight: 800;
+  }
+
+  .shape-showcase {
+    display: grid;
+    min-height: 115svh;
+    padding-top: var(--space-9);
+    align-content: center;
+    color: var(--color-white);
+  }
+
+  .shape-showcase :global(.watermark) {
+    left: -4vw;
+    bottom: 8%;
+  }
+
+  .shape-showcase__content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: min(100%, var(--content-max));
+    margin: var(--space-7) auto 0;
+    grid-template-columns: minmax(17rem, 0.85fr) minmax(18rem, 1.15fr);
+    gap: clamp(2rem, 7vw, 8rem);
+    align-items: center;
+  }
+
+  .frame-demo {
+    width: min(32rem, 100%);
+    justify-self: end;
+  }
+
+  .frame-demo img {
+    object-position: center 16%;
+    background: var(--color-surface);
+  }
+
+  .shape-notes {
+    max-width: 41rem;
+  }
+
+  .shape-notes h2 {
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: clamp(2.6rem, 4.6vw, 4.9rem);
+    font-style: normal;
+    font-weight: 800;
+    letter-spacing: 0.025em;
+    line-height: 1.02;
+  }
+
+  .shape-notes > p:not(.spec-label) {
+    max-width: 35rem;
+    color: var(--color-paper);
+    font-size: var(--step-1);
+  }
+
+  .spec-label--lime {
+    color: var(--color-lime);
+  }
+
+  .shape-rule {
+    display: grid;
+    margin-top: var(--space-7);
+    padding: var(--space-4);
+    grid-template-columns: 7rem 1fr;
+    gap: 0.2rem 1.3rem;
+    align-items: center;
+    background: var(--color-black);
+    border-left: 0.35rem solid var(--color-lime);
+  }
+
+  .shape-rule span {
+    grid-row: 1 / 3;
+    width: 7rem;
+    height: 3rem;
+    border-top: 0.55rem solid var(--color-lime);
+    transform: skewX(calc(var(--shape-angle) * -1));
+  }
+
+  .shape-rule strong {
+    font-family: var(--font-body);
+    font-size: var(--step-1);
+    line-height: 1;
+  }
+
+  .shape-rule small {
+    color: var(--color-lime);
+    font-weight: 800;
+  }
+
+  .controls {
+    min-height: 120svh;
+    padding-top: var(--space-9);
+    background: var(--color-paper);
+  }
+
+  .controls :global(.watermark) {
+    top: 10%;
+    right: -4vw;
+  }
+
+  .controls__content {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    width: min(100%, 76rem);
+    margin: var(--space-7) auto 0;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-5);
+  }
+
+  .controls__headline {
+    grid-column: 1 / -1;
+    padding-inline-start: clamp(0rem, 8vw, 8rem);
+  }
+
+  .controls__headline h2 {
+    font-size: clamp(3.3rem, 6vw, 6rem);
+  }
+
+  .control-stage {
+    display: grid;
+    min-height: 12rem;
+    padding: var(--space-6);
+    align-content: center;
+    gap: var(--space-4);
+    border: var(--border-strong);
+    background: var(--color-white);
+    box-shadow: var(--shadow-hard);
+    clip-path: polygon(0 0, calc(100% - 2.5rem) 0, 100% 2.5rem, 100% 100%, 0 100%);
+  }
+
+  .control-stage--dark {
+    grid-column: 1 / -1;
+    background: var(--color-surface);
+    color: var(--color-white);
+  }
+
+  .control-stage--lime {
+    background: var(--color-lime);
+  }
+
+  .control-stage__label {
+    font-size: var(--step--1);
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .control-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-4);
+  }
+
+  .motion-note {
+    position: relative;
+    margin-top: var(--space-6);
+    grid-column: 1 / -1;
+    padding: var(--space-6) clamp(1.5rem, 5vw, 5rem);
+    background: var(--color-black);
+    color: var(--color-white);
+    clip-path: polygon(2.5rem 0, 100% 0, calc(100% - 2.5rem) 100%, 0 100%);
+  }
+
+  .motion-note strong {
+    display: block;
+    color: var(--color-lime);
+    font-family: var(--font-display);
+    font-size: var(--step-2);
+    font-style: italic;
+    letter-spacing: var(--tracking-display-readable);
+    line-height: var(--leading-display-readable);
+    text-transform: uppercase;
+  }
+
+  .motion-note p {
+    max-width: 58rem;
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 70rem) {
+    .guide-hero__stamp {
+      right: 3rem;
+    }
+
+    .foundation__content,
+    .shape-showcase__content {
+      gap: var(--space-7);
+    }
+  }
+
+  @media (max-width: 56rem) {
+    .guide-hero__copy {
+      width: 74vw;
+    }
+
+    .guide-hero__stamp {
+      right: 1rem;
+      bottom: 10vh;
+      opacity: 0.45;
+    }
+
+    .foundation__content,
+    .shape-showcase__content,
+    .controls__content {
+      grid-template-columns: 1fr;
+    }
+
+    .type-specimen,
+    .spacing-ruler,
+    .controls__headline {
+      padding-inline-start: 0;
+    }
+
+    .swatch-stack {
+      width: min(34rem, calc(100% - 2.5rem));
+      justify-self: center;
+    }
+
+    .frame-demo {
+      justify-self: center;
+    }
+
+    .shape-notes {
+      justify-self: center;
+    }
+
+    .control-stage,
+    .control-stage--dark,
+    .motion-note,
+    .controls__headline {
+      grid-column: 1;
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .guide-section {
+      min-height: auto;
+      padding-block: var(--space-8);
+    }
+
+    .guide-hero {
+      min-height: 100svh;
+    }
+
+    .guide-masthead {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .guide-hero__copy {
+      width: 82vw;
+      margin-top: 14vh;
+    }
+
+    .guide-hero h1 {
+      font-size: clamp(3.25rem, 14.5vw, 4.3rem);
+      white-space: normal;
+    }
+
+    .guide-hero__copy > p:not(.guide-kicker) {
+      font-size: var(--step-0);
+    }
+
+    .guide-hero__stamp {
+      display: none;
+    }
+
+    .foundation,
+    .shape-showcase,
+    .controls {
+      padding-top: var(--space-8);
+    }
+
+    .foundation__content,
+    .shape-showcase__content,
+    .controls__content {
+      margin-top: var(--space-7);
+    }
+
+    .type-specimen h2,
+    .shape-notes h2,
+    .controls__headline h2 {
+      font-size: clamp(2.2rem, 9vw, 2.8rem);
+    }
+
+    .shape-notes .spec-label {
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+    }
+
+    .swatch {
+      transform: none;
+    }
+
+    .swatch-stack {
+      width: calc(100% - 0.75rem);
+      max-width: 100%;
+    }
+
+    .foundation__content,
+    .shape-showcase__content,
+    .controls__content,
+    .body-sample {
+      width: 100%;
+      max-width: 100%;
+      overflow-wrap: anywhere;
+    }
+
+    .spacing-ruler span:nth-child(5) {
+      display: none;
+    }
+
+    .control-stage {
+      padding: var(--space-5);
+    }
+
+    .motion-note {
+      clip-path: polygon(1.5rem 0, 100% 0, calc(100% - 1.5rem) 100%, 0 100%);
+    }
+  }
+</style>

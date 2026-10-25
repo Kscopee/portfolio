@@ -1,0 +1,219 @@
+---
+import PillTabs from './PillTabs.astro';
+
+interface Props {
+  technical: string[];
+  soft: string[];
+}
+
+const { technical, soft } = Astro.props;
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const iconNames: Record<string, string> = {
+  HTML: 'html.svg',
+  CSS: 'css.svg',
+  JavaScript: 'javascript.svg',
+  Astro: 'astro-light.svg',
+  Bootstrap: 'bootstrap.svg',
+  React: 'react.svg',
+  Java: 'java.svg',
+  C: 'c.svg',
+  MySQL: 'mysql-light.svg',
+  Git: 'git.svg',
+  GitHub: 'github-light.svg',
+  'VS Code': 'vscode.svg',
+  'Android Studio': 'android-studio.svg',
+  Communication: 'communication.webp',
+  Networking: 'networking.webp',
+  Organization: 'organization.webp',
+  Creativity: 'creativity.webp',
+  Curiosity: 'curiosity.webp',
+  Dedication: 'dedication.webp',
+  Adaptability: 'adaptability.webp',
+};
+const iconUrl = (skill: string) => `${base}/assets/skills/${iconNames[skill]}`;
+const tabs = [
+  { label: 'Technical', value: 'technical', controls: 'technical-skills-panel' },
+  { label: 'Soft', value: 'soft', controls: 'soft-skills-panel' },
+];
+---
+
+<div class="skills-panel" data-skills-panel>
+  <div class="skills-panel__head">
+    <p>Tools I use and strengths I bring to a team.</p>
+    <PillTabs id="skills-tabs" label="Choose skill type" items={tabs} active="technical" />
+  </div>
+
+  <div
+    class="skills-grid"
+    id="technical-skills-panel"
+    role="tabpanel"
+    aria-labelledby="skills-tabs-technical-tab"
+    data-skill-group="technical"
+  >
+    {technical.map((skill, index) => (
+      <article class="skill-card" style={`--skill-index: ${index}`}>
+        <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <img src={iconUrl(skill)} alt="" loading="lazy" />
+        <h3>{skill}</h3>
+      </article>
+    ))}
+  </div>
+
+  <div
+    class="skills-grid skills-grid--soft"
+    id="soft-skills-panel"
+    role="tabpanel"
+    aria-labelledby="skills-tabs-soft-tab"
+    data-skill-group="soft"
+    hidden
+  >
+    {soft.map((skill, index) => (
+      <article class="skill-card" style={`--skill-index: ${index}`}>
+        <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+        <img src={iconUrl(skill)} alt="" loading="lazy" />
+        <h3>{skill}</h3>
+      </article>
+    ))}
+  </div>
+</div>
+
+<script>
+  let cleanUpSkillsPanels = () => {};
+
+  const setupSkillsPanels = () => {
+    cleanUpSkillsPanels();
+    const cleanups: Array<() => void> = [];
+
+    document.querySelectorAll<HTMLElement>('[data-skills-panel]').forEach((panel) => {
+      const tabList = panel.querySelector<HTMLElement>('[data-pill-tabs]');
+      const groups = [...panel.querySelectorAll<HTMLElement>('[data-skill-group]')];
+      const changeHandler = (event: Event) => {
+        const value = (event as CustomEvent<{ value: string }>).detail.value;
+        groups.forEach((group) => { group.hidden = group.dataset.skillGroup !== value; });
+      };
+      tabList?.addEventListener('pill-tab-change', changeHandler);
+      cleanups.push(() => tabList?.removeEventListener('pill-tab-change', changeHandler));
+    });
+
+    cleanUpSkillsPanels = () => cleanups.forEach((cleanup) => cleanup());
+  };
+
+  document.addEventListener('astro:page-load', setupSkillsPanels);
+  setupSkillsPanels();
+</script>
+
+<style>
+  .skills-panel {
+    position: relative;
+    z-index: 2;
+    width: min(100%, 78rem);
+    margin-inline: auto;
+  }
+
+  .skills-panel__head {
+    display: flex;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem);
+    align-items: end;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+
+  .skills-panel__head > p {
+    max-width: 28rem;
+    margin: 0;
+    color: var(--color-white);
+    font-size: clamp(1rem, 0.92rem + 0.35vw, 1.25rem);
+    font-weight: 800;
+  }
+
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: clamp(0.8rem, 1.8vw, 1.5rem);
+  }
+
+  .skills-grid[hidden] {
+    display: none;
+  }
+
+  .skill-card {
+    position: relative;
+    display: grid;
+    min-height: 11.5rem;
+    padding: 1.4rem 1rem 1.2rem;
+    place-items: center;
+    align-content: center;
+    gap: 0.75rem;
+    overflow: hidden;
+    border: 0.16rem solid var(--color-black);
+    background: var(--color-surface);
+    color: var(--color-white);
+    box-shadow: 0.38rem 0.38rem 0 var(--color-black);
+    clip-path: polygon(0 0, calc(100% - 1.5rem) 0, 100% 1.5rem, 100% 100%, 1.5rem 100%, 0 calc(100% - 1.5rem));
+    transition: transform var(--motion-fast) var(--ease-snap), background var(--motion-fast) ease;
+  }
+
+  .skill-card:hover,
+  .skill-card:focus-within {
+    background: var(--color-surface-raised);
+    transform: translateY(-0.35rem) rotate(-0.5deg);
+  }
+
+  .skill-card > span {
+    position: absolute;
+    top: 0.55rem;
+    left: 0.7rem;
+    color: var(--color-lime);
+    font-size: 0.62rem;
+    font-weight: 900;
+  }
+
+  .skill-card img {
+    width: 3.8rem;
+    height: 3.8rem;
+    object-fit: contain;
+  }
+
+  .skill-card h3 {
+    margin: 0;
+    color: var(--color-white);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    font-weight: 900;
+    line-height: 1.2;
+    text-align: center;
+  }
+
+  @media (max-width: 60rem) {
+    .skills-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 40rem) {
+    .skills-panel__head {
+      align-items: stretch;
+      flex-direction: column;
+    }
+
+    .skills-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .skill-card {
+      min-height: 9.5rem;
+      padding-inline: 0.7rem;
+    }
+
+    .skill-card img {
+      width: 3.15rem;
+      height: 3.15rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .skill-card {
+      transition: none;
+    }
+  }
+</style>

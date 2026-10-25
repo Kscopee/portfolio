@@ -1,0 +1,5 @@
+iot-enclosure-side-wiring.jpg - Prototype enclosure: control box with the ESP32-S3 and wiring mounted on the side, ultrasonic sensor under the lid.
+iot-enclosure-front-angle.jpg - Front corner of the acrylic litter box enclosure with the control box attached.
+iot-enclosure-top-wiring.jpg - Sensor wiring routed along the top frame to the sensor module inside.
+iot-enclosure-entrance.jpg - The cat entrance, where each visit begins.
+iot-enclosure-overview.jpg - Full view of the prototype enclosure.

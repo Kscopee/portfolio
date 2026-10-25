@@ -1,0 +1,60 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+const withBase = (path: string) => `${base}/${path.replace(/^\//, '')}`;
+---
+
+<div class="video-backdrop" aria-hidden="true" transition:persist="portfolio-background-video">
+  <video
+    class="background-video"
+    muted
+    autoplay
+    loop
+    playsinline
+    preload="metadata"
+    poster={withBase('/assets/video/portfolio-poster.svg')}
+    data-background-video
+  >
+    <source src={withBase('/assets/video/portfolio-background.mp4')} type="video/mp4" />
+    <track kind="descriptions" src={withBase('/assets/video/portfolio-background.vtt')} srclang="en" label="English video descriptions" />
+  </video>
+</div>
+
+<script>
+  const setupBackgroundVideo = () => {
+    const video = document.querySelector<HTMLVideoElement>('[data-background-video]');
+    if (!video || video.dataset.ready === 'true') return;
+    video.dataset.ready = 'true';
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const syncPlayback = () => {
+      const shouldPause = reducedMotion.matches || document.hidden;
+      if (shouldPause) video.pause();
+      else video.play().catch(() => {});
+    };
+
+    syncPlayback();
+    reducedMotion.addEventListener('change', syncPlayback);
+    document.addEventListener('visibilitychange', syncPlayback);
+  };
+
+  document.addEventListener('astro:page-load', setupBackgroundVideo);
+  setupBackgroundVideo();
+</script>
+
+<style>
+  .video-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    overflow: hidden;
+    background: var(--color-surface);
+  }
+  .video-backdrop::after {
+    position: absolute;
+    inset: 0;
+    background: rgb(0 0 0 / 0.34);
+    content: '';
+  }
+  .background-video { width: 100%; height: 100%; object-fit: cover; opacity: 0.72; }
+  @media (prefers-reduced-motion: reduce) { .background-video { opacity: 0.52; } }
+</style>

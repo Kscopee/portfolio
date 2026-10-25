@@ -1,0 +1,40 @@
+---
+import DiagonalBands from '../components/DiagonalBands.astro';
+import PillButton from '../components/PillButton.astro';
+import WatermarkWord from '../components/WatermarkWord.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+
+<BaseLayout
+  title="Page not found | Ashton Caspe"
+  description="The requested page could not be found."
+  robots="noindex, nofollow"
+  backgroundVideo={false}
+  bodyClass="not-found-page"
+>
+  <section class="not-found" aria-labelledby="not-found-title">
+    <DiagonalBands variant="split" />
+    <WatermarkWord word="LOST" tone="dark" />
+    <div class="not-found__code" aria-hidden="true">404</div>
+    <div class="not-found__copy">
+      <p>Wrong turn</p>
+      <h1 id="not-found-title">THIS PAGE<br /><em>SLIPPED AWAY.</em></h1>
+      <p>The address may have changed, or the page may no longer exist.</p>
+      <PillButton href={`${base}/`} label="Back home" tone="lime" arrow="left" />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found { position: relative; isolation: isolate; display: grid; min-height: 75svh; padding: var(--space-8) var(--page-gutter); place-items: center; overflow: hidden; background: var(--color-paper); }
+  .not-found :global(.watermark) { right: -0.1em; bottom: -0.08em; }
+  .not-found__code { position: absolute; right: 5vw; top: 50%; z-index: 1; color: var(--color-lime); font-family: var(--font-display); font-size: clamp(12rem, 31vw, 33rem); font-style: italic; line-height: 0.7; opacity: 0.82; transform: translateY(-50%) rotate(-4deg); }
+  .not-found__copy { position: relative; z-index: 2; width: min(100%, 50rem); margin-inline: max(0px, calc((100vw - var(--content-max)) / 2)) auto; padding: clamp(1.5rem, 4vw, 3rem); background: var(--color-black); color: var(--color-white); clip-path: polygon(0 0, calc(100% - 3rem) 0, 100% 3rem, 100% 100%, 3rem 100%, 0 calc(100% - 3rem)); }
+  .not-found__copy > p:first-child { color: var(--color-lime); font-size: var(--step--1); font-weight: 800; letter-spacing: 0.15em; text-transform: uppercase; }
+  .not-found h1 { color: var(--color-white); font-size: clamp(3rem, 7vw, 6.5rem); font-style: italic; }
+  .not-found h1 em { color: var(--color-lime); font-style: inherit; }
+  .not-found__copy > p:not(:first-child) { max-width: 34rem; margin-bottom: var(--space-6); color: var(--color-paper); }
+  @media (max-width: 40rem) { .not-found__copy { clip-path: polygon(0 0, calc(100% - 1.5rem) 0, 100% 1.5rem, 100% 100%, 1.5rem 100%, 0 calc(100% - 1.5rem)); } }
+</style>

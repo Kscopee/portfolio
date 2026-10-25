@@ -1,0 +1,70 @@
+{
+  "title": "LitterSense IoT Architecture: Edge Processing and Sensor Fusion for Resilient Feline Health Tracking",
+  "shortTitle": "LitterSense IoT",
+  "slug": "littersense-iot-architecture",
+  "type": "iot",
+  "status": "completed",
+  "year": 2026,
+  "course": "ITPE 04: Internet of Things, St. Dominic College of Asia",
+  "description": "The hardware and network design behind LitterSense. An ESP32 microcontroller reads an RFID reader, an ultrasonic sensor, and two gas sensors inside the litter box, processes each visit on the device itself (\"edge processing\"), and sends it to Firebase over HTTPS. If the Wi-Fi drops, it keeps the data and syncs it once the connection is back, so no visits are lost during the internet outages common in Philippine homes. The course paper was submitted on March 3, 2026, and the hardware continues as part of the capstone.",
+  "objectives": [
+    "Build a litter box monitoring device that records each visit automatically using ultrasonic and gas sensors controlled by an ESP32.",
+    "Send the data reliably from the device to a cloud database over Wi-Fi.",
+    "Show visit patterns, history, and alerts in a web app.",
+    "Build a separate behavior baseline for each cat, including in multi-cat homes.",
+    "Detect unusual litter box behavior and notify the owner early.",
+    "Evaluate accuracy, reliability, affordability, and user acceptance in Filipino homes."
+  ],
+  "technologies": [
+    "ESP32-S3 microcontroller with OV2640 camera",
+    "YRM100 UHF RFID reader module with UHF RFID tags",
+    "HC-SR04 ultrasonic sensor",
+    "MQ-135 ammonia gas sensor",
+    "MQ-136 hydrogen sulfide gas sensor",
+    "Firebase Realtime Database REST API over HTTPS/TLS",
+    "Local buffering with automatic sync"
+  ],
+  "team": [
+    "4-member team (names not shown for privacy)"
+  ],
+  "myRole": "I handled documentation and app design, not hardware. I wrote most of the Chapter 1 introduction, including the Overview of the IoT Project, the Problem Statement, and the System Overview. I also designed the app screens and made some of the system flowcharts. My teammates built the hardware.",
+  "output": "A working three-layer design (sensors and edge processing → cloud storage and anomaly detection → web app and reports) that became the hardware base of the LitterSense capstone.",
+  "links": [
+    {
+      "label": "View the LitterSense capstone",
+      "url": "/projects/littersense-smart-litter-monitoring/"
+    }
+  ],
+  "cover": {
+    "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-side-wiring.jpeg",
+    "alt": "Prototype enclosure: control box with the ESP32-S3 and wiring mounted on the side, ultrasonic sensor under the lid."
+  },
+  "evidence": [
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-side-wiring.jpeg",
+      "caption": "Prototype enclosure: control box with the ESP32-S3 and wiring mounted on the side, ultrasonic sensor under the lid."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-front-angle.jpeg",
+      "caption": "Front corner of the acrylic litter box enclosure with the control box attached."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-top-wiring.jpeg",
+      "caption": "Sensor wiring routed along the top frame to the sensor module inside."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-entrance.jpeg",
+      "caption": "The cat entrance, where each visit begins."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-overview.jpeg",
+      "caption": "Full view of the prototype enclosure."
+    },
+    {
+      "image": "../../assets/content/projects/littersense/littersense-iot-dashboard-wireframe.png",
+      "caption": "Dashboard wireframe I designed in Figma (design mockup, not the final app).",
+      "tag": "Wireframe"
+    }
+  ],
+  "featured": false
+}

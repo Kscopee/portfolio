@@ -1,0 +1,84 @@
+---
+interface Props {
+  href?: string;
+  label: string;
+  tone?: 'black' | 'lime' | 'white';
+  arrow?: 'right' | 'left';
+}
+
+const { href, label, tone = 'black', arrow = 'right' } = Astro.props;
+const Tag = href ? 'a' : 'button';
+---
+
+<Tag class:list={["pill-button", `pill-button--${tone}`, `pill-button--${arrow}`]} href={href} type={href ? undefined : 'button'}>
+  {arrow === 'left' && (
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5 7.5 12l7 7" /></svg>
+  )}
+  <span>{label}</span>
+  {arrow === 'right' && (
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 5 7 7-7 7" /></svg>
+  )}
+</Tag>
+
+<style>
+  .pill-button {
+    --pill-bg: var(--color-black);
+    --pill-fg: var(--color-white);
+    display: inline-flex;
+    min-height: 2.8rem;
+    padding: 0.55rem 0.65rem 0.55rem 1.25rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    border: 2px solid var(--color-black);
+    border-radius: var(--radius-pill);
+    background: var(--pill-bg);
+    color: var(--pill-fg);
+    font-size: var(--step--1);
+    font-weight: 800;
+    line-height: 1;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background var(--motion-fast) ease, color var(--motion-fast) ease, transform var(--motion-fast) ease;
+  }
+
+  .pill-button--left {
+    padding-inline: 0.65rem 1.25rem;
+  }
+
+  .pill-button--lime {
+    --pill-bg: var(--color-lime);
+    --pill-fg: var(--color-black);
+  }
+
+  .pill-button--white {
+    --pill-bg: var(--color-white);
+    --pill-fg: var(--color-black);
+  }
+
+  .pill-button svg {
+    width: 1.7rem;
+    padding: 0.25rem;
+    overflow: visible;
+    border-radius: 50%;
+    background: currentColor;
+    color: inherit;
+  }
+
+  .pill-button path {
+    fill: none;
+    stroke: var(--pill-bg);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-width: 2.7;
+  }
+
+  .pill-button:hover {
+    transform: translateY(-0.16rem);
+  }
+
+  .pill-button--black:hover {
+    --pill-bg: var(--color-lime);
+    --pill-fg: var(--color-black);
+  }
+</style>

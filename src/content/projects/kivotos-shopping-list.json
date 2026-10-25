@@ -1,0 +1,41 @@
+{
+  "title": "Kivotos Shopping List",
+  "shortTitle": "Kivotos Shopping List",
+  "slug": "kivotos-shopping-list",
+  "type": "early-work",
+  "status": "completed",
+  "year": 2024,
+  "description": "A small shopping list web app I built on my own while learning web development through Scrimba's free course. You type an item, add it to the list, and it is saved to a Firebase database. I themed it myself. It shows where I started, as a self-taught beginner, before the projects above. The last update was June 17, 2024.",
+  "objectives": [
+    "Learn HTML, CSS, and JavaScript by building a complete app, following Scrimba's free course.",
+    "Learn the basics of saving data with Firebase."
+  ],
+  "technologies": [
+    "HTML",
+    "CSS",
+    "JavaScript",
+    "Firebase Realtime Database"
+  ],
+  "team": [
+    "Solo project"
+  ],
+  "myRole": "Built the whole thing myself, following and then customizing the course project.",
+  "output": "Version 1.1 added sound effects and improved functionality. Adding new items is currently broken on the Firebase side, so the portfolio shows screenshots.",
+  "links": [
+    {
+      "label": "View the older live build",
+      "url": "https://kivotosshoppinglist.netlify.app"
+    }
+  ],
+  "cover": {
+    "image": "../../assets/content/projects/kivotos/kivotos-shopping-list-2024.jpeg",
+    "alt": "Kivotos Shopping List web app."
+  },
+  "evidence": [
+    {
+      "image": "../../assets/content/projects/kivotos/kivotos-shopping-list-2024.jpeg",
+      "caption": "Kivotos Shopping List web app."
+    }
+  ],
+  "featured": false
+}
