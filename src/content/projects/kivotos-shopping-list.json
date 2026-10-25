@@ -25,10 +25,6 @@
     {
       "label": "View the older live build",
       "url": "https://kivotosshoppinglist.netlify.app"
-    },
-    {
-      "label": "View the GitHub repository",
-      "url": "https://github.com/Kscopee/KivotosShoppingList"
     }
   ],
   "cover": {

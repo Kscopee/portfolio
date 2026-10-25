@@ -28,7 +28,7 @@
   "team": [
     "4-member team (names not shown for privacy)"
   ],
-  "myRole": "Design: system architecture, UI/UX design, and workflow diagrams. Building: the core app modules (login/authentication, product listing, cart and wishlist, and the order and payment flow). Also testing and documentation alongside the team.",
+  "myRole": "I designed the system architecture, UI/UX, and workflow diagrams. I also built the core app modules: login and authentication, product listings, the cart and wishlist, and the order and payment flow. I handled testing and documentation alongside the team.",
   "output": "A working prototype that runs locally, built in one semester (about three months) as a proof of concept for the course. It was never deployed as a live app.",
   "links": [],
   "cover": {

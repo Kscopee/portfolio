@@ -8,11 +8,11 @@ interface Props {
 const { count = 4, active = 0, label = 'Carousel controls' } = Astro.props;
 ---
 
-<div class="carousel-controls" aria-label={label}>
+<div class="carousel-controls" role="group" aria-label={label}>
   <button class="carousel-controls__arrow" type="button" aria-label="Previous item">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 5 7.5 12l7 7" /></svg>
   </button>
-  <div class="carousel-controls__dots" aria-label="Choose item">
+  <div class="carousel-controls__dots" role="group" aria-label="Choose item">
     {Array.from({ length: count }, (_, index) => (
       <button
         type="button"

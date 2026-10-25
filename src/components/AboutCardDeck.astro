@@ -65,11 +65,11 @@ const { cards } = Astro.props;
     </div>
   </div>
 
-  <div class="about-deck__controls" aria-label="About card controls">
+  <div class="about-deck__controls" role="group" aria-label="About card controls">
     <button type="button" aria-label="Previous about card" data-about-previous>
       <span aria-hidden="true">←</span>
     </button>
-    <div class="about-deck__dots" aria-label="Choose an about card">
+    <div class="about-deck__dots" role="group" aria-label="Choose an about card">
       {cards.map((card, index) => (
         <button
           type="button"

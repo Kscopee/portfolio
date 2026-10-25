@@ -22,7 +22,8 @@
   --color-white: #ffffff;
   --color-paper: #f5f5f5;
   --color-border: #dddddd;
-  --color-muted: #737373;
+  --color-muted: #666666;
+  --color-muted-on-dark: #9b9b9b;
 
   --font-display: "Hongmengti", Impact, Haettenschweiler, sans-serif;
   --font-body: "Tahoma Local", Tahoma, Arial, sans-serif;

@@ -27,7 +27,7 @@
   "team": [
     "4-member team (names not shown for privacy)"
   ],
-  "myRole": "Documentation and app design, not hardware. I wrote most of the Chapter 1 introduction, including the Overview of the IoT Project, the Problem Statement, and the System Overview. I also designed the app screens and made some of the system flowcharts. My teammates built the hardware.",
+  "myRole": "I handled documentation and app design, not hardware. I wrote most of the Chapter 1 introduction, including the Overview of the IoT Project, the Problem Statement, and the System Overview. I also designed the app screens and made some of the system flowcharts. My teammates built the hardware.",
   "output": "A working three-layer design (sensors and edge processing → cloud storage and anomaly detection → web app and reports) that became the hardware base of the LitterSense capstone.",
   "links": [
     {
@@ -59,22 +59,6 @@
     {
       "image": "../../assets/content/projects/littersense/littersense-iot-enclosure-overview.jpeg",
       "caption": "Full view of the prototype enclosure."
-    },
-    {
-      "image": "../../assets/content/projects/littersense/littersense-iot-logic-flowchart.jpg",
-      "caption": "System logic flowchart I made for LitterSense."
-    },
-    {
-      "image": "../../assets/content/projects/littersense/littersense-iot-anomaly-flowchart.jpg",
-      "caption": "Flowchart showing how LitterSense classifies a behavioral anomaly, creates an alert, and records the event."
-    },
-    {
-      "image": "../../assets/content/projects/littersense/littersense-iot-hardware-flowchart.jpg",
-      "caption": "Flowchart showing sensor data moving through the ESP32-CAM, Firebase, and the app dashboard, including offline storage."
-    },
-    {
-      "image": "../../assets/content/projects/littersense/littersense-iot-user-flowchart.jpg",
-      "caption": "User flowchart covering notifications, account access, reports, settings, and veterinary report sharing."
     },
     {
       "image": "../../assets/content/projects/littersense/littersense-iot-dashboard-wireframe.png",
