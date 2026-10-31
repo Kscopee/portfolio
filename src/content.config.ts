@@ -111,6 +111,11 @@ const about = defineCollection({
     interests: z.array(z.string()).min(1),
     skills: z.object({
       technical: z.array(z.string()).min(1),
+      multimedia: z.array(z.object({
+        name: z.string(),
+        plugin: z.string().optional(),
+        maker: z.string().optional(),
+      })).min(1),
       soft: z.array(z.string()).min(1),
     }),
     links: z.object({

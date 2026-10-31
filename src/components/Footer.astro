@@ -98,7 +98,7 @@ const year = new Date().getFullYear();
         status.dataset.state = 'success';
       } catch (error) {
         console.error('EmailJS error:', error);
-        status.textContent = 'Message could not be sent. Please try again or email Ashton directly.';
+        status.textContent = 'Message could not be sent. Please try again or email me directly.';
         status.dataset.state = 'error';
       } finally {
         button.disabled = false;
@@ -214,7 +214,7 @@ const year = new Date().getFullYear();
   .social-links img { width: 1.35rem; height: 1.35rem; object-fit: contain; }
   .footer-bottom > p { justify-self: end; margin: 0; color: #a7a7a7; font-size: 0.7rem; }
 
-  @media (max-width: 64rem) {
+  @media (max-width: 52rem) {
     .footer-contact { grid-template-columns: 1fr; }
     .footer-intro { max-width: 43rem; }
   }
