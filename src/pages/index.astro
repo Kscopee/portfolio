@@ -132,7 +132,7 @@ const railSections = [
     </div>
     <h2 class="visually-hidden" id="projects-preview-heading">Project previews</h2>
 
-    <div class="home-projects__stage" data-home-reveal="right">
+    <div class="home-projects__stage">
       {projects.map((project, index) => (
         <article
           class="home-projects__panel"
@@ -156,7 +156,7 @@ const railSections = [
                 alt={project.data.cover.alt}
                 widths={[720, 1080, 1440]}
                 sizes="(max-width: 48rem) 100vw, 60vw"
-                loading="lazy"
+                loading={index === 0 ? 'eager' : 'lazy'}
               />
             </CutFrame>
           </div>
@@ -399,7 +399,7 @@ const railSections = [
     transform: skewX(calc(var(--shape-angle) * -1));
   }
 
-  .home-about :global(.watermark) { top: 0.04em; left: -0.07em; color: rgb(255 255 255 / 0.055); }
+  .home-about :global(.watermark) { top: 0.04em; left: -0.07em; color: rgb(255 255 255 / 0.1); }
 
   .home-about__title,
   .home-projects__title,
@@ -516,7 +516,7 @@ const railSections = [
     display: none;
   }
 
-  .home-projects :global(.watermark) { top: 1.1em; right: -0.08em; color: rgb(255 255 255 / 0.04); }
+  .home-projects :global(.watermark) { top: 1.1em; right: -0.08em; color: rgb(255 255 255 / 0.1); }
   .home-projects__stage { position: relative; z-index: 2; min-width: 0; grid-row: 2; }
 
   .home-projects__panel {
@@ -609,8 +609,8 @@ const railSections = [
 
   .home-credentials {
     display: grid;
-    min-height: calc(100svh - 4.6rem);
-    padding: clamp(4rem, 6vw, 6rem) var(--page-safe-end) clamp(4rem, 6vw, 6rem) var(--page-gutter);
+    min-height: auto;
+    padding: clamp(4rem, 6vw, 6rem) var(--page-safe-end) clamp(2.5rem, 3.5vw, 3.75rem) var(--page-gutter);
     grid-template-columns: minmax(19rem, 0.7fr) minmax(27rem, 1.3fr);
     grid-template-rows: auto 1fr;
     align-items: center;
@@ -742,6 +742,7 @@ const railSections = [
     .home-credentials__certificate { width: calc(100% - 1rem); }
     .home-credentials__certificate :global(.cut-frame__media) { min-height: clamp(17rem, 74vw, 26rem); }
     .home-credentials__caption { width: 94%; align-items: start; flex-direction: column; gap: 0.25rem; }
+    .home-credentials { padding-bottom: var(--space-7); }
   }
 
   @media (max-width: 25rem) {

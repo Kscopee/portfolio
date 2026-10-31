@@ -12,6 +12,7 @@ node_modules/
 dist/
 .astro/
 .qa/
+/local-tests/
 
 # Logs and local environment files
 npm-debug.log*

@@ -38,6 +38,19 @@
       "VS Code",
       "Android Studio"
     ],
+    "multimedia": [
+      {
+        "name": "Adobe After Effects",
+        "plugin": "Boris FX Sapphire"
+      },
+      {
+        "name": "Adobe Premiere Pro"
+      },
+      {
+        "name": "Cinema 4D",
+        "maker": "Maxon"
+      }
+    ],
     "soft": [
       "Communication",
       "Networking",

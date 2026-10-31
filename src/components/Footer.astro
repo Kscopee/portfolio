@@ -2,6 +2,11 @@
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const withBase = (path: string) => `${base}/${path.replace(/^\//, '')}`;
 const year = new Date().getFullYear();
+const emailJsConfig = {
+  serviceId: import.meta.env.PUBLIC_EMAILJS_SERVICE_ID,
+  templateId: import.meta.env.PUBLIC_EMAILJS_TEMPLATE_ID,
+  publicKey: import.meta.env.PUBLIC_EMAILJS_PUBLIC_KEY,
+};
 ---
 
 <footer class="site-footer" id="contact">
@@ -18,7 +23,13 @@ const year = new Date().getFullYear();
       <a href="mailto:projectkfiles@gmail.com">projectkfiles@gmail.com</a>
     </div>
 
-    <form class="contact-form" data-contact-form>
+    <form
+      class="contact-form"
+      data-contact-form
+      data-emailjs-service-id={emailJsConfig.serviceId}
+      data-emailjs-template-id={emailJsConfig.templateId}
+      data-emailjs-public-key={emailJsConfig.publicKey}
+    >
       <div class="form-field">
         <label for="contact-email">Your email</label>
         <input id="contact-email" name="from_email" type="email" autocomplete="email" maxlength="254" required />
@@ -69,6 +80,9 @@ const year = new Date().getFullYear();
     const status = form.querySelector<HTMLElement>('[data-form-status]');
     const button = form.querySelector<HTMLButtonElement>('[data-submit-button]');
     const buttonLabel = button?.querySelector('span');
+    const serviceId = form.dataset.emailjsServiceId;
+    const templateId = form.dataset.emailjsTemplateId;
+    const publicKey = form.dataset.emailjsPublicKey;
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -88,17 +102,20 @@ const year = new Date().getFullYear();
       status.dataset.state = 'pending';
 
       try {
-        await emailjs.send('service_usctl47', 'template_e6fsk3h', {
+        if (!serviceId || !templateId || !publicKey) {
+          throw new Error('EmailJS configuration is missing from this build.');
+        }
+
+        await emailjs.send(serviceId, templateId, {
           from_email: String(data.get('from_email') || ''),
           message: String(data.get('message') || ''),
-          to_email: 'projectkfiles@gmail.com',
-        }, { publicKey: 'G2P_85WXNra-Q-jj0' });
+        }, { publicKey });
         form.reset();
         status.textContent = 'Message sent. Thank you!';
         status.dataset.state = 'success';
       } catch (error) {
         console.error('EmailJS error:', error);
-        status.textContent = 'Message could not be sent. Please try again or email Ashton directly.';
+        status.textContent = 'Message could not be sent. Please try again or email me directly.';
         status.dataset.state = 'error';
       } finally {
         button.disabled = false;
@@ -214,7 +231,7 @@ const year = new Date().getFullYear();
   .social-links img { width: 1.35rem; height: 1.35rem; object-fit: contain; }
   .footer-bottom > p { justify-self: end; margin: 0; color: #a7a7a7; font-size: 0.7rem; }
 
-  @media (max-width: 64rem) {
+  @media (max-width: 52rem) {
     .footer-contact { grid-template-columns: 1fr; }
     .footer-intro { max-width: 43rem; }
   }
